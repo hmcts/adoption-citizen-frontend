@@ -1,4 +1,4 @@
 nodejs:
-  applicationPort: 3100
+  applicationPort: 3000
   environment:
-    image: 'hmctspublic.azurecr.io/rpe/expressjs-template:latest'
+    image: 'hmctspublic.azurecr.io/fpl/adoption-frontend:latest'
