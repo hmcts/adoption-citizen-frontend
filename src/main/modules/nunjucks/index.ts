@@ -11,7 +11,7 @@ export class Nunjucks {
   enableFor (app: express.Express) {
     app.set('view engine', 'njk')
     nunjucks.configure([
-      path.join(__dirname,'..','..','views'),
+      path.join(__dirname,'..','..','views')
     ], {
       autoescape: true,
       throwOnUndefined: true,
