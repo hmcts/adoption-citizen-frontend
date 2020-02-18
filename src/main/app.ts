@@ -1,5 +1,4 @@
 import * as bodyParser from 'body-parser'
-import * as config from 'config'
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import { Helmet } from './modules/helmet'
@@ -9,6 +8,7 @@ import favicon from 'serve-favicon'
 import { HTTPError } from 'HttpError'
 import { Nunjucks } from './modules/nunjucks'
 
+const config = require('config')
 const { Logger } = require('@hmcts/nodejs-logging')
 
 const env = process.env.NODE_ENV || 'development'
