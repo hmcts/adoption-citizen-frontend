@@ -1,5 +1,5 @@
 {
-  "name": "expressjs-template",
+  "name": "adoption-frontend",
   "version": "0.0.1",
   "private": true,
   "engines": {
@@ -7,17 +7,18 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/ts-node -r tsconfig-paths/register src/main/server.ts",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && sass-lint -v -q",
+    "lint": "tsc --noEmit && tslint --project tsconfig.json && sass-lint -v -q",
     "sass": "gulp sass copy-files",
-    "test": "NODE_ENV=mocha LOG_LEVEL=OFF mocha -r tsconfig-paths/register $(find src/test \\( -name '*.ts' -or -name '*.js' \\) ! -path '*a11y*' ! -path '*/routes/*') --reporter mochawesome --reporter-options reportFilename=unit,inlineAssets=true,reportTitle=expressjs-template-unit",
-    "test:routes": "NODE_ENV=mocha LOG_LEVEL=OFF  TS_NODE_PROJECT=tsconfig.json mocha --require ts-node/register $(find src/test \\( -name '*.ts' -or -name '*.js' \\) -path '*/routes/*') --require ts-node/register --reporter mochawesome --reporter-options reportFilename=routes,inlineAssets=true,reportTitle=expressjs-template-routes",
-    "test:a11y": "NODE_ENV=mocha LOG_LEVEL=ERROR TS_NODE_PROJECT=tsconfig.json mocha --exit $(find src/test \\( -name '*.ts' -or -name '*.js' \\) -path '*/a11y/*') --timeout 60000 --reporter mochawesome --require ts-node/register --reporter-options reportFilename=a11y,inlineAssets=true,reportTitle=expressjs-template-a11y",
+    "test": "NODE_ENV=mocha LOG_LEVEL=OFF mocha -r tsconfig-paths/register $(find src/test \\( -name '*.ts' -or -name '*.js' \\) ! -path '*a11y*' ! -path '*/routes/*') --reporter mochawesome --reporter-options reportFilename=unit,inlineAssets=true,reportTitle=adoption-frontend-unit",
+    "test:routes": "NODE_ENV=mocha LOG_LEVEL=OFF  TS_NODE_PROJECT=tsconfig.json mocha --require ts-node/register $(find src/test \\( -name '*.ts' -or -name '*.js' \\) -path '*/routes/*') --require ts-node/register --reporter mochawesome --reporter-options reportFilename=routes,inlineAssets=true,reportTitle=adoption-frontend-routes",
+    "test:a11y": "NODE_ENV=mocha LOG_LEVEL=ERROR TS_NODE_PROJECT=tsconfig.json mocha --exit $(find src/test \\( -name '*.ts' -or -name '*.js' \\) -path '*/a11y/*') --timeout 60000 --reporter mochawesome --require ts-node/register --reporter-options reportFilename=a11y,inlineAssets=true,reportTitle=adoption-frontend-a11y",
     "test:nsp": "nsp check"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
     "@hmcts/nodejs-healthcheck": "^1.5.1",
     "@hmcts/nodejs-logging": "^3.0.1",
+    "@hmcts/properties-volume": "^0.0.9",
     "@types/config": "^0.0.36",
     "@types/cookie-parser": "^1.4.2",
     "@types/csurf": "^1.9.36",
@@ -42,6 +43,7 @@
     "serve-favicon": "^2.5.0",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
+    "tslint-microsoft-contrib": "^6.2.0",
     "typescript": "^3.7.5"
   },
   "devDependencies": {
@@ -71,6 +73,7 @@
     "sinon": "^8.1.1",
     "sinon-chai": "^3.4.0",
     "supertest": "^4.0.2",
-    "tslint": "5.20.1"
+    "tslint": "5.20.1",
+    "tslint-config-standard": "^9.0.0"
   }
 }

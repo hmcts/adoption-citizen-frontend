@@ -1,8 +1,8 @@
 # Adoption Frontend
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/hmcts/expressjs-template.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/hmcts/adoption-frontend.svg)](https://greenkeeper.io/)
 
-[![Build Status](https://travis-ci.org/hmcts/expressjs-template.svg?branch=master)](https://travis-ci.org/hmcts/expressjs-template)
+[![Build Status](https://travis-ci.org/hmcts/adoption-frontend.svg?branch=master)](https://travis-ci.org/hmcts/adoption-frontend)
 
 ## Purpose
 
