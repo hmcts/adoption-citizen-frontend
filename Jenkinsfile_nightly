@@ -9,8 +9,8 @@ pipelineTriggers([cron('H 05 * * *')])
 
 def type = "nodejs"
 def product = "adoption"
-def component = "citizen-frontend"
+def component = "frontend"
 
 withNightlyPipeline(type, product, component) {
-//enableSlackNotifications('#rpe-build-notices')
+  enableSlackNotifications('#fpla_adoption_tech')
 }

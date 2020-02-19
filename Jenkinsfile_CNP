@@ -4,9 +4,10 @@
 
 def type = "nodejs"
 def product = "adoption"
-def component = "citizen-frontend"
+def component = "frontend"
 
 withPipeline(type, product, component) {
   installCharts()
   disableLegacyDeployment()
+  enableSlackNotifications('#fpla_adoption_tech')
 }
