@@ -12,5 +12,5 @@ def product = "adoption"
 def component = "citizen-frontend"
 
 withNightlyPipeline(type, product, component) {
-enableSlackNotifications('#rpe-build-notices')
+//enableSlackNotifications('#rpe-build-notices')
 }
