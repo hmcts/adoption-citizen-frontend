@@ -1,12 +1,15 @@
+import * as path from 'path'
 import * as bodyParser from 'body-parser'
+
 import cookieParser from 'cookie-parser'
 import express from 'express'
-import { Helmet } from './modules/helmet'
-import * as path from 'path'
-import { RouterFinder } from 'router/routerFinder'
 import favicon from 'serve-favicon'
+
+import { Helmet } from 'modules/helmet'
+import { RouterFinder } from 'router/routerFinder'
 import { HTTPError } from 'HttpError'
-import { Nunjucks } from './modules/nunjucks'
+import { Nunjucks } from 'modules/nunjucks'
+import { I18Next } from 'modules/i18n'
 
 const config = require('config')
 const { Logger } = require('@hmcts/nodejs-logging')
@@ -17,9 +20,10 @@ const developmentMode = env === 'development'
 export const app = express()
 app.locals.ENV = env
 
+const i18next = I18Next.enableFor(app)
 const logger = Logger.getLogger('app')
 
-new Nunjucks(developmentMode)
+new Nunjucks(developmentMode, i18next)
   .enableFor(app)
 // secure the application by adding various HTTP headers to its responses
 new Helmet(config.get('security')).enableFor(app)
