@@ -1,4 +1,8 @@
 nodejs:
+  image: hmctspublic.azurecr.io/ado/adoption-frontend:latest
   applicationPort: 3000
+  memoryRequests: 512Mi
+  memoryLimits: 1024Mi
+  cpuLimits: 1
   environment:
-    image: 'hmctspublic.azurecr.io/fpl/adoption-frontend:latest'
+

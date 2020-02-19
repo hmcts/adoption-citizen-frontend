@@ -1,0 +1,12 @@
+version: '1'
+
+services:
+  adoption-frontend-integration-tests:
+    image: hmctspublic.azurecr.io/ado/adoption-frontend-integration-tests
+    command: test:integration --grep @smoke-test
+    environment:
+      - WEB_DRIVER_HOST=remote-webdriver
+    volumes:
+      - ./smoke-output:/usr/src/app/output
+  remote-webdriver:
+    image: selenium/standalone-chrome:3.8.1

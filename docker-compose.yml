@@ -1,4 +1,4 @@
-version: '2'
+version: '1'
 
 services:
   adoption-frontend:
@@ -8,5 +8,15 @@ services:
         - http_proxy
         - https_proxy
         - no_proxy
+    image: hmctspublic.azurecr.io/ado/adoption-frontend
     ports:
       - 3000:3000
+  adoption-integration-tests:
+    build:
+      context: .
+      dockerfile: integration-tests.Dockerfile
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: hmctspublic.azurecr.io/ado/adoption-frontend-integration-tests
