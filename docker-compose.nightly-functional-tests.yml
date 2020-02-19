@@ -1,8 +1,8 @@
 version: '1'
 
 services:
-  adoption-frontend-integration-tests:
-    image: hmctspublic.azurecr.io/ado/adoption-frontend-integration-tests
+  citizen-frontend-integration-tests:
+    image: hmctspublic.azurecr.io/adoption/citizen-frontend-integration-tests
     command: test:integration --grep @nightly
     environment:
       - WEB_DRIVER_HOST=remote-webdriver
