@@ -1,8 +1,6 @@
 # Adoption Frontend
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/hmcts/adoption-frontend.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://travis-ci.org/hmcts/adoption-frontend.svg?branch=master)](https://travis-ci.org/hmcts/adoption-frontend)
+[![Greenkeeper badge](https://badges.greenkeeper.io/hmcts/adoption-citizen-frontend.svg)](https://greenkeeper.io/)
 
 ## Purpose
 
