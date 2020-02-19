@@ -10,7 +10,7 @@ FROM base as build
 RUN yarn install && yarn sass && rm -r node_modules/ && yarn install --production && rm -r ~/.cache/yarn
 COPY tsconfig.json gulpfile.js server.js ./
 COPY --chown=hmcts:hmcts src/main ./src/main
-RUN yarn setup
+RUN yarn sass
 
 # ---- Runtime image ----
 FROM base as runtime
