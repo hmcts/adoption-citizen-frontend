@@ -1,17 +1,19 @@
 version: '1'
 
 services:
-  citizen-frontend:
+  adoption-frontend:
+    image: hmctspublic.azurecr.io/adoption/frontend
+    container_name: adoption-frontend
     build:
       context: .
       args:
         - http_proxy
         - https_proxy
         - no_proxy
-    image: hmctspublic.azurecr.io/adoption/citizen-frontend
     ports:
       - 3000:3000
   adoption-integration-tests:
+    image: hmctspublic.azurecr.io/adoption/frontend-integration-tests
     build:
       context: .
       dockerfile: integration-tests.Dockerfile
@@ -19,4 +21,3 @@ services:
         - http_proxy
         - https_proxy
         - no_proxy
-    image: hmctspublic.azurecr.io/adoption/citizen-frontend-integration-tests

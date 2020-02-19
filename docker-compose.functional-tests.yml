@@ -1,8 +1,8 @@
 version: '1'
 
 services:
-  citizen-frontend-integration-tests:
-    image: hmctspublic.azurecr.io/adoption/citizen-frontend-integration-tests
+  adoption-frontend-integration-tests:
+    image: hmctspublic.azurecr.io/adoption/frontend-integration-tests
     command: test:integration --grep @pipeline
     environment:
       - WEB_DRIVER_HOST=remote-webdriver

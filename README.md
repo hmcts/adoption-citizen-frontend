@@ -1,6 +1,6 @@
 # Adoption Frontend
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/hmcts/adoption-citizen-frontend.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/hmcts/adoption-frontend.svg)](https://greenkeeper.io/)
 
 ## Purpose
 
