@@ -1,0 +1,23 @@
+name: Adoption Frontend CI Checks
+
+on:
+  pull_request:
+      branches:
+        - master
+  push:
+      branches:
+        - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn install
+      - run: yarn global add gulp-cli
+      - run: gulp copy-files
+      - run: yarn cichecks
