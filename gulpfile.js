@@ -1,10 +1,10 @@
-let gulp = require('gulp')
-let nodemon = require('gulp-nodemon')
-let plumber = require('gulp-plumber')
-let livereload = require('gulp-livereload')
-let sass = require('gulp-sass')
-let path = require('path')
-let replace = require('gulp-replace')
+const gulp = require('gulp')
+const nodemon = require('gulp-nodemon')
+const plumber = require('gulp-plumber')
+const livereload = require('gulp-livereload')
+const sass = require('gulp-sass')
+const path = require('path')
+const replace = require('gulp-replace')
 
 const repoRoot = path.join(__dirname, '/')
 const govUkFrontendToolkitRoot = path.join(repoRoot, 'node_modules/govuk_frontend_toolkit/stylesheets')
@@ -64,8 +64,9 @@ gulp.task('develop', (done) => {
     livereload.listen()
 
     nodemon({
-      ext: 'ts js njk po',
-      stdout: true
+      ext: 'ts js po',
+      stdout: true,
+      ignore: ['./src/integration-test/', 'src/main/public/js/lib', 'src/test']
     }).on('start', () => {
         livereload.changed(__dirname)
     })

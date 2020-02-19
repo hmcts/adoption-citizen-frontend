@@ -7,9 +7,9 @@ RUN yarn install --production \
 
 # ---- Build image ----
 FROM base as build
-RUN yarn install && yarn sass && rm -r node_modules/ && yarn install --production && rm -r ~/.cache/yarn
-COPY tsconfig.json gulpfile.js server.js ./
+RUN yarn install --production && yarn cache clean
 COPY --chown=hmcts:hmcts src/main ./src/main
+COPY tsconfig.json gulpfile.js server.js ./
 RUN yarn sass
 
 # ---- Runtime image ----
