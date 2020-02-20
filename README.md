@@ -2,6 +2,9 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/hmcts/adoption-frontend.svg)](https://greenkeeper.io/)
 
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
+[![codecov](https://codecov.io/gh/hmcts/adoption-frontend/branch/master/graph/badge.svg)](https://codecov.io/gh/hmcts/adoption-frontend)
 ## Purpose
 
 This is the frontend application for Adoption. Service provides web UI for citizens, presented as sequence of HTML 5 web pages designed to GDS Service Design guidelines, so that they can make adoption application.
