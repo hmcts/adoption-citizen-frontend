@@ -5,4 +5,5 @@ nodejs:
   memoryLimits: 1024Mi
   cpuLimits: 1
   environment:
-
+    HTTP_PROTOCOL: http
+    NODE_ENV: production
