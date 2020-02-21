@@ -12,7 +12,9 @@
     "test": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) ! -path '*a11y*' ! -path '*/routes/*') --reporter-options reportFilename=unit,inlineAssets=true,reportTitle=adoption-frontend-unit",
     "test:routes": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) -path '*/routes/*') --timeout 10000 --reporter-options reportFilename=routes,inlineAssets=true,reportTitle=adoption-frontend-routes",
     "test:a11y": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --exit --opts mocha.opts src/test/a11y/a11y.ts --timeout 60000 --reporter-options reportFilename=a11y,inlineAssets=true,reportTitle=adoption-frontend-a11y",
-    "cichecks": "yarn && yarn sass && yarn lint  && yarn test && yarn test:routes &&  yarn test:a11y"
+    "test:coverage": "exit 0",
+    "cichecks": "yarn && yarn sass && yarn lint  && yarn test && yarn test:routes &&  yarn test:a11y",
+    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
@@ -80,6 +82,7 @@
     "sass-lint": "^1.13.1",
     "sinon": "^8.1.1",
     "sinon-chai": "^3.4.0",
+    "sonarqube-scanner": "^2.5.0",
     "supertest": "^4.0.2",
     "tslint": "5.20.1",
     "tslint-config-standard": "^9.0.0"
