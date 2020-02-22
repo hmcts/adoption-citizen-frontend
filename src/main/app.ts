@@ -5,11 +5,11 @@ import cookieParser from 'cookie-parser'
 import express from 'express'
 import favicon from 'serve-favicon'
 
-import { Helmet } from 'modules/helmet'
+import { Helmet } from 'main/modules/helmet'
 import { RouterFinder } from 'router/routerFinder'
-import { HTTPError } from 'HttpError'
-import { Nunjucks } from 'modules/nunjucks'
-import { I18Next } from 'modules/i18n'
+import { HTTPError } from 'main/HttpError'
+import { Nunjucks } from 'main/modules/nunjucks'
+import { I18Next } from 'main/modules/i18n'
 
 const config = require('config')
 const { Logger } = require('@hmcts/nodejs-logging')
