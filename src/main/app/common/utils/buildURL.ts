@@ -1,7 +1,8 @@
 import * as express from 'express'
-import { StringUtils } from './StringUtils'
 
-export function BuildURL (req: express.Request, path: string) {
+import { StringUtils } from './stringUtils'
+
+export function buildURL (req: express.Request, path: string) {
   if (StringUtils.isBlank(path)) {
     throw new Error('Path null or undefined')
   }
@@ -14,7 +15,7 @@ export function BuildURL (req: express.Request, path: string) {
   const host = req.headers.host
   const baseURL: string = `${protocol}${host}`
 
-  if(path.startsWith('/')) {
+  if (path.startsWith('/')) {
     return baseURL + path
   } else {
     return `${baseURL}/${path}`

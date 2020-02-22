@@ -4,9 +4,9 @@ import config from 'config'
 import axios from 'axios'
 
 import { ServiceAuthToken } from './serviceAuthToken'
-import { User } from 'main/app/idam/user'
+import { User } from 'idam/user'
 import { AuthToken } from './AuthToken'
-import { trackCustomEvent } from '../logging/customEventTracker'
+import { trackCustomEvent } from 'logging/customEventTracker'
 
 const s2sUrl = config.get<string>('idam.service-2-service-auth.url')
 const idamApiUrl = config.get<string>('idam.api.url')

@@ -15,6 +15,18 @@
     ],
     "baseUrl": "src",
     "paths": {
+      "case/*": [
+        "main/app/case/*"
+      ],
+      "common/*": [
+        "main/app/common/*"
+      ],
+      "idam/*": [
+        "main/app/idam/*"
+      ],
+      "logging/*": [
+        "main/app/logging/*"
+      ],
       "router/*": [
         "main/router/*"
       ],
