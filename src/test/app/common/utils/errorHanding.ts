@@ -11,11 +11,11 @@ const expect = chai.expect
 
 describe('ErrorHandling', () => {
   const resolvingRequestHandler = sinon.spy((req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
-    return undefined
+    return Promise.resolve()
   })
 
   const rejectingRequestHandler = sinon.spy((req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
-    throw new Error('An error occurred')
+    return Promise.reject("Reject")
   })
 
   const nextFunction = sinon.spy(() => {

@@ -1,7 +1,7 @@
 import * as express from 'express'
 import * as uuid from 'uuid'
 import * as Cookies from 'cookies'
-import * as config from 'config'
+import config from 'config'
 
 import { RoutablePath } from 'main/app/common/router/routablePath'
 import { Paths } from 'main/app/case/paths'
