@@ -1,16 +1,19 @@
 import * as express from 'express'
+
 import Cookies from 'cookies'
 import config from 'config'
 
 import { Paths } from 'case/paths'
 import { ErrorHandling } from 'common/utils/errorHandling'
-import { ReceiverHelper } from 'case/helpers/receiverHelper'
 import { IdamClient } from 'idam/idamClient'
 import { RoutablePath } from 'common/router/routablePath'
 import { hasTokenExpired } from 'idam/authorizationMiddleware'
 import { OAuthHelper } from 'idam/oAuthHelper'
 import { Logger } from '@hmcts/nodejs-logging'
 import { trackCustomEvent } from 'logging/customEventTracker'
+import { AuthToken } from 'idam/AuthToken'
+import { buildURL } from 'common/utils/buildURL'
+import { JwtExtractor } from 'idam/jwtExtractor'
 
 const logger = Logger.getLogger('router/receiver')
 const sessionCookie = config.get<string>('session.cookieName')
@@ -27,7 +30,7 @@ export default express.Router()
       let user
 
       try {
-        const authenticationToken = await ReceiverHelper.getAuthenticationToken(req)
+        const authenticationToken = await getAuthenticationToken(req)
 
         if (authenticationToken) {
           user = await IdamClient.getUserFromJwt(authenticationToken)
@@ -83,4 +86,38 @@ function isDefendantFirstContactPinLogin (req: express.Request): boolean {
 function setAuthCookie (cookies: Cookies, authenticationToken: string): void {
   cookies.set(sessionCookie, authenticationToken)
   cookies.set(STATE_COOKIE_NAME, '')
+}
+
+async function getOAuthAccessToken (req: express.Request, receiver: RoutablePath): Promise<string> {
+  if (req.query.state != OAuthHelper.getStateCookie(req)) {
+  trackCustomEvent('State cookie mismatch (citizen)',
+    {
+      requestValue: req.query.state,
+      cookieValue: OAuthHelper.getStateCookie(req)
+    }
+  )
+}
+
+const authToken: AuthToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
+
+if (authToken) {
+  return authToken.accessToken
+}
+
+return Promise.reject()
+}
+
+async function getAuthenticationToken (
+  req: express.Request,
+  receiver: RoutablePath = Paths.receiver,
+  checkCookie = true
+) {
+  let authenticationToken
+
+  if (req.query.code) {
+    authenticationToken = await getOAuthAccessToken(req, receiver)
+  } else if (checkCookie) {
+    authenticationToken = JwtExtractor.extract(req)
+  }
+  return authenticationToken
 }

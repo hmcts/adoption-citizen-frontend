@@ -1,10 +1,25 @@
-import * as idamServiceMock from 'test/http-mocks/idam/idam'
-import { IdamServiceToken } from 'main/app/idam/idamServiceToken'
-import { ServiceAuthToken } from 'main/app/idam/serviceAuthToken'
+import * as idamServiceMocks from 'test/http-mocks/idam/idam'
+import { IdamClient } from 'idam/idamClient'
+import { expect } from 'chai'
+import { ServiceAuthToken } from 'idam/serviceAuthToken'
 
 describe('IdamClient', () => {
-  describe('getValidServiceToken', () => {
-    const idamServiceToken = new IdamServiceToken(new ServiceAuthToken(idamServiceMock.defaultAuthToken))
-    console.log(idamServiceToken.getValidServiceToken())
+  it('getServiceToken', async () => {
+
+    idamServiceMocks.resolveRetrieveServiceToken()
+
+    const token = await IdamClient.getServiceToken()
+    expect(token).to.be.instanceOf(ServiceAuthToken)
+  })
+
+  it('Unable to getServiceToken', async () => {
+
+    idamServiceMocks.rejectRetrieveServiceToken()
+
+    try {
+      await IdamClient.getServiceToken()
+    } catch (err) {
+      expect(err.message).to.be.equal('Unable to get service token - Error: Request failed with status code 400')
+    }
   })
 })

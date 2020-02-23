@@ -1,6 +1,6 @@
 import * as express from 'express'
 import * as uuid from 'uuid'
-import * as Cookies from 'cookies'
+import Cookies from 'cookies'
 import config from 'config'
 
 import { RoutablePath } from 'main/app/common/router/routablePath'

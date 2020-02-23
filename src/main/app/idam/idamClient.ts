@@ -1,5 +1,4 @@
-import * as otp from 'otp'
-
+import otp from 'otp'
 import config from 'config'
 import axios from 'axios'
 

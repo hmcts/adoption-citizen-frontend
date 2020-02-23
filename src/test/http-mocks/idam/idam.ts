@@ -24,7 +24,7 @@ export function resolveRetrieveUserFor (id: string, ...roles: string[]) {
     .reply(HttpStatus.OK, { id: id, roles: roles, email: 'user@example.com' })
 }
 
-export function resolveExchangeCode (token: string) {
+export function resolveAuthToken (token: string) {
   mock(apiServiceBaseURL)
     .post(new RegExp('/oauth2/token.*'))
     .reply(HttpStatus.OK, {
@@ -34,7 +34,7 @@ export function resolveExchangeCode (token: string) {
     })
 }
 
-export function rejectExchangeCode (token: string) {
+export function rejectAuthToken (token: string) {
   mock(apiServiceBaseURL)
     .post(new RegExp('/oauth2/token.*'))
     .reply(HttpStatus.UNAUTHORIZED)
@@ -67,5 +67,5 @@ export function resolveRetrieveServiceToken (token: string = defaultAuthToken) {
 export function rejectRetrieveServiceToken (reason: string = 'HTTP error') {
   return mock(s2sAuthServiceBaseURL)
     .post('/lease')
-    .reply(HttpStatus.INTERNAL_SERVER_ERROR, reason)
+    .reply(HttpStatus.BAD_REQUEST)
 }
