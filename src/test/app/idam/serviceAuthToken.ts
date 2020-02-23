@@ -1,4 +1,3 @@
-/* tslint:disable:no-unused-expression */
 import { expect } from 'chai'
 import * as jwt from 'jsonwebtoken'
 import moment from 'moment'

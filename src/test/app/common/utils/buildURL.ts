@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { mockReq as req } from 'sinon-express-mock'
-import { buildURL } from 'main/app/common/utils/buildURL'
+import { buildURL } from 'common/utils/buildURL'
 
 describe('BuildURL', () => {
 

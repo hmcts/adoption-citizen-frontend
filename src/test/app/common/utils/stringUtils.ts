@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-expression */
 import { expect } from 'chai'
-import { StringUtils } from 'main/app/common/utils/stringUtils'
+import { StringUtils } from 'common/utils/stringUtils'
 
 describe('StringUtils', () => {
   describe('trimToUndefined', () => {
