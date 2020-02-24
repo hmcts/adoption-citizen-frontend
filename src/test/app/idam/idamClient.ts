@@ -4,6 +4,7 @@ import { expect } from 'chai'
 import { ServiceAuthToken } from 'idam/serviceAuthToken'
 import { User } from 'idam/user'
 import { AuthToken } from 'idam/AuthToken'
+import { defaultAuthToken } from 'test/http-mocks/idam/idam'
 
 describe('IdamClient', () => {
   describe('getUserFromJwt', () => {
@@ -50,7 +51,7 @@ describe('IdamClient', () => {
   })
 
   describe('getAuthToken', () => {
-    it ('should get auth token', async () => {
+    it('should get auth token', async () => {
       idamServiceMocks.resolveAuthToken('dummy token')
 
       const authToken = await IdamClient.getAuthToken('adoption', 'http://redirectUri:4000/receiver')
@@ -68,6 +69,19 @@ describe('IdamClient', () => {
       } catch (err) {
         expect(err.message).to.be.equal('Request failed with status code 401')
       }
+    })
+  })
+
+  describe('invalidateSession', () => {
+    it('should throw error when unable to invalidate session', async () => {
+      idamServiceMocks.rejectInvalidateSession(defaultAuthToken)
+
+      try {
+        await IdamClient.invalidateSession(defaultAuthToken)
+      } catch (err) {
+        expect(err.message).to.be.equal('Request failed with status code 500')
+      }
+
     })
   })
 })

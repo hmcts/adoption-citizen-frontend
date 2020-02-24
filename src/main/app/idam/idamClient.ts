@@ -21,80 +21,83 @@ class ServiceAuthRequest {
 
 export class IdamClient {
 
-  static getUserFromJwt (jwt: string): Promise<User> {
-    return axios
-      .get(`${idamApiUrl}/details`, { headers: { Authorization: `Bearer ${jwt}` } })
-      .then((response: any) => {
-        const data = response.data
-        return new User(
-          data.id,
-          data.email,
-          data.forename,
-          data.surname,
-          data.roles,
-          data.group,
-          jwt
-        )
-      })
-      .catch(err => {
-        throw new Error(`Unable to get user from jwt - ${err}`)
-      })
+  static async getUserFromJwt (jwt: string): Promise<User> {
+
+    try {
+      const { data } = await axios
+        .get(`${idamApiUrl}/details`, { headers: { Authorization: `Bearer ${jwt}` } })
+
+      return new User(
+        data.id,
+        data.email,
+        data.forename,
+        data.surname,
+        data.roles,
+        data.group,
+        jwt
+      )
+    } catch (err) {
+      throw new Error(`Unable to get user from jwt - ${err}`)
+    }
   }
 
-  static getServiceToken (): Promise<ServiceAuthToken> {
+  static async getServiceToken (): Promise<ServiceAuthToken> {
     const oneTimePassword = otp({ secret: totpSecret }).totp()
 
-    return axios
-      .post(`${s2sUrl}/lease`, new ServiceAuthRequest(microserviceName, oneTimePassword))
-      .then((token: any) => {
-        return new ServiceAuthToken(token)
-      })
-      .catch(err => {
-        throw new Error(`Unable to get service token - ${err}`)
-      })
+    try {
+      const { data } = await axios
+        .post(`${s2sUrl}/lease`, new ServiceAuthRequest(microserviceName, oneTimePassword))
+      return new ServiceAuthToken(data)
+    } catch (err) {
+      throw new Error(`Unable to get service token - ${err}`)
+    }
   }
 
-  static getAuthToken (code: String, redirectUri: string): Promise<AuthToken> {
+  static async getAuthToken (code: String, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId')
     const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret')
     const url = `${config.get('idam.api.url')}/oauth2/token`
 
-    return axios
-      .post(
-        url,
-        {
-          auth: { username: clientId, password: clientSecret },
-          form: { grant_type: 'authorization_code', code: code, redirect_uri: redirectUri }
-        })
-      .then((response: any) => {
-        const data = response.data
-        return new AuthToken(
-          data.access_token,
-          data.token_type,
-          data.expires_in
-        )
+    try {
+      const { data } = await axios
+        .post(
+          url,
+          {
+            auth: { username: clientId, password: clientSecret },
+            form: { grant_type: 'authorization_code', code: code, redirect_uri: redirectUri }
+          })
+
+      return new AuthToken(
+        data.access_token,
+        data.token_type,
+        data.expires_in
+      )
+    } catch (err) {
+      trackCustomEvent('failed to get auth token', {
+        errorValue: {
+          message: err.name,
+          code: err.statusCode
+        }
       })
-      .catch((error: any) => {
-        trackCustomEvent('failed to get auth token', {
-          errorValue: {
-            message: error.name,
-            code: error.statusCode
-          }
-        })
-        throw error
-      })
+      throw err
+    }
   }
 
-  static invalidateSession (jwt: string, bearerToken: string): Promise<void> {
-    const url = `${config.get('idam.api.url')}/session/${jwt}`
-    axios
-      .delete(
-        url,
-        { headers: { Authorization: `Bearer ${bearerToken}`}}
+  static async invalidateSession (jwt: string): Promise<void> {
+    if (!jwt) {
+      return Promise.reject('missing jwt')
+    }
+
+    try {
+      const url = `${config.get('idam.api.url')}/session/${jwt}`
+      await axios
+        .delete(
+          url,
+          { headers: { Authorization: `Bearer ${jwt}` } }
         )
-      .catch((error: any) => {
-        throw error
-      })
-    return Promise.resolve()
+      return Promise.resolve()
+    } catch (err) {
+      throw err
+    }
   }
 }
