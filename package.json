@@ -48,6 +48,7 @@
     "i18next": "^18.0.0",
     "i18next-conv": "^9.2.0",
     "i18next-express-middleware": "^1.9.1",
+    "i18next-node-fs-backend": "^2.1.0",
     "i18next-sprintf-postprocessor": "^0.2.2",
     "jquery": "^3.4.1",
     "nunjucks": "^3.2.0",
