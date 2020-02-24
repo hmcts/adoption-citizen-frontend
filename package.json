@@ -16,7 +16,7 @@
     "test:coverage": "exit 0",
     "test:smoke": "exit 0",
     "test:functional": "exit 0",
-    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src -Dsonar.exclusions=src/integration-test/* -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info"
+    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src -Dsonar.language=ts -Dsonar.cpd.exclusions=app/**/*.njk,app/**/template.html,app/steps/**/index.js -Dsonar.exclusions=src/integration-test/* -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
