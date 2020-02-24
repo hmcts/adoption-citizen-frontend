@@ -79,9 +79,8 @@ describe('IdamClient', () => {
       try {
         await IdamClient.invalidateSession(defaultAuthToken)
       } catch (err) {
-        expect(err.message).to.be.equal('Request failed with status code 500')
+        expect(err.message).to.be.equal('Unable to invalidate session - Error: Request failed with status code 500')
       }
-
     })
   })
 })

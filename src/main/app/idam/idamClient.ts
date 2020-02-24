@@ -53,7 +53,7 @@ export class IdamClient {
     }
   }
 
-  static async getAuthToken (code: String, redirectUri: string): Promise<AuthToken> {
+  static async getAuthToken (code: string, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId')
     const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret')
     const url = `${config.get('idam.api.url')}/oauth2/token`
@@ -97,7 +97,7 @@ export class IdamClient {
         )
       return Promise.resolve()
     } catch (err) {
-      throw err
+      throw new Error(`Unable to invalidate session - ${err}`)
     }
   }
 }
