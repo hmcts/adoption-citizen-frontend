@@ -1,5 +1,7 @@
 nodejs:
   environment:
+    HTTP_PROTOCOL: http
+    NODE_ENV: production
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
