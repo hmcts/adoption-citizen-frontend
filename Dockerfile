@@ -7,14 +7,13 @@ RUN yarn install --production \
 
 # ---- Build image ----
 FROM base as build
-RUN yarn install --production && yarn cache clean
+COPY tsconfig.json gulpfile.js  ./
 COPY --chown=hmcts:hmcts src/main ./src/main
-COPY tsconfig.json gulpfile.js server.js ./
-RUN yarn sass
+RUN yarn install && yarn sass
 
 # ---- Runtime image ----
 FROM base as runtime
 COPY --from=build $WORKDIR/src/main ./src/main
-COPY --from=build $WORKDIR/server.js $WORKDIR/tsconfig.json ./
+COPY --from=build $WORKDIR/tsconfig.json ./
 COPY config ./config
 EXPOSE 3000
