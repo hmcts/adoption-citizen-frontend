@@ -25,15 +25,19 @@ export class IdamClient {
     return axios
       .get(`${idamApiUrl}/details`, { headers: { Authorization: `Bearer ${jwt}` } })
       .then((response: any) => {
+        const data = response.data
         return new User(
-          response.id.toString(),
-          response.email,
-          response.forename,
-          response.surname,
-          response.roles,
-          response.group,
+          data.id,
+          data.email,
+          data.forename,
+          data.surname,
+          data.roles,
+          data.group,
           jwt
         )
+      })
+      .catch(err => {
+        throw new Error(`Unable to get user from jwt - ${err}`)
       })
   }
 
@@ -52,7 +56,7 @@ export class IdamClient {
 
   static getAuthToken (code: String, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId')
-    const clientSecret = config.get<string>('secrets.cmc.citizen-oauth-client-secret')
+    const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret')
     const url = `${config.get('idam.api.url')}/oauth2/token`
 
     return axios
@@ -63,10 +67,11 @@ export class IdamClient {
           form: { grant_type: 'authorization_code', code: code, redirect_uri: redirectUri }
         })
       .then((response: any) => {
+        const data = response.data
         return new AuthToken(
-          response.access_token,
-          response.token_type,
-          response.expires_in
+          data.access_token,
+          data.token_type,
+          data.expires_in
         )
       })
       .catch((error: any) => {

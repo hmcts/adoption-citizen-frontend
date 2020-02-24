@@ -12,7 +12,8 @@
   },
   "secrets": {
     "adoption": {
-      "adoption-s2s-secret": "secret"
+      "adoption-s2s-secret": "secret",
+      "citizen-oauth-client-secret": "secret"
     }
   },
   "idam": {

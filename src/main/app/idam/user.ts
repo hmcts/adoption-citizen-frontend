@@ -1,27 +1,11 @@
 export class User {
-  id: string
-  email: string
-  forename: string
-  surname: string
-  roles: string[]
-  group: string
-  bearerToken: string
-
-  constructor (id: string,
-               email: string,
-               forename: string,
-               surname: string,
-               roles: string[],
-               group: string,
-               bearerToken: string) {
-    this.id = id
-    this.email = email
-    this.forename = forename
-    this.surname = surname
-    this.roles = roles
-    this.group = group
-    this.bearerToken = bearerToken
-  }
+  constructor (public id: string,
+               public email: string,
+               public forename: string,
+               public surname: string,
+               public roles: string[],
+               public group: string,
+               public bearerToken: string) {}
 
   isInRoles (...requiredRoles: string[]): boolean {
     return requiredRoles.every(requiredRole => this.roles.includes(requiredRole))
