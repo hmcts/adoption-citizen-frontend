@@ -90,21 +90,21 @@ function setAuthCookie (cookies: Cookies, authenticationToken: string): void {
 
 async function getOAuthAccessToken (req: express.Request, receiver: RoutablePath): Promise<string> {
   if (req.query.state != OAuthHelper.getStateCookie(req)) {
-  trackCustomEvent('State cookie mismatch (citizen)',
-    {
-      requestValue: req.query.state,
-      cookieValue: OAuthHelper.getStateCookie(req)
-    }
-  )
-}
+    trackCustomEvent('State cookie mismatch (citizen)',
+      {
+        requestValue: req.query.state,
+        cookieValue: OAuthHelper.getStateCookie(req)
+      }
+    )
+  }
 
-const authToken: AuthToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
+  const authToken: AuthToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
 
-if (authToken) {
-  return authToken.accessToken
-}
+  if (authToken) {
+    return authToken.accessToken
+  }
 
-return Promise.reject()
+  return Promise.reject()
 }
 
 async function getAuthenticationToken (

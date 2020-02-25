@@ -1,5 +1,5 @@
 import * as express from 'express'
-import * as uuid from 'uuid'
+import uuid from 'uuid'
 import Cookies from 'cookies'
 import config from 'config'
 

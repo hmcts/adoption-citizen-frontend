@@ -73,6 +73,14 @@ describe('IdamClient', () => {
   })
 
   describe('invalidateSession', () => {
+    it('should resolve promise when session is invalidated', async () => {
+      idamServiceMocks.resolveInvalidateSession(defaultAuthToken)
+
+      const response = await IdamClient.invalidateSession(defaultAuthToken)
+
+      expect(response).to.be.equal(200)
+    })
+
     it('should throw error when unable to invalidate session', async () => {
       idamServiceMocks.rejectInvalidateSession(defaultAuthToken)
 

@@ -84,18 +84,14 @@ export class IdamClient {
   }
 
   static async invalidateSession (jwt: string): Promise<void> {
-    if (!jwt) {
-      return Promise.reject('missing jwt')
-    }
-
     try {
       const url = `${config.get('idam.api.url')}/session/${jwt}`
-      await axios
+      const { status } = await axios
         .delete(
           url,
           { headers: { Authorization: `Bearer ${jwt}` } }
         )
-      return Promise.resolve()
+      return status
     } catch (err) {
       throw new Error(`Unable to invalidate session - ${err}`)
     }
