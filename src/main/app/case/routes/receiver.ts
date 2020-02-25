@@ -43,14 +43,7 @@ export default express.Router()
       }
 
       if (res.locals.isLoggedIn) {
-        if (isDefendantFirstContactPinLogin(req)) {
-          cookies.set(STATE_COOKIE_NAME, req.query.state)
-          // redirect to adoption application dashboard page or task list page
-        } else {
-          // if no adoption applications for the use redirect to start page
-          // else
-          // redirect to dashboard or task list page
-        }
+          // redirect to adoption application landing page
       } else {
         if (res.locals.code) {
           trackCustomEvent('Authentication token undefined (jwt defined)',
@@ -78,46 +71,31 @@ function loginErrorHandler (
   return next(err)
 }
 
-function isDefendantFirstContactPinLogin (req: express.Request): boolean {
-  //regex match to adoption case format
-  return req.query && req.query.state && req.query.state.match(/[0-9]{3}AD[0-9]{3}/)
-}
-
 function setAuthCookie (cookies: Cookies, authenticationToken: string): void {
   cookies.set(sessionCookie, authenticationToken)
   cookies.set(STATE_COOKIE_NAME, '')
-}
-
-async function getOAuthAccessToken (req: express.Request, receiver: RoutablePath): Promise<string> {
-  if (req.query.state != OAuthHelper.getStateCookie(req)) {
-    trackCustomEvent('State cookie mismatch (citizen)',
-      {
-        requestValue: req.query.state,
-        cookieValue: OAuthHelper.getStateCookie(req)
-      }
-    )
-  }
-
-  const authToken: AuthToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
-
-  if (authToken) {
-    return authToken.accessToken
-  }
-
-  return Promise.reject()
 }
 
 async function getAuthenticationToken (
   req: express.Request,
   receiver: RoutablePath = Paths.receiver,
   checkCookie = true
-) {
-  let authenticationToken
+): Promise<string> {
+
+  const stateCookie: string = OAuthHelper.getStateCookie(req)
+  if (req.query.state != stateCookie) {
+    trackCustomEvent('State cookie mismatch (citizen)',
+      {
+        requestValue: req.query.state,
+        cookieValue: stateCookie
+      }
+    )
+  }
 
   if (req.query.code) {
-    authenticationToken = await getOAuthAccessToken(req, receiver)
+    const authToken: AuthToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
+    return authToken.accessToken
   } else if (checkCookie) {
-    authenticationToken = JwtExtractor.extract(req)
+    return JwtExtractor.extract(req)
   }
-  return authenticationToken
 }
