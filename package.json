@@ -13,10 +13,13 @@
     "test": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) ! -path '*a11y*' ! -path '*/routes/*') --reporter-options reportFilename=unit,inlineAssets=true,reportTitle=adoption-frontend-unit",
     "test:routes": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) -path '*/routes/*') --timeout 10000 --reporter-options reportFilename=routes,inlineAssets=true,reportTitle=adoption-frontend-routes",
     "test:a11y": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --exit --opts mocha.opts src/test/a11y/a11y.ts --timeout 60000 --reporter-options reportFilename=a11y,inlineAssets=true,reportTitle=adoption-frontend-a11y",
-    "test:coverage": "exit 0",
+    "test:coverage": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF nyc --cache false mocha --exit --timeout 8000 --opts mocha.opts $(find src/test \\( -name '*.ts' \\) ! -path '*a11y*')",
+    "test:coverage-unit": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF nyc --cache false mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) ! -path '*a11y*' ! -path '*/routes/*')",
+    "test:codacy-upload": "cat ./coverage-report/lcov.info | codacy-coverage",
+    "test:codecov-upload": "codecov -f ./coverage-report/lcov.info",
     "test:smoke": "exit 0",
     "test:functional": "exit 0",
-    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info"
+    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.exclusions=src/integration-test/* -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
@@ -56,6 +59,7 @@
     "gulp": "^4.0.2",
     "helmet": "^3.21.2",
     "http-status-codes": "^1.4.0",
+    "husky": "^4.2.3",
     "i18next": "^18.0.0",
     "i18next-conv": "^9.2.0",
     "i18next-express-middleware": "^1.9.1",
@@ -67,6 +71,7 @@
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "nunjucks": "^3.2.0",
+    "nyc": "^15.0.0",
     "otp": "^0.1.3",
     "require-directory": "^2.1.1",
     "serve-favicon": "^2.5.0",
@@ -101,7 +106,31 @@
     "sass-lint": "^1.13.1",
     "sinon": "^8.1.1",
     "sinon-chai": "^3.4.0",
-    "supertest": "^4.0.2",
-    "sonarqube-scanner": "^2.5.0"
+    "sonarqube-scanner": "^2.5.0",
+    "supertest": "^4.0.2"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/main"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "src/main/public"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "report-dir": "coverage-report",
+    "all": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "pre-push": "yarn cichecks"
+    }
   }
 }
