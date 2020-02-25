@@ -4,24 +4,34 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es6",
+    "target": "es2019",
     "noImplicitAny": false,
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "lib": [
-      "es6",
-      "es2017.object",
-      "dom"
+      "es2019"
     ],
-    "baseUrl": "src/main",
+    "baseUrl": "src",
     "paths": {
+      "case/*": [
+        "main/app/case/*"
+      ],
+      "common/*": [
+        "main/app/common/*"
+      ],
+      "idam/*": [
+        "main/app/idam/*"
+      ],
+      "logging/*": [
+        "main/app/logging/*"
+      ],
       "router/*": [
-        "router/*"
+        "main/router/*"
       ],
       "routes/*": [
-        "routes/*"
+        "main/routes/*"
       ]
     },
     "typeRoots": [
