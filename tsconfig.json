@@ -32,9 +32,6 @@
       ],
       "routes/*": [
         "main/routes/*"
-      ],
-      "test/*": [
-        "test/*"
       ]
     },
     "typeRoots": [

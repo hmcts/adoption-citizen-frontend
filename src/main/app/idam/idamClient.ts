@@ -3,7 +3,7 @@ import config from 'config'
 import axios from 'axios'
 
 import { ServiceAuthToken } from './serviceAuthToken'
-import { User } from 'idam/user'
+import { User } from './user'
 import { AuthToken } from './AuthToken'
 import { trackCustomEvent } from 'logging/customEventTracker'
 

@@ -3,9 +3,9 @@ import uuid from 'uuid'
 import Cookies from 'cookies'
 import config from 'config'
 
-import { RoutablePath } from 'main/app/common/router/routablePath'
-import { Paths } from 'main/app/case/paths'
-import { buildURL } from 'main/app/common/utils/buildURL'
+import { RoutablePath } from 'common/router/routablePath'
+import { Paths } from 'case/paths'
+import { buildURL } from 'common/utils/buildURL'
 import { User } from './user'
 
 const clientId = config.get<string>('oauth.clientId')
