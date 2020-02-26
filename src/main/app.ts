@@ -10,6 +10,8 @@ import { RouterFinder } from 'router/routerFinder'
 import { HTTPError } from 'main/HttpError'
 import { Nunjucks } from 'main/modules/nunjucks'
 import { I18Next } from 'main/modules/i18n'
+import { AdoptionApplication } from 'case/index'
+// import { CsrfProtection } from './modules/csrf'
 
 const config = require('config')
 const { Logger } = require('@hmcts/nodejs-logging')
@@ -37,6 +39,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// if (env !== 'mocha') {
+//   new CsrfProtection().enableFor(app)
+// }
+
+new AdoptionApplication().enableFor(app)
 
 app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')))
 
