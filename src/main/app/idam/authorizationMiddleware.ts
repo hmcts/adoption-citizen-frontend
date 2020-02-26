@@ -24,12 +24,13 @@ export class AuthorizationMiddleware {
     unprotectedPaths?: string[]): express.RequestHandler {
 
     return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-      const jwt: string = JwtExtractor.extract(req)
 
-      // if (unprotectedPaths || unprotectedPaths.includes(req.path) || unprotectedPaths.length !== 0) {
-      //   logger.debug(`Unprotected path - access to ${req.path} granted`)
-      //   return next()
-      // }
+      if (unprotectedPaths && unprotectedPaths.length !== 0 && unprotectedPaths.includes(req.path)) {
+        logger.debug(`Unprotected path - access to ${req.path} granted`)
+        return next()
+      }
+
+      const jwt: string = JwtExtractor.extract(req)
 
       if (!jwt) {
         return accessDeniedCallback(req, res)

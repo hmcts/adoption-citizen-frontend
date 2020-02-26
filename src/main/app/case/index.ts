@@ -1,6 +1,8 @@
 import * as express from 'express'
 import { AuthorizationMiddleware } from 'idam/authorizationMiddleware'
 import { OAuthHelper } from 'idam/oAuthHelper'
+// import { RoutablePath } from 'common/router/routablePath'
+// import { Paths } from 'case/paths'
 
 export class AdoptionApplication {
   enableFor (app: express.Express) {
@@ -13,7 +15,8 @@ export class AdoptionApplication {
     }
 
     const requiredRoles = ['citizen']
-    const unprotectedPaths = []
+    // const unprotectedPaths: string[] = [Paths.something.uri, Paths.something.uri]
+    const unprotectedPaths: string[] = []
 
     return AuthorizationMiddleware.requestHandler(requiredRoles, accessDeniedCallback, unprotectedPaths)
   }
