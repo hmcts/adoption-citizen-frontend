@@ -24,37 +24,44 @@ export class AuthorizationMiddleware {
     unprotectedPaths?: string[]): express.RequestHandler {
 
     return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+      this.handleUnprotectedPaths(unprotectedPaths, req, next)
+      this.handleProtectedPaths(req, accessDeniedCallback, res, requiredRoles, next)
+    }
+  }
 
-      if (unprotectedPaths && unprotectedPaths.length !== 0 && unprotectedPaths.includes(req.path)) {
-        logger.debug(`Unprotected path - access to ${req.path} granted`)
-        return next()
-      }
+  static async handleProtectedPaths (req: express.Request,
+                                       accessDeniedCallback: (req: express.Request, res: express.Response) => void, res: express.Response, requiredRoles: string[], next: express.NextFunction) {
+    const jwt: string = JwtExtractor.extract(req)
 
-      const jwt: string = JwtExtractor.extract(req)
+    if (!jwt) {
+      return accessDeniedCallback(req, res)
+    } else {
+      try {
+        const user: User = await IdamClient.getUserFromJwt(jwt)
 
-      if (!jwt) {
-        return accessDeniedCallback(req, res)
-      } else {
-        try {
-          const user: User = await IdamClient.getUserFromJwt(jwt)
-
-          if (!user.isInRoles(...requiredRoles)) {
-            return accessDeniedCallback(req, res)
-          } else {
-            res.locals.isLoggedIn = true
-            res.locals.user = user
-            return next()
-          }
-        } catch (err) {
-          if (hasTokenExpired(err)) {
-            logger.debug(`Protected path - invalid JWT - access to ${req.path} rejected`)
-            const cookies = new Cookies(req, res)
-            cookies.set(sessionCookieName, '')
-            return accessDeniedCallback(req, res)
-          }
-          return next(err)
+        if (!user.isInRoles(...requiredRoles)) {
+          return accessDeniedCallback(req, res)
+        } else {
+          res.locals.isLoggedIn = true
+          res.locals.user = user
+          return next()
         }
+      } catch (err) {
+        if (hasTokenExpired(err)) {
+          logger.debug(`Protected path - invalid JWT - access to ${req.path} rejected`)
+          const cookies = new Cookies(req, res)
+          cookies.set(sessionCookieName, '')
+          return accessDeniedCallback(req, res)
+        }
+        return next(err)
       }
+    }
+  }
+
+  static handleUnprotectedPaths (unprotectedPaths: string[], req: express.Request, next: express.NextFunction) {
+    if (unprotectedPaths && unprotectedPaths.length !== 0 && unprotectedPaths.includes(req.path)) {
+      logger.debug(`Unprotected path - access to ${req.path} granted`)
+      return next()
     }
   }
 }
