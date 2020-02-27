@@ -25,12 +25,11 @@ export class AuthorizationMiddleware {
 
     return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
       this.handleUnprotectedPaths(unprotectedPaths, req, next)
-      this.handleProtectedPaths(req, accessDeniedCallback, res, requiredRoles, next)
+      this.handleProtectedPaths(req, res, next, requiredRoles, accessDeniedCallback)
     }
   }
 
-  static async handleProtectedPaths (req: express.Request,
-                                       accessDeniedCallback: (req: express.Request, res: express.Response) => void, res: express.Response, requiredRoles: string[], next: express.NextFunction) {
+  static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[], accessDeniedCallback: (req: express.Request, res: express.Response) => void) {
     const jwt: string = JwtExtractor.extract(req)
 
     if (!jwt) {
