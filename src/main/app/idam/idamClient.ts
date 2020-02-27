@@ -37,7 +37,7 @@ export class IdamClient {
         jwt
       )
     } catch (err) {
-      throw new Error(`Unable to get user from jwt - ${err}`)
+      throw err
     }
   }
 
@@ -93,7 +93,7 @@ export class IdamClient {
         )
       return status
     } catch (err) {
-      throw new Error(`Unable to invalidate session - ${err}`)
+      throw err
     }
   }
 }

@@ -7,13 +7,12 @@ import { Logger } from '@hmcts/nodejs-logging'
 import * as HttpStatus from 'http-status-codes'
 
 import config from 'config'
-import Cookies from 'cookies'
 
 const sessionCookieName = config.get<string>('session.cookieName')
 const logger = Logger.getLogger('middleware/authorization')
 
 export function hasTokenExpired (err) {
-  return (err.statusCode === HttpStatus.FORBIDDEN || err.statusCode === HttpStatus.UNAUTHORIZED)
+  return (err.response.status === HttpStatus.FORBIDDEN || err.response.status === HttpStatus.UNAUTHORIZED)
 }
 
 export class AuthorizationMiddleware {
@@ -30,6 +29,7 @@ export class AuthorizationMiddleware {
   }
 
   static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[], accessDeniedCallback: (req: express.Request, res: express.Response) => void) {
+
     const jwt: string = JwtExtractor.extract(req)
 
     if (!jwt) {
@@ -48,8 +48,7 @@ export class AuthorizationMiddleware {
       } catch (err) {
         if (hasTokenExpired(err)) {
           logger.debug(`Protected path - invalid JWT - access to ${req.path} rejected`)
-          const cookies = new Cookies(req, res)
-          cookies.set(sessionCookieName, '')
+          res.cookie(sessionCookieName,'')
           return accessDeniedCallback(req, res)
         }
         return next(err)

@@ -5,9 +5,10 @@ import { ServiceAuthToken } from 'idam/serviceAuthToken'
 import { User } from 'idam/user'
 import { AuthToken } from 'idam/AuthToken'
 import { defaultAuthToken } from 'test/http-mocks/idam/idam'
+import * as HttpStatus from 'http-status-codes'
 
 describe('IdamClient', () => {
-  describe('getUserFromJwt', () => {
+  context('getUserFromJwt', () => {
     it('should get correct user from json web token', async () => {
       idamServiceMocks.resolveRetrieveUserFor('123', 'adoption-citizen-role')
 
@@ -23,13 +24,13 @@ describe('IdamClient', () => {
       try {
         await IdamClient.getUserFromJwt(idamServiceMocks.defaultAuthToken)
       } catch (err) {
-        expect(err.message).to.be.equal('Unable to get user from jwt - Error: Request failed with status code 403')
+        expect(err.response.status).to.be.equal(HttpStatus.FORBIDDEN)
       }
 
     })
   })
 
-  describe('getServiceToken', () => {
+  context('getServiceToken', () => {
     it('should get serviceToken', async () => {
 
       idamServiceMocks.resolveRetrieveServiceToken()
@@ -50,7 +51,7 @@ describe('IdamClient', () => {
     })
   })
 
-  describe('getAuthToken', () => {
+  context('getAuthToken', () => {
     it('should get auth token', async () => {
       idamServiceMocks.resolveAuthToken('dummy token')
 
@@ -67,18 +68,18 @@ describe('IdamClient', () => {
       try {
         await IdamClient.getAuthToken('adoption', 'http://redirectUri:4000/receiver')
       } catch (err) {
-        expect(err.message).to.be.equal('Request failed with status code 401')
+        expect(err.response.status).to.be.equal(HttpStatus.UNAUTHORIZED)
       }
     })
   })
 
-  describe('invalidateSession', () => {
+  context('invalidateSession', () => {
     it('should resolve promise when session is invalidated', async () => {
       idamServiceMocks.resolveInvalidateSession(defaultAuthToken)
 
       const response = await IdamClient.invalidateSession(defaultAuthToken)
 
-      expect(response).to.be.equal(200)
+      expect(response).to.be.equal(HttpStatus.OK)
     })
 
     it('should throw error when unable to invalidate session', async () => {
@@ -87,7 +88,7 @@ describe('IdamClient', () => {
       try {
         await IdamClient.invalidateSession(defaultAuthToken)
       } catch (err) {
-        expect(err.message).to.be.equal('Unable to invalidate session - Error: Request failed with status code 500')
+        expect(err.response.status).to.be.equal(HttpStatus.INTERNAL_SERVER_ERROR)
       }
     })
   })
