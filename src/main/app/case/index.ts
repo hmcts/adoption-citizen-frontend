@@ -9,7 +9,7 @@ export class AdoptionApplication {
     app.all('/*', this.requestHandler())
   }
 
-  private requestHandler() {
+  requestHandler() {
     function accessDeniedCallback (req: express.Request, res: express.Response): void {
       res.redirect(OAuthHelper.forLogin(req, res))
     }

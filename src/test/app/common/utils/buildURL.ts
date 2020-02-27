@@ -4,7 +4,7 @@ import { buildURL } from 'common/utils/buildURL'
 
 describe('BuildURL', () => {
 
-  describe(`buildURL should create URL `, () => {
+  context(`buildURL should create URL `, () => {
     it('for SSL request ', () => {
       const path = 'my/service/path'
       const expected = `https://localhost/${path}`
@@ -28,7 +28,7 @@ describe('BuildURL', () => {
     })
   })
 
-  describe(`buildURL should throw error `, () => {
+  context(`buildURL should throw error `, () => {
     it('for undefined request ', () => {
       const path = 'my/service/path'
       expect(() => buildURL(undefined, path)).to.throw(Error, 'Request is undefined')

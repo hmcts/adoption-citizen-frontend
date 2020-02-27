@@ -82,7 +82,7 @@ async function getAuthenticationToken (
   checkCookie = true
 ): Promise<string> {
 
-  const stateCookie: string = OAuthHelper.getStateCookie(req)
+  const stateCookie: string = req.cookies['state']
   if (req.query.state != stateCookie) {
     trackCustomEvent('State cookie mismatch (citizen)',
       {

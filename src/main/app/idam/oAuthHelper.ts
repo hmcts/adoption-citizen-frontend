@@ -1,6 +1,5 @@
 import * as express from 'express'
 import uuid from 'uuid'
-import Cookies from 'cookies'
 import config from 'config'
 
 import { RoutablePath } from 'common/router/routablePath'
@@ -14,17 +13,8 @@ export class OAuthHelper {
   static forLogin (req: express.Request, res: express.Response, receiver: RoutablePath = Paths.receiver): string {
     const redirectUri = buildURL(req, receiver.uri)
     const state = uuid()
-    OAuthHelper.storeStateCookie(req, res, state)
+    res.cookie('state', state)
 
     return `${loginPath}?response_type=code&state=${state}&client_id=${clientId}&redirect_uri=${redirectUri}`
-  }
-
-  static getStateCookie (req: express.Request): string {
-    return req.cookies['state']
-  }
-
-  private static storeStateCookie (req: express.Request, res: express.Response, state: string): void {
-    const cookies = new Cookies(req, res)
-    cookies.set('state', state)
   }
 }
