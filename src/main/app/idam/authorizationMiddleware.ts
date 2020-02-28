@@ -17,7 +17,7 @@ export function hasTokenExpired (err) {
 
 export class AuthorizationMiddleware {
 
-  static requestHandler (
+  requestHandler (
     requiredRoles: string[],
     accessDeniedCallback: (req: express.Request, res: express.Response) => void,
     unprotectedPaths?: string[]): express.RequestHandler {
@@ -28,7 +28,7 @@ export class AuthorizationMiddleware {
     }
   }
 
-  static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[], accessDeniedCallback: (req: express.Request, res: express.Response) => void) {
+  async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[], accessDeniedCallback: (req: express.Request, res: express.Response) => void) {
 
     const jwt: string = JwtExtractor.extract(req)
 
@@ -56,7 +56,7 @@ export class AuthorizationMiddleware {
     }
   }
 
-  static handleUnprotectedPaths (unprotectedPaths: string[], req: express.Request, next: express.NextFunction) {
+  handleUnprotectedPaths (unprotectedPaths: string[], req: express.Request, next: express.NextFunction) {
     if (unprotectedPaths && unprotectedPaths.length !== 0 && unprotectedPaths.includes(req.path)) {
       logger.debug(`Unprotected path - access to ${req.path} granted`)
       return next()
