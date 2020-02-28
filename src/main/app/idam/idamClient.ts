@@ -23,22 +23,18 @@ export class IdamClient {
 
   static async getUserFromJwt (jwt: string): Promise<User> {
 
-    try {
-      const { data } = await axios
-        .get(`${idamApiUrl}/details`, { headers: { Authorization: `Bearer ${jwt}` } })
+    const { data } = await axios
+      .get(`${idamApiUrl}/details`, { headers: { Authorization: `Bearer ${jwt}` } })
 
-      return new User(
-        data.id,
-        data.email,
-        data.forename,
-        data.surname,
-        data.roles,
-        data.group,
-        jwt
-      )
-    } catch (err) {
-      throw err
-    }
+    return new User(
+      data.id,
+      data.email,
+      data.forename,
+      data.surname,
+      data.roles,
+      data.group,
+      jwt
+    )
   }
 
   static async getServiceToken (): Promise<ServiceAuthToken> {
@@ -84,16 +80,13 @@ export class IdamClient {
   }
 
   static async invalidateSession (jwt: string): Promise<void> {
-    try {
-      const url = `${config.get('idam.api.url')}/session/${jwt}`
-      const { status } = await axios
-        .delete(
-          url,
-          { headers: { Authorization: `Bearer ${jwt}` } }
-        )
-      return status
-    } catch (err) {
-      throw err
-    }
+    const url = `${config.get('idam.api.url')}/session/${jwt}`
+    const { status } = await axios
+      .delete(
+        url,
+        { headers: { Authorization: `Bearer ${jwt}` } }
+      )
+    return status
+
   }
 }
