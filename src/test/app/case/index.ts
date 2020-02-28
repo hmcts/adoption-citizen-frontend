@@ -8,7 +8,7 @@ describe('AdoptionApplication', () => {
 
     //This test can be improved
     it('should call requestHandler once', () => {
-      const spyRequestHandler = sinon.spy(new AuthorizationMiddleware(), 'requestHandler')
+      const spyRequestHandler = sinon.spy(AuthorizationMiddleware, 'requestHandler')
       const spyAccessDeniedCallback = sinon.spy(() => {})
 
       new AdoptionApplication().requestHandler()
