@@ -18,7 +18,7 @@ export class AdoptionApplication {
     // const unprotectedPaths: string[] = [Paths.something.uri, Paths.something.uri]
     const unprotectedPaths: string[] = []
 
-    return new AuthorizationMiddleware().requestHandler(requiredRoles, accessDeniedCallback, unprotectedPaths)
+    return AuthorizationMiddleware.requestHandler(requiredRoles, accessDeniedCallback, unprotectedPaths)
   }
 }
 
