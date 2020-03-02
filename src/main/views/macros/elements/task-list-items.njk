@@ -1,0 +1,20 @@
+{% macro taskListItems(items=[{  title: '', url: '', status: false }], sectionId='') %}
+
+  <ul class="task-list__items">
+    {% for item in items %}
+      
+      <li class="task-list__item">
+        <span class="app-task-list__task-name">
+          {% if item.status %}
+            <a href="{{ item.url }}" aria-describedby="{{ sectionId + '-' + loop.index }}">{{ item.title }}</a>
+          {% else %}
+            <a href="{{ item.url }}">{{ item.title }}</a>
+          {% endif %}
+        </span>
+        {% if item.status %}
+          <strong class="govuk-tag task-list__tag" id="{{ sectionId + '-' + loop.index}}">{{ item.status }}</strong>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}

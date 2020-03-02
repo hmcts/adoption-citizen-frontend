@@ -1,0 +1,21 @@
+.margin-top {
+  &--xs {
+    margin-top: 10px;
+  }
+
+  &--s {
+    margin-top: 20px;
+  }
+
+  &--m {
+    margin-top: 30px;
+  }
+
+  &--l {
+    margin-top: 40px;
+  }
+
+  &--xl {
+    margin-top: 50px;
+  }
+}

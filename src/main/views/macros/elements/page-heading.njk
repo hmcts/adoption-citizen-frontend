@@ -1,0 +1,6 @@
+{% macro pageHeading(heading='', caption=false) %}
+  {% if caption %}
+    <span class="govuk-caption-xl">{{ caption}}</span>
+  {% endif %}
+  <h1 class='govuk-heading-xl'>{{ heading }}</h1>
+{% endmacro %}
