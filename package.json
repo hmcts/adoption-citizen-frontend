@@ -21,7 +21,7 @@
     "test:codecov-upload": "codecov -f ./coverage-report/lcov.info",
     "test:smoke": "exit 0",
     "test:functional": "exit 0",
-    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info"
+    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info - Dsonar.exclusions=src/main/assets, src/main/webpack, src/main/index.js"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
