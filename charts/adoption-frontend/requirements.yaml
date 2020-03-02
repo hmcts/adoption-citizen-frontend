@@ -2,3 +2,8 @@ dependencies:
   - name: nodejs
     version: ~1.8.0
     repository: '@hmctspublic'
+  - name: adoption-backend
+    version: 0.0.3
+    repository: '@hmctspublic'
+    tags:
+      - adoption-ccd-stack

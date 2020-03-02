@@ -6,8 +6,51 @@ def type = "nodejs"
 def product = "adoption"
 def component = "frontend"
 
+static Map<String, Object> secret(String secretName, String envVariable) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    envVariable: envVariable
+  ]
+}
+
+def otherSecrets = [
+  's2s-${env}': [
+    secret('microservicekey-ccd-gw', 'CCD_API_GATEWAY_S2S_SECRET'),
+    secret('microservicekey-ccd-data', 'CCD_DATA_STORE_S2S_SECRET'),
+    secret('microservicekey-ccd-definition', 'CCD_DEFINITION_STORE_S2S_SECRET')
+  ],
+  'ccd-${env}': [
+    secret('ccd-api-gateway-oauth2-client-secret', 'CCD_API_GATEWAY_IDAM_CLIENT_SECRET'),
+    secret('postcode-info-address-lookup-token', 'ADDRESS_LOOKUP_TOKEN')
+  ],
+  'adoption-${env}': [
+    secret('ccd-importer-username', 'CCD_CONFIGURER_IMPORTER_USERNAME'),
+    secret('ccd-importer-password', 'CCD_CONFIGURER_IMPORTER_PASSWORD')
+  ]
+]
+
+def loadCddDefintions() {
+  withCredentials([usernamePassword(credentialsId: 'jenkins-github-hmcts-api-token', usernameVariable: 'USERNAME', passwordVariable: 'BEARER_TOKEN')]) {
+    sh """       
+        eval \$(./bin/load-preview-environment-variables.sh ${CHANGE_ID})
+        ./bin/fetch-ccd-definition.sh
+        
+       """
+  }
+}
+
 withPipeline(type, product, component) {
   installCharts()
   disableLegacyDeployment()
   enableSlackNotifications('#fpla_adoption_tech')
+  onPR {
+    loadVaultSecrets(otherSecrets)
+  }
+
+
+  before('smoketest:preview') {
+    loadCddDefintions()
+    env.URL="https://adoption-pr-${CHANGE_ID}.service.core-compute-preview.internal"
+  }
 }
