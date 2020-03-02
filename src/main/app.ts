@@ -28,17 +28,18 @@ new Nunjucks(developmentMode, i18next)
 // secure the application by adding various HTTP headers to its responses
 new Helmet(config.get('security')).enableFor(app)
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'))
-
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(favicon(path.join(__dirname, '/public/img/favicon.ico')))
+app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')))
+
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
+  next();
+})
 
 // returning "not found" page for requests with paths not resolved by the router
 app.use((req, res, next) => {
