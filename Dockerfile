@@ -7,6 +7,7 @@ RUN yarn install && yarn build:prod && rm -r node_modules/ && yarn install --pro
 # ---- Build image ----
 FROM base as build
 COPY tsconfig.json ./
+COPY --chown=hmcts:hmcts webpack.config.js ./webpack.config.js
 COPY --chown=hmcts:hmcts src/main ./src/main
 RUN yarn install && yarn build:prod
 
