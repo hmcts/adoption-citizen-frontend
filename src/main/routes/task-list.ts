@@ -3,7 +3,6 @@ import { SubTaskListBuilder } from '../views/macros/elements/task-list/util/subT
 
 const router = express.Router()
 
-/* GET home page. */
 router.get('/task-list', (req, res, next) => {
   res.render('task-list', {
     tasks: {
