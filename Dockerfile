@@ -9,6 +9,7 @@ FROM base as build
 COPY tsconfig.json ./
 COPY --chown=hmcts:hmcts webpack.config.js ./webpack.config.js
 COPY --chown=hmcts:hmcts src/main ./src/main
+RUN ls
 RUN yarn install && yarn build:prod
 
 # ---- Runtime image ----
