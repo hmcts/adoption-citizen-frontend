@@ -1,10 +1,7 @@
 import * as express from 'express'
+import { Paths } from 'case/paths'
 
-const router = express.Router()
-
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('home')
+export default express.Router()
+  .get(Paths.homePage.uri, (req, res) =>{
+    res.redirect(Paths.receiver.uri)
 })
-
-module.exports = router

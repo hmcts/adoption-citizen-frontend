@@ -4,13 +4,11 @@ import Cookies from 'cookies'
 import config from 'config'
 
 import { Paths } from 'case/paths'
-import { ErrorHandling } from 'common/utils/errorHandling'
 import { IdamClient } from 'idam/idamClient'
 import { RoutablePath } from 'common/router/routablePath'
 import { hasTokenExpired } from 'idam/authorizationMiddleware'
 import { OAuthHelper } from 'idam/oAuthHelper'
 import { Logger } from '@hmcts/nodejs-logging'
-import { trackCustomEvent } from 'logging/customEventTracker'
 import { AuthToken } from 'idam/AuthToken'
 import { buildURL } from 'common/utils/buildURL'
 import { JwtExtractor } from 'idam/jwtExtractor'
@@ -20,14 +18,15 @@ const sessionCookie = config.get<string>('session.cookieName')
 const STATE_COOKIE_NAME = 'state'
 
 export default express.Router()
-  .get(Paths.receiver.uri,
-    ErrorHandling.apply(async (
-      req: express.Request,
-      res: express.Response,
-      next: express.NextFunction
+  .get(Paths.receiver.uri, async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
     ): Promise<void> => {
       const cookies = new Cookies(req, res)
       let user
+
+    console.log('receiver test-------')
 
       try {
         const authenticationToken = await getAuthenticationToken(req)
@@ -43,15 +42,11 @@ export default express.Router()
       }
 
       if (res.locals.isLoggedIn) {
-          // redirect to adoption application landing page
+        // redirect to adoption application landing page
       } else {
-        if (res.locals.code) {
-          trackCustomEvent('Authentication token undefined (jwt defined)',
-            { requestValue: req.query.state })
-        }
         res.redirect(OAuthHelper.forLogin(req, res))
       }
-    })
+    }
   )
 
 function loginErrorHandler (
@@ -81,16 +76,6 @@ async function getAuthenticationToken (
   receiver: RoutablePath = Paths.receiver,
   checkCookie = true
 ): Promise<string> {
-
-  const stateCookie: string = req.cookies['state']
-  if (req.query.state != stateCookie) {
-    trackCustomEvent('State cookie mismatch (citizen)',
-      {
-        requestValue: req.query.state,
-        cookieValue: stateCookie
-      }
-    )
-  }
 
   if (req.query.code) {
     const authToken: AuthToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { ServiceAuthToken } from './serviceAuthToken'
 import { User } from './user'
 import { AuthToken } from './AuthToken'
-import { trackCustomEvent } from 'logging/customEventTracker'
+// import { trackCustomEvent } from 'logging/customEventTracker'
 
 const s2sUrl = config.get<string>('idam.service-2-service-auth.url')
 const idamApiUrl = config.get<string>('idam.api.url')
@@ -55,26 +55,22 @@ export class IdamClient {
     const url = `${config.get('idam.api.url')}/oauth2/token`
 
     try {
-      const { data } = await axios
+      const response = await axios
         .post(
           url,
           {
             auth: { username: clientId, password: clientSecret },
             form: { grant_type: 'authorization_code', code: code, redirect_uri: redirectUri }
           })
+      console.log('response----->', response)
 
+      const { data } = response
       return new AuthToken(
         data.access_token,
         data.token_type,
         data.expires_in
       )
     } catch (err) {
-      trackCustomEvent('failed to get auth token', {
-        errorValue: {
-          message: err.name,
-          code: err.statusCode
-        }
-      })
       throw err
     }
   }
