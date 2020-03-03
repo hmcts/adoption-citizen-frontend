@@ -6,7 +6,7 @@ export class SubTaskListBuilder {
       new SubTask('Number of children and applicants', '#', TaskStatus.Completed),
       new SubTask('Choose your family court', '#')
     ];
-  };
+  }
 
   static buildYourDetailsSubTasks(): SubTask[] {
     return [
@@ -16,7 +16,7 @@ export class SubTaskListBuilder {
       new SubTask('Your relationship (if the user said they were the only applicant)', '#'),
       new SubTask('Upload your identity documents', '#')
     ];
-  };
+  }
 
   static buildChildDetailsSubTasks(): SubTask[] {
     return [
@@ -29,7 +29,7 @@ export class SubTaskListBuilder {
       new SubTask('Previous court order for the child', '#'),
       new SubTask('Court order details for any siblings or half-siblings', '#')
     ];
-  };
+  }
 
   static buildAdoptionContactsSubTasks(): SubTask[] {
     return [
@@ -37,17 +37,17 @@ export class SubTaskListBuilder {
       new SubTask('The child\'s social worker', '#'),
       new SubTask('Your solictor, if relevant', '#')
     ];
-  };
+  }
 
   static buildDeclarePaymentsSubTasks(): SubTask[] {
     return [
       new SubTask('Declare any payments made or received', '#')
     ];
-  };
+  }
 
   static buildReviewApplicationSubTasks(): SubTask[] {
     return [
       new SubTask('Review application, pay and send', '#')
     ];
-  };
+  }
 }
