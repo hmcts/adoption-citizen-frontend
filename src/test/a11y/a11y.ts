@@ -22,11 +22,8 @@ class PallyIssue {
 }
 
 describe('Accessibility', () => {
-
-  // testing accessibility of the home page
-  testAccessibility('/')
-
-  // TODO: include each path of your application in accessibility checks
+  testAccessibility('/');
+  testAccessibility('/task-list');
 })
 
 function testAccessibility (url: string): void {
