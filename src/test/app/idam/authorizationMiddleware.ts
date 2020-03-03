@@ -36,7 +36,7 @@ describe('AuthorizationMiddleware', () => {
         path: '/unprotected'
       })
 
-      new AuthorizationMiddleware().handleUnprotectedPaths(['/unprotected'],req, nextFunction)
+      AuthorizationMiddleware.handleUnprotectedPaths(['/unprotected'],req, nextFunction)
       expect(nextFunction).to.have.been.called
     })
 
@@ -45,7 +45,7 @@ describe('AuthorizationMiddleware', () => {
         path: '/unprotected'
       })
 
-      new AuthorizationMiddleware().handleUnprotectedPaths([''],req, nextFunction)
+      AuthorizationMiddleware.handleUnprotectedPaths([''],req, nextFunction)
       expect(nextFunction).to.have.not.been.called
     })
   })
@@ -65,7 +65,7 @@ describe('AuthorizationMiddleware', () => {
         cookies: { SESSION_ID: undefined}
       })
 
-      new AuthorizationMiddleware().handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback)
 
       expect(spyAccessDeniedCallback).to.have.been.called
     })
@@ -84,7 +84,7 @@ describe('AuthorizationMiddleware', () => {
         }
       })
 
-      await new AuthorizationMiddleware().handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback)
 
       expect(nextFunction).to.have.been.called
     })
@@ -97,7 +97,7 @@ describe('AuthorizationMiddleware', () => {
         cookies: { SESSION_ID: '123'}
       })
 
-      await new AuthorizationMiddleware().handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      await AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback)
 
       expect(spyAccessDeniedCallback).to.have.been.called
     })
@@ -113,7 +113,7 @@ describe('AuthorizationMiddleware', () => {
         cookies: { SESSION_ID: '123'}
       })
 
-      await new AuthorizationMiddleware().handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback)
 
       expect(spyAccessDeniedCallback).to.have.been.called
     })
