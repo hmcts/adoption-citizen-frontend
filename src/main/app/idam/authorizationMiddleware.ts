@@ -12,7 +12,7 @@ const sessionCookieName = config.get<string>('session.cookieName')
 const logger = Logger.getLogger('middleware/authorization')
 
 export function hasTokenExpired (err) {
-  return (err.response.status === HttpStatus.FORBIDDEN || err.response.status === HttpStatus.UNAUTHORIZED)
+  return (err.statusCode === HttpStatus.FORBIDDEN || err.statusCode === HttpStatus.UNAUTHORIZED)
 }
 
 export class AuthorizationMiddleware {

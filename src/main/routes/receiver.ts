@@ -9,9 +9,9 @@ import { RoutablePath } from 'common/router/routablePath'
 import { hasTokenExpired } from 'idam/authorizationMiddleware'
 import { OAuthHelper } from 'idam/oAuthHelper'
 import { Logger } from '@hmcts/nodejs-logging'
-import { AuthToken } from 'idam/AuthToken'
 import { buildURL } from 'common/utils/buildURL'
 import { JwtExtractor } from 'idam/jwtExtractor'
+import { AuthToken } from 'idam/AuthToken'
 
 const logger = Logger.getLogger('router/receiver')
 const sessionCookie = config.get<string>('session.cookieName')
@@ -26,23 +26,22 @@ export default express.Router()
       const cookies = new Cookies(req, res)
       let user
 
-    console.log('receiver test-------')
-
       try {
         const authenticationToken = await getAuthenticationToken(req)
 
         if (authenticationToken) {
-          user = await IdamClient.getUserFromJwt(authenticationToken)
+          const accessToken: string = authenticationToken.accessToken
+          user = await IdamClient.getUserFromJwt(accessToken)
           res.locals.isLoggedIn = true
           res.locals.user = user
-          setAuthCookie(cookies, authenticationToken)
+          setAuthCookie(cookies, accessToken)
         }
       } catch (e) {
         return loginErrorHandler(req, res, cookies, next, e)
       }
 
       if (res.locals.isLoggedIn) {
-        // redirect to adoption application landing page
+        res.cookie('user', 'loggedIn')
       } else {
         res.redirect(OAuthHelper.forLogin(req, res))
       }
@@ -75,12 +74,13 @@ async function getAuthenticationToken (
   req: express.Request,
   receiver: RoutablePath = Paths.receiver,
   checkCookie = true
-): Promise<string> {
+): Promise<AuthToken> {
 
+  let authenticationToken
   if (req.query.code) {
-    const authToken: AuthToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
-    return authToken.accessToken
+    authenticationToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
   } else if (checkCookie) {
-    return JwtExtractor.extract(req)
+    authenticationToken = JwtExtractor.extract(req)
   }
+  return authenticationToken
 }

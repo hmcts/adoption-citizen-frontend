@@ -6,7 +6,7 @@
   "secrets": {
     "adoption": {
       "adoption-s2s-secret": "secret",
-      "citizen-oauth-client-secret": "OOOOOOOOOOOOOOOO"
+      "citizen-oauth-client-secret": "adoption"
     }
   },
   "idam": {
@@ -25,6 +25,6 @@
     "clientId": "adoption"
   },
   "session": {
-    "cookieName": "Idam.Session"
+    "cookieName": "SESSION_ID"
   }
 }
