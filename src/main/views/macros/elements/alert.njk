@@ -1,8 +1,0 @@
-{% macro alert(heading=false, content='', headingType='h2', type='default') %}
-  <div class="alert {{ 'alert--' + type }}">
-    {% if heading %}
-      <{{ headingType }} class="govuk-heading-s">{{ heading }}</{{ headingType }}>
-    {% endif %}
-    <p class="{{ 'margin-top--xs' if not heading }}">{{ content }}</p>
-  </div>
-{% endmacro %}

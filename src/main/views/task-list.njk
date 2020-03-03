@@ -5,26 +5,17 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-    {{ pageHeading("Apply to adopt a child placed in your care") }}
+      {{ pageHeading("Apply to adopt a child placed in your care") }}
+
       <ol class="task-list">
         <li>
           <h2 class="task-list__section">
             <span class="task-list__section-number">1. </span> Add application details
           </h2>
-          {{ taskListItems(
-            items=[
-              {
-                title: 'Number of children and applicants',
-                url: '#',
-                status: 'Complete'
-              },
-              {
-                title: 'Choose your family court',
-                url: '#'
-              }
-            ],
-            sectionId="test"
-          )}}
+          {{ subTaskList(
+            subTasks=(tasks.applicantDetails),
+            sectionId='application_details'
+          ) }}
         </li>
         <li>
           <h2 class="task-list__section">
@@ -44,30 +35,9 @@
               <li>evidence of any name changes, for example deed pool</li>
             </ul>
           </div>
-          {{ taskListItems(
-            items=[
-              {
-                title: 'Your personal details',
-                url: '#'
-              },
-              {
-                title: 'Your contact details',
-                url: '#'
-              },
-              {
-                title: 'Your relationship details',
-                url: '#'
-              },
-              {
-                title: 'Your relationship (if the user said they were the only applicant)',
-                url: '#'
-              },
-              {
-                title: 'Upload your identity documents',
-                url: '#'
-              }
-            ],
-            sectionId="test"
+          {{ subTaskList(
+            subTasks=(tasks.yourDetails),
+            sectionId="your_details"
           )}}
         </li>
         <li>
@@ -78,78 +48,27 @@
             <p class="margin-top--xs">You'll need to work with your social worker or adoption agency to answer these questions, but it's important the answers come from you.</p>
             <p>This is because, if your application is successful, <a href="#">'parental responsibility'</a> will permanently transfer from the birth parents to you. </p>
           </div>
-          {{ taskListItems(
-            items=[
-              {
-                title: 'Their birth certificate details',
-                url: '#'
-              },
-              {
-                title: 'Adoption certificate details',
-                url: '#'
-              },
-              {
-                title: 'Their history with you',
-                url: '#'
-              },
-              {
-                title: 'Their placement order details',
-                url: '#'
-              },
-              {
-                title: "Their birth mother's details",
-                url: '#'
-              },
-              {
-                title: "Their birth father's or other parent's details",
-                url: '#'
-              },
-              {
-                title: 'Previous court order for the child',
-                url: '#'
-              },
-              {
-                title: 'Court order details for any siblings or half-siblings',
-                url: '#'
-              }
-            ],
-            sectionId="test"
+          {{ subTaskList(
+            subTasks=(tasks.childDetails),
+            sectionId="childs_details"
           )}}
         </li>
         <li>
           <h2 class="task-list__section">
             <span class="task-list__section-number">4. </span> Add your adoption contacts
           </h2>
-          {{ taskListItems(
-            items=[
-              {
-                title: 'Your social worker or adoption agency',
-                url: '#'
-              },
-              {
-                title: "The child's social worker",
-                url: '#'
-              },
-              {
-                title: 'Your solictor, if relevant',
-                url: '#'
-              }
-            ],
-            sectionId="test"
+          {{ subTaskList(
+            subTasks=(tasks.adoptionContacts),
+            sectionId="adoption_contacts"
           )}}
         </li>
         <li>
           <h2 class="task-list__section">
             <span class="task-list__section-number">5. </span> Declare payments
           </h2>
-          {{ taskListItems(
-            items=[
-              {
-                title: 'Declare any payments made or received',
-                url: '#'
-              }
-            ],
-            sectionId="test"
+          {{ subTaskList(
+            subTasks=(tasks.declarePayments),
+            sectionId="declare_payments"
           )}}
         </li>
         <li>
@@ -157,17 +76,13 @@
             <span class="task-list__section-number">5. </span> Review application, pay and send
           </h2>
           {{ alert(content="You'll need your credit or debit card.") }}
-          {{ taskListItems(
-            items=[
-              {
-                title: 'Review application, pay and send',
-                url: '#'
-              }
-            ],
-            sectionId="test"
+          {{ subTaskList(
+            subTasks=(tasks.reviewApplication),
+            sectionId="review_application"
           )}}
         </li>
       </ol>
+
     <div>
   </div>
 {% endblock %}
