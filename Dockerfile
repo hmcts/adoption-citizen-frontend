@@ -2,7 +2,7 @@
 FROM hmctspublic.azurecr.io/base/node:12-alpine as base
 RUN yarn config set proxy "$http_proxy" && yarn config set https-proxy "$https_proxy"
 COPY package.json yarn.lock webpack.config.js ./
-RUN yarn install --production  && yarn cache clean
+RUN yarn install && yarn build:prod && rm -r node_modules/ && yarn install --production && rm -r ~/.cache/yarn
 
 # ---- Build image ----
 FROM base as build
