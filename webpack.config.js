@@ -2,8 +2,8 @@ const path = require('path');
 
 const sourcePath = path.resolve(__dirname, 'src/main/');
 
-const govukFrontend = require(path.resolve(sourcePath, 'webpack/govukFrontend'));
-const scss = require(path.resolve(sourcePath,'webpack/scss'));
+const govukFrontend = require(path.resolve(sourcePath, 'modules/webpack/govukFrontend'));
+const scss = require(path.resolve(sourcePath, 'modules/webpack/scss'));
 
 module.exports = {
   plugins: [...govukFrontend.plugins, ...scss.plugins],
