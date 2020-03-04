@@ -14,10 +14,10 @@ describe('AuthorizationMiddleware', () => {
   context('hasTokenExpired', () => {
     it('should return true if err status is forbidden or unauthorized', () => {
       const err1 = {
-        response: { status: HttpStatus.FORBIDDEN }
+        statusCode: HttpStatus.FORBIDDEN
       }
       const err2 = {
-        response: { status: HttpStatus.BAD_REQUEST }
+        statusCode: HttpStatus.BAD_REQUEST
       }
 
       expect(hasTokenExpired(err1)).to.be.true

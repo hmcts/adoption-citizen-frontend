@@ -13,7 +13,7 @@ describe('OAuthHelper', () => {
       })
 
       const redirectUri = OAuthHelper.forLogin(req, res)
-      expect(redirectUri).to.be.contain('client_id=adoption_citizen&redirect_uri=https://localhost/receiver')
+      expect(redirectUri).to.be.contain('client_id=adoption&redirect_uri=https://localhost/landing')
     })
   })
 })

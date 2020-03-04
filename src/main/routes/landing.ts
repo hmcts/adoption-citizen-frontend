@@ -13,12 +13,12 @@ import { buildURL } from 'common/utils/buildURL'
 import { JwtExtractor } from 'idam/jwtExtractor'
 import { AuthToken } from 'idam/AuthToken'
 
-const logger = Logger.getLogger('router/receiver')
+const logger = Logger.getLogger('router/landing')
 const sessionCookie = config.get<string>('session.cookieName')
 const STATE_COOKIE_NAME = 'state'
 
 export default express.Router()
-  .get(Paths.receiver.uri, async (
+  .get(Paths.landing.uri, async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
@@ -41,7 +41,10 @@ export default express.Router()
       }
 
       if (res.locals.isLoggedIn) {
-        res.cookie('user', 'loggedIn')
+        // redirect to adoption application landing page
+        // remove below - just for testing
+        cookies.set(STATE_COOKIE_NAME, req.query.state)
+        res.render('<h1>Login success</h1>')
       } else {
         res.redirect(OAuthHelper.forLogin(req, res))
       }
@@ -54,31 +57,31 @@ function loginErrorHandler (
   cookies: Cookies,
   next: express.NextFunction,
   err: Error,
-  receiver: RoutablePath = Paths.receiver
+  landing: RoutablePath = Paths.landing
 ) {
   if (hasTokenExpired(err)) {
     cookies.set(sessionCookie)
     logger.debug(`Protected path - expired auth token - access to ${req.path} rejected`)
-    return res.redirect(OAuthHelper.forLogin(req, res, receiver))
+    return res.redirect(OAuthHelper.forLogin(req, res, landing))
   }
   cookies.set(STATE_COOKIE_NAME, '')
   return next(err)
 }
 
-function setAuthCookie (cookies: Cookies, authenticationToken: string): void {
-  cookies.set(sessionCookie, authenticationToken)
+function setAuthCookie (cookies: Cookies, accessToken: string): void {
+  cookies.set(sessionCookie, accessToken)
   cookies.set(STATE_COOKIE_NAME, '')
 }
 
 async function getAuthenticationToken (
   req: express.Request,
-  receiver: RoutablePath = Paths.receiver,
+  landing: RoutablePath = Paths.landing,
   checkCookie = true
 ): Promise<AuthToken> {
 
   let authenticationToken
   if (req.query.code) {
-    authenticationToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, receiver.uri))
+    authenticationToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, landing.uri))
   } else if (checkCookie) {
     authenticationToken = JwtExtractor.extract(req)
   }

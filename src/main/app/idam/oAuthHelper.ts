@@ -10,8 +10,8 @@ const clientId = config.get<string>('oauth.clientId')
 const loginPath = `${config.get('idam.authentication-web.url')}/login`
 
 export class OAuthHelper {
-  static forLogin (req: express.Request, res: express.Response, receiver: RoutablePath = Paths.receiver): string {
-    const redirectUri = buildURL(req, receiver.uri)
+  static forLogin (req: express.Request, res: express.Response, landing: RoutablePath = Paths.landing): string {
+    const redirectUri = buildURL(req, landing.uri)
     const state = uuid()
     res.cookie('state', state)
 

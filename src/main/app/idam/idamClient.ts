@@ -1,22 +1,10 @@
-import otp from 'otp'
 import config from 'config'
 import request from 'request-promise'
 
-import { ServiceAuthToken } from './serviceAuthToken'
 import { User } from './user'
 import { AuthToken } from './AuthToken'
 
-const s2sUrl = config.get<string>('idam.service-2-service-auth.url')
 const idamApiUrl = config.get<string>('idam.api.url')
-const totpSecret = config.get<string>('secrets.adoption.adoption-s2s-secret')
-const microserviceName = config.get<string>('idam.service-2-service-auth.microservice')
-
-class ServiceAuthRequest {
-  constructor (public microservice: string, public oneTimePassword: string) {
-    this.microservice = microservice
-    this.oneTimePassword = oneTimePassword
-  }
-}
 
 export class IdamClient {
 
@@ -26,9 +14,8 @@ export class IdamClient {
       headers: { Authorization: `Bearer ${jwt}` }
     })
 
-    const response = await request
-      .get(requestOptions)
-    const data = JSON.parse(response)
+    const data = JSON.parse(await request
+      .get(requestOptions))
 
     return new User(
       data.id,
@@ -41,20 +28,23 @@ export class IdamClient {
     )
   }
 
+  //We will need below in future but not for now
+  /*
   static async getServiceToken (): Promise<ServiceAuthToken> {
     const oneTimePassword = otp({ secret: totpSecret }).totp()
+    const options = {
+      uri: `${s2sUrl}/lease`,
+      body: new ServiceAuthRequest(microserviceName, oneTimePassword)
+    }
 
     try {
-      const data = await request
-        .post({
-          uri: `${s2sUrl}/lease`,
-          body: new ServiceAuthRequest(microserviceName, oneTimePassword)})
-
+      const data = await request.post(options)
       return new ServiceAuthToken(JSON.parse(data))
     } catch (err) {
       throw new Error(`Unable to get service token - ${err}`)
     }
   }
+  */
 
   static async getAuthToken (code: string, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId')
@@ -89,13 +79,13 @@ export class IdamClient {
   }
 
   static async invalidateSession (jwt: string): Promise<void> {
-    const url = `${config.get('idam.api.url')}/session/${jwt}`
-    const { status } = await request
-      .delete(
-        url,
-        { headers: { Authorization: `Bearer ${jwt}` } }
-      )
-    return status
+    const options = {
+      uri: `${config.get('idam.api.url')}/session/${jwt}`,
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    }
 
+    await request.delete(options)
   }
 }
