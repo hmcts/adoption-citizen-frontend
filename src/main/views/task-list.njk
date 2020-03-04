@@ -1,16 +1,16 @@
 {% extends "./layouts/default.layout.njk" %}
 
-{% set pageName="Hmcts - Apply to adopt a child" %}
+{% set pageName=t('taskList.title') %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {{ pageHeading("Apply to adopt a child placed in your care") }}
+      {{ pageHeading(t('taskList.title')) }}
 
       <ol class="task-list">
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">1. </span> Add application details
+            <span class="task-list__section-number">1. </span> {{ t('taskList.taskItems.applicationDetails.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.applicantDetails),
@@ -19,7 +19,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">2. </span> Add your details
+            <span class="task-list__section-number">2. </span> {{ t('taskList.taskItems.yourDetails.heading') }}
           </h2>
           <div class="alert alert--default">
             <p class="margin-top--xs">You'll need to upload your:</p>
@@ -42,7 +42,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">3. </span> Add the child's details
+            <span class="task-list__section-number">3. </span> {{ t('taskList.taskItems.childDetails.heading') }}
           </h2>
           <div class="alert alert--default">
             <p class="margin-top--xs">You'll need to work with your social worker or adoption agency to answer these questions, but it's important the answers come from you.</p>
@@ -55,7 +55,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">4. </span> Add your adoption contacts
+            <span class="task-list__section-number">4. </span> {{ t('taskList.taskItems.adoptionContacts.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.adoptionContacts),
@@ -64,7 +64,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">5. </span> Declare payments
+            <span class="task-list__section-number">5. </span> {{ t('taskList.taskItems.declarePayments.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.declarePayments),
@@ -73,7 +73,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">5. </span> Review application, pay and send
+            <span class="task-list__section-number">5. </span> {{ t('taskList.taskItems.reviewApplication.heading') }}
           </h2>
           {{ alert(content="You'll need your credit or debit card.") }}
           {{ subTaskList(

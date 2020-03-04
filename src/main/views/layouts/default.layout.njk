@@ -19,9 +19,9 @@
 
   {{ govukPhaseBanner({
     tag: {
-      text: "alpha"
+      text:  t('template.phaseBanner.phase')
     },
-    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+    html: t('template.phaseBanner.content')
   }) }}
 
 {% endblock %}
@@ -29,14 +29,14 @@
 {% block header %}
 
   {{ govukHeader({
-    serviceName: "Apply to adopt a child",
+    serviceName: t('template.serviceName'),
     navigation: [
       {
-        text: "Profile",
+        text: t('template.links.profile'),
         href: "#"
       },
       {
-        text: "Sign out",
+        text: t('template.links.signOut'),
         href: "#"
       }
     ]

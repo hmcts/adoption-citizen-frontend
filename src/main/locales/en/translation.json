@@ -1,6 +1,45 @@
 {
-  "home": {
-    "title": "Hello world!"
+  "template": {
+    "serviceName": "Apply to adopt a child",
+    "phaseBanner": {
+      "phase": "Alpha",
+      "content": "This is a new service - your <a href='#'> feedback </a> will help us to improve it."
+    },
+    "links": {
+      "profile": "Profile",
+      "signOut": "Sign out"
+    }
   },
-  "single": "single works"
+  "home": {
+    "heading": "Hello world!"
+  },
+  "error": {
+    "heading": "Something went wrong"
+  },
+  "pageNotFound": {
+    "heading": "Page not found"
+  },
+  "taskList": {
+    "title": "Apply to adopt a child placed in your care",
+    "taskItems": {
+      "applicationDetails": {
+        "heading": "Add application details"
+      },
+      "yourDetails": {
+        "heading": "Add your details"
+      },
+      "childDetails": {
+        "heading": "Add the child details"
+      },
+      "adoptionContacts": {
+        "heading": "Add the adoption contacts"
+      },
+      "declarePayments": {
+        "heading": "Declare payments"
+      },
+      "reviewApplication": {
+        "heading": "Review application, pay and send"
+      }
+    }
+  }
 }

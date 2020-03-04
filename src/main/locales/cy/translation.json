@@ -1,5 +1,45 @@
 {
+  "template": {
+    "serviceName": "Gwnewch gais i fabwysiadu plentyn",
+    "phaseBanner": {
+      "phase": "",
+      "content": ""
+    },
+    "links": {
+      "profile": "Proffil",
+      "signOut": "arwyddo Allan"
+    }
+  },
   "home": {
     "title": "Helo Byd!"
+  },
+  "error": {
+    "heading": "Aeth rhywbeth o'i le"
+  },
+  "pageNotFound": {
+    "heading": "Tudalen heb ei darganfod"
+  },
+  "taskList": {
+    "title": "Gwnewch gais i fabwysiadu plentyn sydd wedi'i roi yn eich gofal",
+    "taskItems": {
+      "applicationDetails": {
+        "heading": "Ychwanegwch fanylion y cais"
+      },
+      "yourDetails": {
+        "heading": "Ychwanegwch eich manylion"
+      },
+      "childDetails": {
+        "heading": "Add the child details"
+      },
+      "adoptionContacts": {
+        "heading": "Ychwanegwch fanylion y plentyn"
+      },
+      "declarePayments": {
+        "heading": "Datgan taliadau"
+      },
+      "reviewApplication": {
+        "heading": "Adolygu cais, talu ac anfon"
+      }
+    }
   }
 }
