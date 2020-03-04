@@ -21,20 +21,6 @@
           <h2 class="task-list__section">
             <span class="task-list__section-number">2. </span> {{ t('taskList.taskItems.yourDetails.heading') }}
           </h2>
-          <div class="alert alert--default">
-            <p class="margin-top--xs">You'll need to upload your:</p>
-            <ul class="govuk-list govuk-list--bullet">
-              <li>marriage or civil partnership certificate [if couple; only show for 1 user]</li>
-              <li>passport's photo page</li>
-              <li>driving licence</li>
-            </ul>
-            <p>If relevant to you, you'll also need to upload: </p>
-            <ul class="govuk-list govuk-list--bullet">
-              <li>your UK visa</li>
-              <li>immigration stamps in your passport</li>
-              <li>evidence of any name changes, for example deed pool</li>
-            </ul>
-          </div>
           {{ subTaskList(
             subTasks=(tasks.yourDetails),
             sectionId="your_details"
@@ -44,10 +30,6 @@
           <h2 class="task-list__section">
             <span class="task-list__section-number">3. </span> {{ t('taskList.taskItems.childDetails.heading') }}
           </h2>
-          <div class="alert alert--default">
-            <p class="margin-top--xs">You'll need to work with your social worker or adoption agency to answer these questions, but it's important the answers come from you.</p>
-            <p>This is because, if your application is successful, <a href="#">'parental responsibility'</a> will permanently transfer from the birth parents to you. </p>
-          </div>
           {{ subTaskList(
             subTasks=(tasks.childDetails),
             sectionId="childs_details"
@@ -75,7 +57,7 @@
           <h2 class="task-list__section">
             <span class="task-list__section-number">5. </span> {{ t('taskList.taskItems.reviewApplication.heading') }}
           </h2>
-          {{ alert(content="You'll need your credit or debit card.") }}
+          {{ alert(content=t('taskList.taskItems.reviewApplication.alert.content')) }}
           {{ subTaskList(
             subTasks=(tasks.reviewApplication),
             sectionId="review_application"

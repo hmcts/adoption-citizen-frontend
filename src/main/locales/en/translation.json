@@ -38,7 +38,10 @@
         "heading": "Declare payments"
       },
       "reviewApplication": {
-        "heading": "Review application, pay and send"
+        "heading": "Review application, pay and send",
+        "alert": {
+          "content": "You'll need your credit or debit card"
+        }
       }
     }
   }

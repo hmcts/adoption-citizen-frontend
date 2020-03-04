@@ -2,8 +2,8 @@
   "template": {
     "serviceName": "Gwnewch gais i fabwysiadu plentyn",
     "phaseBanner": {
-      "phase": "",
-      "content": ""
+      "phase": "Alffa",
+      "content": "Mae hwn yn wasanaeth newydd - eich <a href='#'> adborth </a> yn ein helpu i'w wella."
     },
     "links": {
       "profile": "Proffil",
@@ -38,7 +38,10 @@
         "heading": "Datgan taliadau"
       },
       "reviewApplication": {
-        "heading": "Adolygu cais, talu ac anfon"
+        "heading": "Adolygu cais, talu ac anfon",
+        "alert": {
+          "content": "Bydd angen eich cerdyn credyd neu ddebyd arnoch chi"
+        }
       }
     }
   }
