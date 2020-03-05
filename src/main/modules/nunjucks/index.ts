@@ -1,6 +1,7 @@
 import * as path from 'path'
 import * as express from 'express'
 import * as nunjucks from 'nunjucks'
+import { InitOptions } from 'i18next'
 
 export class Nunjucks {
 
@@ -15,7 +16,7 @@ export class Nunjucks {
       __dirname, '..', '..', '..', '..', 'node_modules',
       'govuk-frontend'
     )
-    nunjucks.configure([
+    const nunjucksEnv = nunjucks.configure([
       path.join(__dirname,'..','..','views'),
       govUkFrontendPath
     ], {
@@ -23,6 +24,9 @@ export class Nunjucks {
       watch: this.developmentMode,
       express: app
     })
+
+    // Enables i18next translate method globally in nujucks
+    nunjucksEnv.addGlobal('t', (key: string, options?: InitOptions): string => this.i18next.t(key, options))
 
     app.use((req, res, next) => {
       res.locals.pagePath = req.path

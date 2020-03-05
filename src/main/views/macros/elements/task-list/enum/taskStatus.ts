@@ -1,4 +1,4 @@
 export enum TaskStatus {
-  Completed = 'Complete',
-  NotStarted = 'Not yet started'
+  Complete = 'taskList.taskStatus.complete',
+  NotStarted = 'taskList.taskStatus.notStarted'
 }
