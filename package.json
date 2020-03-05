@@ -19,7 +19,7 @@
     "test:codecov-upload": "codecov -f ./coverage-report/lcov.info",
     "test:smoke": "exit 0",
     "test:functional": "exit 0",
-    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main/app -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info -Dsonar.exclusions=src/main/app.ts,src/main/server.ts,src/main/modules/*"
+    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info -Dsonar.exclusions=src/main/app.ts,src/main/server.ts,src/main/modules/*"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
