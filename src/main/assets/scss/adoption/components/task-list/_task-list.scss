@@ -20,17 +20,6 @@
     float: left;
   }
 
-  &__items {
-    @include govuk-font($size: 19);
-    @include govuk-responsive-margin(9, 'bottom');
-    @include govuk-media-query($from: tablet) {
-      padding-left: govuk-spacing(6);
-    }
-
-    list-style: none;
-    padding-left: 0;
-  }
-
   &__item {
     @include govuk-clearfix;
 
@@ -42,6 +31,17 @@
     &:first-child {
       border-top: 1px solid $govuk-border-colour;
     }
+  }
+
+  &__items {
+    @include govuk-font($size: 19);
+    @include govuk-responsive-margin(9, 'bottom');
+    @include govuk-media-query($from: tablet) {
+      padding-left: govuk-spacing(6);
+    }
+
+    list-style: none;
+    padding-left: 0;
   }
 
   &__task-name {
