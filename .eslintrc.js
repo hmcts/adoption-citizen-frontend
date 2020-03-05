@@ -12,7 +12,10 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "comma-dangle": ["error", "always-multiline"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "eol-last": ["error"],
+    "no-trailing-spaces": ["error"],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0}]
   },
   "overrides": [
     {
