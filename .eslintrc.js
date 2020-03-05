@@ -15,7 +15,8 @@ module.exports = {
     "semi": ["error", "always"],
     "eol-last": ["error"],
     "no-trailing-spaces": ["error"],
-    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0}]
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0}],
+    "no-console": ["error"]
   },
   "overrides": [
     {
