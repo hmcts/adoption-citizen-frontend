@@ -66,6 +66,11 @@ Running the linting:
 $ yarn lint
 ```
 
+Running the linting with auto fix:
+```bash
+$ yarn lint --fix
+```
+
 ### Running the tests
 
 This template app uses [Mocha](https://mochajs.org/) as the test engine. You can run unit tests by executing
@@ -141,5 +146,4 @@ e.g. the ones verifying the state of each service it depends on.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
 

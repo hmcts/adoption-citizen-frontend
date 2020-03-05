@@ -8,7 +8,7 @@
   "scripts": {
     "start": "./node_modules/.bin/ts-node -r tsconfig-paths/register src/main/server.ts",
     "cichecks": "yarn && yarn sass && yarn lint  && yarn test && yarn test:routes &&  yarn test:a11y",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && sass-lint -v -q",
+    "lint": "sass-lint -v -q && eslint . --ext .js,.jsx,.ts,.tsx ",
     "sass": "gulp sass copy-files",
     "test": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) ! -path '*a11y*' ! -path '*/routes/*') --reporter-options reportFilename=unit,inlineAssets=true,reportTitle=adoption-frontend-unit",
     "test:routes": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) -path '*/routes/*') --timeout 10000 --reporter-options reportFilename=routes,inlineAssets=true,reportTitle=adoption-frontend-routes",
@@ -19,7 +19,7 @@
     "test:codecov-upload": "codecov -f ./coverage-report/lcov.info",
     "test:smoke": "exit 0",
     "test:functional": "exit 0",
-    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info"
+    "sonar-scan": "sonar-scanner -Dsonar.projectName='Adoption :: Frontend' -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.javascript.lcov.reportPaths=coverage-report/lcov.info -Dsonar.exclusions=src/main/app.ts,src/main/server.ts,src/main/modules/*"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
@@ -49,6 +49,7 @@
     "@types/serve-favicon": "^2.5.0",
     "@types/uuid": "^3.4.7",
     "applicationinsights": "^1.7.2",
+    "babel-eslint": "^10.1.0",
     "bluebird": "^3.7.2",
     "config": "^3.2.5",
     "cookie-parser": "^1.4.4",
