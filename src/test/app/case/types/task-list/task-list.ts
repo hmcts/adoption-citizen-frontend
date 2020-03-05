@@ -7,24 +7,24 @@ const alert = new Alert('alert heading');
 const subTasks = [
   new SubTask('sub task one', '#', TaskStatus.Complete),
   new SubTask('sub task two', '#', TaskStatus.NotStarted),
-  new SubTask('sub task three', '#')
+  new SubTask('sub task three', '#'),
 ];
 
 const tasks = [
-   new Task('task heading', subTasks, 'sectionId', alert)
+  new Task('task heading', subTasks, 'sectionId', alert),
 ];
 
 const taskList = new TaskList(tasks);
 
-describe("Task list component", () => {
-  describe("Task List", () => {
+describe('Task list component', () => {
+  describe('Task List', () => {
     it('Should get tasks', () => {
       expect(taskList.tasks.length).to.be.equal(1);
       expect(taskList.tasks).to.be.equal(tasks);
     });
   });
 
-  describe("Task", () => {
+  describe('Task', () => {
     it('Should get heading', () => {
       expect(tasks[0].heading).to.be.equal('task heading');
     });
@@ -43,7 +43,7 @@ describe("Task list component", () => {
     });
   });
 
-  describe("Sub Task", () => {
+  describe('Sub Task', () => {
     it('Should get name', () => {
       expect(subTasks[0].name).to.be.equal('sub task one');
     });

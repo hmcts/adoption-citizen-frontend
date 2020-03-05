@@ -7,13 +7,13 @@ const scss = require(path.resolve(sourcePath, 'modules/webpack/scss'));
 
 module.exports = {
   plugins: [...govukFrontend.plugins, ...scss.plugins],
-  entry: path.resolve(sourcePath, 'index.js') ,
+  entry: path.resolve(sourcePath, 'index.js'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   module: {
-    rules: [...scss.rules]
+    rules: [...scss.rules],
   },
   output: {
     path: path.resolve(__dirname, 'src/main/public/'),
     filename: 'main.js',
-  }
+  },
 };

@@ -1,10 +1,10 @@
-import { SubTask, TaskStatus } from "../types";
+import { SubTask, TaskStatus } from '../types';
 
 export class SubTaskListBuilder {
   static buildApplicationDetailsSubTasks(): SubTask[] {
     return [
       new SubTask('taskList.taskItems.applicationDetails.subTasks.numOfChildren', '#', TaskStatus.Complete),
-      new SubTask('taskList.taskItems.applicationDetails.subTasks.chooseFamilyCourt', '#')
+      new SubTask('taskList.taskItems.applicationDetails.subTasks.chooseFamilyCourt', '#'),
     ];
   }
 
@@ -14,7 +14,7 @@ export class SubTaskListBuilder {
       new SubTask('taskList.taskItems.yourDetails.subTasks.contactDetails', '#'),
       new SubTask('taskList.taskItems.yourDetails.subTasks.relationshipDetails', '#'),
       new SubTask('taskList.taskItems.yourDetails.subTasks.relationshipDetailsOnlyApplicant', '#'),
-      new SubTask('taskList.taskItems.yourDetails.subTasks.uploadDocuments', '#')
+      new SubTask('taskList.taskItems.yourDetails.subTasks.uploadDocuments', '#'),
     ];
   }
 
@@ -27,7 +27,7 @@ export class SubTaskListBuilder {
       new SubTask('taskList.taskItems.childDetails.subTasks.birthMotherDetails', '#'),
       new SubTask('taskList.taskItems.childDetails.subTasks.birthFatherDetails', '#'),
       new SubTask('taskList.taskItems.childDetails.subTasks.previousCourtOrder', '#'),
-      new SubTask('taskList.taskItems.childDetails.subTasks.courtOrderDetails', '#')
+      new SubTask('taskList.taskItems.childDetails.subTasks.courtOrderDetails', '#'),
     ];
   }
 
@@ -35,19 +35,19 @@ export class SubTaskListBuilder {
     return [
       new SubTask('taskList.taskItems.adoptionContacts.subTasks.socialWorker', '#'),
       new SubTask('taskList.taskItems.adoptionContacts.subTasks.childsSocialWorker', '#'),
-      new SubTask('taskList.taskItems.adoptionContacts.subTasks.solictor', '#')
+      new SubTask('taskList.taskItems.adoptionContacts.subTasks.solictor', '#'),
     ];
   }
 
   static buildDeclarePaymentsSubTasks(): SubTask[] {
     return [
-      new SubTask('taskList.taskItems.declarePayments.subTasks.declarePayments', '#')
+      new SubTask('taskList.taskItems.declarePayments.subTasks.declarePayments', '#'),
     ];
   }
 
   static buildReviewApplicationSubTasks(): SubTask[] {
     return [
-      new SubTask('taskList.taskItems.reviewApplication.subTasks.reviewApplication', '#')
+      new SubTask('taskList.taskItems.reviewApplication.subTasks.reviewApplication', '#'),
     ];
   }
 }

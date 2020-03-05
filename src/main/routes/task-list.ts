@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { SubTaskListBuilder } from '../app/case/util/subTaskListBuilder';
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/task-list', (req, res, next) => {
+router.get('/task-list', (req, res) => {
   res.render('task-list', {
     tasks: {
       applicantDetails: SubTaskListBuilder.buildApplicationDetailsSubTasks(),
@@ -11,9 +11,9 @@ router.get('/task-list', (req, res, next) => {
       childDetails: SubTaskListBuilder.buildChildDetailsSubTasks(),
       adoptionContacts: SubTaskListBuilder.buildAdoptionContactsSubTasks(),
       declarePayments: SubTaskListBuilder.buildDeclarePaymentsSubTasks(),
-      reviewApplication: SubTaskListBuilder.buildReviewApplicationSubTasks()
-    }
-  })
-})
+      reviewApplication: SubTaskListBuilder.buildReviewApplicationSubTasks(),
+    },
+  });
+});
 
-module.exports = router
+module.exports = router;

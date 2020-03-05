@@ -1,9 +1,10 @@
-import * as express from 'express'
+import * as express from 'express';
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.render('home')
-})
+/* GET home page. */
+router.get('/', (req, res) => {
+  res.render('home');
+});
 
-module.exports = router
+module.exports = router;
