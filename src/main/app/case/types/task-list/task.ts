@@ -1,5 +1,5 @@
 import { SubTask } from './subTask';
-import { Alert } from '../../alert/types/alert';
+import { Alert } from '../alert/alert';
 
 export class Task {
   heading: string;

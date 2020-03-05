@@ -1,4 +1,4 @@
-import { SubTask, TaskStatus } from "..";
+import { SubTask, TaskStatus } from "../types";
 
 export class SubTaskListBuilder {
   static buildApplicationDetailsSubTasks(): SubTask[] {
