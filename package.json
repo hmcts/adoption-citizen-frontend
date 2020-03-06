@@ -11,7 +11,7 @@
     "lint": "sass-lint -v -q && eslint . --ext .js,.jsx,.ts,.tsx ",
     "build": "yarn webpack",
     "server": "./node_modules/.bin/ts-node -r tsconfig-paths/register src/main/server.ts",
-    "build:dev": "concurrently \"yarn run start\" \"yarn webpack-dev-server\"",
+    "build:dev": "concurrently \"yarn webpack-dev-server\" \"yarn run server\"",
     "build:prod": "yarn webpack --mode production --config webpack.config.ts",
     "test": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) ! -path '*a11y*' ! -path '*/routes/*') --reporter-options reportFilename=unit,inlineAssets=true,reportTitle=adoption-frontend-unit",
     "test:routes": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=mocha LOG_LEVEL=OFF mocha --opts mocha.opts $(find src/test \\( -name '*.ts' \\) -path '*/routes/*') --timeout 10000 --reporter-options reportFilename=routes,inlineAssets=true,reportTitle=adoption-frontend-routes",
