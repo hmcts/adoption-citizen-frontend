@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import govukFrontend from './src/main/modules/webpack/govukFrontend';
 import scss from './src/main/modules/webpack/scss';
 

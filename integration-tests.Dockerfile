@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 RUN yarn config set proxy "$http_proxy" && yarn config set https-proxy "$https_proxy"
 
-COPY --chown=hmcts:hmcts package.json yarn.lock webpack.config.js /usr/src/app/
+COPY --chown=hmcts:hmcts package.json yarn.lock webpack.config.ts /usr/src/app/
 
 RUN yarn install && yarn cache clean
 USER hmcts

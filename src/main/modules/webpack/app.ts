@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const root = path.resolve(__dirname, './../../');
