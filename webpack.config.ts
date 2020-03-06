@@ -4,7 +4,7 @@ import scss from './src/main/modules/webpack/scss';
 
 const sourcePath = path.resolve(__dirname, 'src/main/');
 
-module.exports = {
+export default {
   plugins: [...govukFrontend.plugins, ...scss.plugins],
   entry: path.resolve(sourcePath, 'index.ts'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
