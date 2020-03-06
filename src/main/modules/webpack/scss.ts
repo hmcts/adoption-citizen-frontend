@@ -1,4 +1,4 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const miniCss = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
@@ -7,7 +7,7 @@ const miniCss = new MiniCssExtractPlugin({
   chunkFilename: '[id].css',
 });
 
-module.exports = {
+export default {
   rules: [{
     test: /\.scss$/,
     use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],

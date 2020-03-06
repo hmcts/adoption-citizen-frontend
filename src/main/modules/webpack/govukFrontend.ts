@@ -1,5 +1,5 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+import * as path from 'path';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const packageJson = require.resolve('govuk-frontend/package.json');
 const root = path.resolve(packageJson, '..', 'govuk');
@@ -15,7 +15,7 @@ const copyGovukTemplateAssets = new CopyWebpackPlugin([
   { from: fonts, to: 'assets/fonts' },
 ]);
 
-module.exports = {
+export default {
   paths: { template: root, components, sass, javascript, assets },
   plugins: [copyGovukTemplateAssets],
 };
