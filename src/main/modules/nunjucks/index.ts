@@ -3,8 +3,9 @@ import * as express from 'express';
 import * as nunjucks from 'nunjucks';
 
 export class Nunjucks {
-  constructor(public developmentMode: boolean) {
+  constructor(public developmentMode: boolean, public i18next) {
     this.developmentMode = developmentMode;
+    this.i18next = i18next;
   }
 
   enableFor(app: express.Express): void {
