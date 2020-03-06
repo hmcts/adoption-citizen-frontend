@@ -9,3 +9,4 @@ coverage/*
 # custom definition files
 /src/main/types/
 gulpfile.js
+mochawesome-report
