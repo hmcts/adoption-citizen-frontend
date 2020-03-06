@@ -11,4 +11,4 @@
 
 !src/main/**
 !config/**
-!webpack.config.js
+!webpack.config.ts
