@@ -1,10 +1,11 @@
+import * as HttpStatus from 'http-status-codes';
 import * as idamServiceMocks from 'test/http-mocks/idam/idam';
+
 import { IdamClient } from 'idam/idamClient';
 import { expect } from 'chai';
 import { User } from 'idam/user';
 import { AuthToken } from 'idam/AuthToken';
 import { defaultAccessToken } from 'test/http-mocks/idam/idam';
-import * as HttpStatus from 'http-status-codes';
 
 describe('IdamClient', () => {
   context('getUserFromJwt', () => {
@@ -30,7 +31,7 @@ describe('IdamClient', () => {
 
     it('should throw error when unable to getAuthToken', async () => {
 
-      idamServiceMocks.rejectAuthToken('dummy token');
+      idamServiceMocks.rejectAuthToken();
 
       try {
         await IdamClient.getAuthToken('adoption', 'http://redirectUri:4000/landing');

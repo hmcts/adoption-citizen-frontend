@@ -1,4 +1,3 @@
-/* tslint:disable:no-unused-expression */
 import { expect } from 'chai';
 import { StringUtils } from 'common/utils/stringUtils';
 

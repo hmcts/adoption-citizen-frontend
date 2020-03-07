@@ -21,7 +21,7 @@ describe('ErrorHandling', () => {
   });
 
   const nextFunction = sinon.spy(() => {
-    // Nothing to do, I'm a mock
+    // spy
   });
 
   it('should invoke given request handler', async () => {

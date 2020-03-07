@@ -1,7 +1,9 @@
 import * as express from 'express';
+
 import { AuthorizationMiddleware } from 'idam/authorizationMiddleware';
 import { OAuthHelper } from 'idam/oAuthHelper';
 // import { RouterFinder } from 'router/routerFinder'
+
 // import path from 'path'
 
 export class AdoptionApplication {

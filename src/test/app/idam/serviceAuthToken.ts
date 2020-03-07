@@ -1,11 +1,11 @@
 import { expect } from 'chai';
+import { ServiceAuthToken } from 'main/app/idam/serviceAuthToken';
+
 import * as jwt from 'jsonwebtoken';
 import moment from 'moment';
 
-import { ServiceAuthToken } from 'main/app/idam/serviceAuthToken';
-
 describe('ServiceAuthToken', () => {
-  describe('hasExpired', () => {
+  context('hasExpired', () => {
     it('should throw an error when token is tampered', () => {
       expect(() => new ServiceAuthToken('tampered-jwt-token').hasExpired())
         .to.throw(Error, 'Unable to parse JWT token: tampered-jwt-token');
