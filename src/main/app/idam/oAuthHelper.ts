@@ -3,7 +3,7 @@ import uuid from 'uuid';
 import config from 'config';
 
 import { RoutablePath } from 'common/router/routablePath';
-import { Paths } from 'case/paths';
+import { Paths } from '../paths';
 import { buildURL } from 'common/utils/buildURL';
 
 const clientId = config.get<string>('oauth.clientId');

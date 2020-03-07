@@ -2,7 +2,9 @@ import { fail } from 'assert';
 
 const pa11y = require('pa11y');
 import * as supertest from 'supertest';
-import { app } from '../../main/app';
+import { app } from 'main/app';
+import { Paths } from 'case/paths';
+import { RoutablePath } from 'common/router/routablePath';
 
 const agent = supertest.agent(app);
 
@@ -42,27 +44,28 @@ function expectNoErrors (messages: PallyIssue[]): void {
   }
 }
 
-function testAccessibility (url: string): void {
+function testAccessibility (paths: Paths): void {
 
-  describe(`Page ${url}`, () => {
+  Object.values(paths).forEach((path: RoutablePath) => {
+    const url = path.uri;
+    describe(`Page ${url}`, () => {
 
-    it('should have no accessibility errors', (done) => {
-      ensurePageCallWillSucceed(url)
-        .then(() => pa11y(agent.get(url).url))
-        .then((result: Pa11yResult) => {
-          expectNoErrors(result.issues);
-          done();
-        })
-        .catch((err) => done(err));
+      it('should have no accessibility errors', (done) => {
+        ensurePageCallWillSucceed(url)
+          .then(() => pa11y(agent.get(url).url))
+          .then((result: Pa11yResult) => {
+            expectNoErrors(result.issues);
+            done();
+          })
+          .catch((err) => done(err));
+      });
     });
   });
 }
 
 describe('Accessibility', () => {
 
-  // testing accessibility of the home page
-  testAccessibility('/');
+  testAccessibility(Paths);
 
-  // TODO: include each path of your application in accessibility checks
 });
 

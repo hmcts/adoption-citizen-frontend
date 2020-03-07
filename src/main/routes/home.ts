@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { Paths } from 'case/paths';
+import { Paths } from '../app/paths';
 
 export default express.Router()
   .get(Paths.homePage.uri, (req, res) =>{

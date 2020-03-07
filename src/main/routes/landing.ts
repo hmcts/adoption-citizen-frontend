@@ -3,7 +3,7 @@ import * as express from 'express';
 import Cookies from 'cookies';
 import config from 'config';
 
-import { Paths } from 'case/paths';
+import { Paths } from '../app/paths';
 import { IdamClient } from 'idam/idamClient';
 import { RoutablePath } from 'common/router/routablePath';
 import { hasTokenExpired } from 'idam/authorizationMiddleware';

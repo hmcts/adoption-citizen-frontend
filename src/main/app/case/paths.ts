@@ -1,6 +1,6 @@
-import { RoutablePath } from 'common/router/routablePath';
+// import { RoutablePath } from 'common/router/routablePath';
 
 export class Paths {
-  static readonly homePage = new RoutablePath('/', false)
-  static readonly landing = new RoutablePath('/landing',false)
+  // Remove below path but all new paths should go in this file
+  // static readonly homePage = new RoutablePath('/', false)
 }
