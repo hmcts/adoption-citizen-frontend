@@ -1,7 +1,6 @@
-
 export class StringUtils {
   static isBlank (value: string): boolean {
-    return !(value && value.length > 0)
+    return !(value && value.length > 0);
   }
 
   /**
@@ -14,14 +13,14 @@ export class StringUtils {
    */
   static trimToUndefined (value: string): string {
     if (value === undefined) {
-      return undefined
+      return undefined;
     }
 
-    const trimmedValue: string = value.trim()
+    const trimmedValue: string = value.trim();
     if (trimmedValue.length === 0) {
-      return undefined
+      return undefined;
     }
 
-    return trimmedValue
+    return trimmedValue;
   }
 }

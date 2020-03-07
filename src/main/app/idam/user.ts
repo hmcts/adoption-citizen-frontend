@@ -8,6 +8,6 @@ export class User {
                public bearerToken: string) {}
 
   isInRoles (...requiredRoles: string[]): boolean {
-    return requiredRoles.every(requiredRole => this.roles.includes(requiredRole))
+    return requiredRoles.every(requiredRole => this.roles.includes(requiredRole));
   }
 }

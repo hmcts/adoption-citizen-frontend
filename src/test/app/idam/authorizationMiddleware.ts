@@ -1,121 +1,121 @@
-import * as HttpStatus from 'http-status-codes'
-import * as chai from 'chai'
-import * as idamServiceMocks from 'test/http-mocks/idam/idam'
-import * as sinon from 'sinon'
+import * as HttpStatus from 'http-status-codes';
+import * as chai from 'chai';
+import * as idamServiceMocks from 'test/http-mocks/idam/idam';
+import * as sinon from 'sinon';
 
-import { AuthorizationMiddleware, hasTokenExpired } from 'idam/authorizationMiddleware'
-import { mockReq, mockRes } from 'sinon-express-mock'
+import { AuthorizationMiddleware, hasTokenExpired } from 'idam/authorizationMiddleware';
+import { mockReq, mockRes } from 'sinon-express-mock';
 
-const spies = require('sinon-chai')
-chai.use(spies)
-const expect = chai.expect
+const spies = require('sinon-chai');
+chai.use(spies);
+const expect = chai.expect;
 
 describe('AuthorizationMiddleware', () => {
   context('hasTokenExpired', () => {
     it('should return true if err status is forbidden or unauthorized', () => {
       const err1 = {
-        statusCode: HttpStatus.FORBIDDEN
-      }
+        statusCode: HttpStatus.FORBIDDEN,
+      };
       const err2 = {
-        statusCode: HttpStatus.BAD_REQUEST
-      }
+        statusCode: HttpStatus.BAD_REQUEST,
+      };
 
-      expect(hasTokenExpired(err1)).to.be.true
-      expect(hasTokenExpired(err2)).to.be.false
-    })
-  })
+      expect(hasTokenExpired(err1)).to.be.true;
+      expect(hasTokenExpired(err2)).to.be.false;
+    });
+  });
 
   context('handleUnprotectedPaths', () => {
-    let nextFunction
+    let nextFunction;
     beforeEach(() => {
-      nextFunction = sinon.spy(() => {})
-    })
+      nextFunction = sinon.spy(nextFunction);
+    });
 
     it('should return express next function for unprotected paths', () => {
       const req = mockReq({
-        path: '/unprotected'
-      })
+        path: '/unprotected',
+      });
 
-      AuthorizationMiddleware.handleUnprotectedPaths(['/unprotected'],req, nextFunction)
-      expect(nextFunction).to.have.been.called
-    })
+      AuthorizationMiddleware.handleUnprotectedPaths(['/unprotected'],req, nextFunction);
+      expect(nextFunction).to.have.been.called;
+    });
 
     it('should not return next function when path is protected', () => {
       const req = mockReq({
-        path: '/unprotected'
-      })
+        path: '/unprotected',
+      });
 
-      AuthorizationMiddleware.handleUnprotectedPaths([''],req, nextFunction)
-      expect(nextFunction).to.have.not.been.called
-    })
-  })
+      AuthorizationMiddleware.handleUnprotectedPaths([''],req, nextFunction);
+      expect(nextFunction).to.have.not.been.called;
+    });
+  });
 
   context('handleProtectedPaths', () => {
 
-    let spyAccessDeniedCallback
-    let nextFunction
+    let spyAccessDeniedCallback;
+    let nextFunction;
     beforeEach(() => {
-      spyAccessDeniedCallback = sinon.spy(() => {})
-      nextFunction = sinon.spy(() => {})
+      spyAccessDeniedCallback = sinon.spy(spyAccessDeniedCallback);
+      nextFunction = sinon.spy(nextFunction);
 
-    })
+    });
 
     it('should return accessDeniedCallback when jwt is invalid', () => {
       const req = mockReq({
-        cookies: { SESSION_ID: undefined}
-      })
+        cookies: { SESSION_ID: undefined},
+      });
 
-      AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback);
 
-      expect(spyAccessDeniedCallback).to.have.been.called
-    })
+      expect(spyAccessDeniedCallback).to.have.been.called;
+    });
 
     it('should return next function when user has correct role', async () => {
 
-      idamServiceMocks.resolveRetrieveUserFor('123','citizen')
+      idamServiceMocks.resolveRetrieveUserFor('123','citizen');
 
       const req = mockReq({
-        cookies: { SESSION_ID: '123'}
-      })
+        cookies: { SESSION_ID: '123'},
+      });
       const res = mockRes({
         locals: {
           isLoggedIn: undefined,
-          user: undefined
-        }
-      })
+          user: undefined,
+        },
+      });
 
-      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback);
 
-      expect(nextFunction).to.have.been.called
-    })
+      expect(nextFunction).to.have.been.called;
+    });
 
     it('should return accessDeniedCallback when user does not have correct role', async () => {
 
-      idamServiceMocks.resolveRetrieveUserFor('123','invalidUserRole')
+      idamServiceMocks.resolveRetrieveUserFor('123','invalidUserRole');
 
       const req = mockReq({
-        cookies: { SESSION_ID: '123'}
-      })
+        cookies: { SESSION_ID: '123'},
+      });
 
-      await AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      await AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback);
 
-      expect(spyAccessDeniedCallback).to.have.been.called
-    })
+      expect(spyAccessDeniedCallback).to.have.been.called;
+    });
 
     it('should return accessDeniedCallback when user token has expired', async () => {
 
-      idamServiceMocks.rejectRetrieveUserFor('Forbidden')
+      idamServiceMocks.rejectRetrieveUserFor('Forbidden');
 
       const req = mockReq({
-        cookies: { SESSION_ID: '123'}
-      })
+        cookies: { SESSION_ID: '123'},
+      });
       const res = mockRes({
-        cookies: { SESSION_ID: '123'}
-      })
+        cookies: { SESSION_ID: '123'},
+      });
 
-      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback)
+      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback);
 
-      expect(spyAccessDeniedCallback).to.have.been.called
-    })
-  })
-})
+      expect(spyAccessDeniedCallback).to.have.been.called;
+    });
+  });
+});
