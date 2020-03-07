@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { app } from 'main/app';
-import { Paths } from '../../../../main/app/paths';
+import { Paths } from 'main/app/paths';
 import { defaultAccessToken, defaultAuthToken } from 'test/http-mocks/idam/idam';
 
 import request from 'supertest';
