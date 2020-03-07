@@ -81,8 +81,7 @@ export default express.Router()
     if (res.locals.isLoggedIn) {
       // redirect to adoption application landing page
       // remove below - just for testing
-      cookies.set(STATE_COOKIE_NAME, req.query.state);
-      res.render('<h1>Login success</h1>');
+      next();
     } else {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
