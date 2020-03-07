@@ -1,11 +1,11 @@
 import { fail } from 'assert';
-
-const pa11y = require('pa11y');
-import * as supertest from 'supertest';
 import { app } from 'main/app';
 import { Paths } from 'case/paths';
 import { RoutablePath } from 'common/router/routablePath';
 
+import * as supertest from 'supertest';
+
+const pa11y = require('pa11y');
 const agent = supertest.agent(app);
 
 class Pa11yResult {
