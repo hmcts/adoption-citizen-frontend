@@ -12,6 +12,7 @@ import { Logger } from '@hmcts/nodejs-logging';
 import { buildURL } from 'common/utils/buildURL';
 import { JwtExtractor } from 'idam/jwtExtractor';
 import { AuthToken } from 'idam/AuthToken';
+import { ErrorHandling } from 'common/utils/errorHandling';
 
 const logger = Logger.getLogger('router/landing');
 const sessionCookie = config.get<string>('session.cookieName');
@@ -56,7 +57,7 @@ async function getAuthenticationToken (
 }
 
 export default express.Router()
-  .get(Paths.landing.uri, async (
+  .get(Paths.landing.uri, ErrorHandling.apply(async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -74,16 +75,16 @@ export default express.Router()
         res.locals.user = user;
         setAuthCookie(cookies, accessToken);
       }
-    } catch (e) {
-      return loginErrorHandler(req, res, cookies, next, e);
+    } catch (err) {
+      return loginErrorHandler(req, res, cookies, next, err);
     }
 
     if (res.locals.isLoggedIn) {
-      // redirect to adoption application landing page
+      // TODO: redirect to adoption application landing page
       // remove below - just for testing
       next();
     } else {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
   },
-  );
+  ));
