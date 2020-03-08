@@ -55,15 +55,13 @@ export class IdamClient {
       'grant_type': 'authorization_code',
       'code': code,
       'redirect_uri': redirectUri,
+      'client_id': clientId,
+      'client_secret': clientSecret,
     });
 
     const requestOptions = Object.assign({
       url: url,
       form: formData,
-      auth: {
-        user: clientId,
-        pass: clientSecret,
-      },
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
