@@ -30,20 +30,20 @@ export class AuthorizationMiddleware {
 
   static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[]) {
 
-    function accessDeniedRedirect (req: express.Request, res: express.Response): void {
+    function accessDeniedRedirect (): void {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
 
     const jwt: string = JwtExtractor.extract(req);
 
     if (!jwt) {
-      return accessDeniedRedirect(req, res);
+      return accessDeniedRedirect();
     } else {
       try {
         const user: User = await IdamClient.getUserFromJwt(jwt);
 
         if (!user.isInRoles(...requiredRoles)) {
-          return accessDeniedRedirect(req, res);
+          return accessDeniedRedirect();
         } else {
           res.locals.isLoggedIn = true;
           res.locals.user = user;
@@ -53,7 +53,7 @@ export class AuthorizationMiddleware {
         if (hasValidToken(err)) {
           logger.debug(`Protected path - invalid JWT - access to ${req.path} rejected`);
           res.cookie(sessionCookieName,'');
-          return accessDeniedRedirect(req, res);
+          return accessDeniedRedirect();
         }
         return next(err);
       }
