@@ -19,9 +19,9 @@
 
   {{ govukPhaseBanner({
     tag: {
-      text: t('template.phaseBanner.phase')
+      text: t('common:phaseBanner.phase')
     },
-    html: t('template.phaseBanner.content')
+    html: t('common:phaseBanner.content')
   }) }}
 
 {% endblock %}
@@ -29,14 +29,14 @@
 {% block header %}
 
   {{ govukHeader({
-    serviceName: t('template.serviceName'),
+    serviceName: t('common:serviceName'),
     navigation: [
       {
-        text: t('template.links.profile'),
+        text: t('common:links.profile'),
         href: "#"
       },
       {
-        text: t('template.links.signOut'),
+        text: t('common:links.signOut'),
         href: "#"
       }
     ]

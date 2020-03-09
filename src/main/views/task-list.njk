@@ -1,16 +1,16 @@
 {% extends "./layouts/default.layout.njk" %}
 
-{% set pageName=t('taskList.title') %}
+{% set pageName=t('taskList:title') %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {{ pageHeading(t('taskList.title')) }}
+      {{ pageHeading(t('taskList:title')) }}
 
       <ol class="task-list">
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">1. </span> {{ t('taskList.taskItems.applicationDetails.heading') }}
+            <span class="task-list__section-number">1. </span> {{ t('taskList:taskItems.applicationDetails.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.applicantDetails),
@@ -19,7 +19,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">2. </span> {{ t('taskList.taskItems.yourDetails.heading') }}
+            <span class="task-list__section-number">2. </span> {{ t('taskList:taskItems.yourDetails.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.yourDetails),
@@ -28,7 +28,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">3. </span> {{ t('taskList.taskItems.childDetails.heading') }}
+            <span class="task-list__section-number">3. </span> {{ t('taskList:taskItems.childDetails.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.childDetails),
@@ -37,7 +37,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">4. </span> {{ t('taskList.taskItems.adoptionContacts.heading') }}
+            <span class="task-list__section-number">4. </span> {{ t('taskList:taskItems.adoptionContacts.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.adoptionContacts),
@@ -46,7 +46,7 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">5. </span> {{ t('taskList.taskItems.declarePayments.heading') }}
+            <span class="task-list__section-number">5. </span> {{ t('taskList:taskItems.declarePayments.heading') }}
           </h2>
           {{ subTaskList(
             subTasks=(tasks.declarePayments),
@@ -55,9 +55,9 @@
         </li>
         <li>
           <h2 class="task-list__section">
-            <span class="task-list__section-number">5. </span> {{ t('taskList.taskItems.reviewApplication.heading') }}
+            <span class="task-list__section-number">5. </span> {{ t('taskList:taskItems.reviewApplication.heading') }}
           </h2>
-          {{ alert(content=t('taskList.taskItems.reviewApplication.alert.content')) }}
+          {{ alert(content=t('taskList:taskItems.reviewApplication.alert.content')) }}
           {{ subTaskList(
             subTasks=(tasks.reviewApplication),
             sectionId="review_application"
