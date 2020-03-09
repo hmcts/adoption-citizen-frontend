@@ -10,14 +10,11 @@ describe('AdoptionApplication', () => {
 
     it('should call requestHandler once', () => {
       const spyRequestHandler = sinon.spy(AuthorizationMiddleware, 'requestHandler');
-      const spyAccessDeniedCallback = sinon.spy(() => {
-        // spy function
-      });
 
       new AdoptionApplication().requestHandler();
 
       assert(spyRequestHandler.calledOnce);
-      assert(spyRequestHandler.withArgs([],spyAccessDeniedCallback, []));
+      assert(spyRequestHandler.withArgs([], []));
     });
   });
 });

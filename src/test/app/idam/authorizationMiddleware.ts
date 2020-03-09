@@ -60,16 +60,6 @@ describe('AuthorizationMiddleware', () => {
 
     });
 
-    it('should return accessDeniedCallback when jwt is invalid', () => {
-      const req = mockReq({
-        cookies: { SESSION_ID: undefined},
-      });
-
-      AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback);
-
-      expect(spyAccessDeniedCallback).to.have.been.called;
-    });
-
     it('should return next function when user has correct role', async () => {
 
       idamServiceMocks.resolveRetrieveUserFor('123','citizen');
@@ -84,38 +74,9 @@ describe('AuthorizationMiddleware', () => {
         },
       });
 
-      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback);
+      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen']);
 
       expect(nextFunction).to.have.been.called;
-    });
-
-    it('should return accessDeniedCallback when user does not have correct role', async () => {
-
-      idamServiceMocks.resolveRetrieveUserFor('123','invalidUserRole');
-
-      const req = mockReq({
-        cookies: { SESSION_ID: '123'},
-      });
-
-      await AuthorizationMiddleware.handleProtectedPaths(req, mockRes, nextFunction, ['citizen'], spyAccessDeniedCallback);
-
-      expect(spyAccessDeniedCallback).to.have.been.called;
-    });
-
-    it('should return accessDeniedCallback when user token has expired', async () => {
-
-      idamServiceMocks.rejectRetrieveUserFor('Forbidden');
-
-      const req = mockReq({
-        cookies: { SESSION_ID: '123'},
-      });
-      const res = mockRes({
-        cookies: { SESSION_ID: '123'},
-      });
-
-      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen'], spyAccessDeniedCallback);
-
-      expect(spyAccessDeniedCallback).to.have.been.called;
     });
   });
 });

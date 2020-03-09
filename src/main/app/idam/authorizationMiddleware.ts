@@ -5,6 +5,7 @@ import { JwtExtractor } from 'idam/jwtExtractor';
 import { IdamClient } from 'idam/idamClient';
 import { User } from 'idam/user';
 import { Logger } from '@hmcts/nodejs-logging';
+import { OAuthHelper } from 'idam/oAuthHelper';
 
 import config from 'config';
 
@@ -19,27 +20,30 @@ export class AuthorizationMiddleware {
 
   static requestHandler (
     requiredRoles: string[],
-    accessDeniedCallback: (req: express.Request, res: express.Response) => void,
     unprotectedPaths?: string[]): express.RequestHandler {
 
     return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
       this.handleUnprotectedPaths(unprotectedPaths, req, next);
-      this.handleProtectedPaths(req, res, next, requiredRoles, accessDeniedCallback);
+      this.handleProtectedPaths(req, res, next, requiredRoles);
     };
   }
 
-  static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[], accessDeniedCallback: (req: express.Request, res: express.Response) => void) {
+  static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[]) {
+
+    function accessDeniedRedirect (req: express.Request, res: express.Response): void {
+      res.redirect(OAuthHelper.forLogin(req, res));
+    }
 
     const jwt: string = JwtExtractor.extract(req);
 
     if (!jwt) {
-      return accessDeniedCallback(req, res);
+      return accessDeniedRedirect(req, res);
     } else {
       try {
         const user: User = await IdamClient.getUserFromJwt(jwt);
 
         if (!user.isInRoles(...requiredRoles)) {
-          return accessDeniedCallback(req, res);
+          return accessDeniedRedirect(req, res);
         } else {
           res.locals.isLoggedIn = true;
           res.locals.user = user;
@@ -47,9 +51,9 @@ export class AuthorizationMiddleware {
         }
       } catch (err) {
         if (hasValidToken(err)) {
-          logger.error(`Protected path - invalid JWT - access to ${req.path} rejected`);
+          logger.debug(`Protected path - invalid JWT - access to ${req.path} rejected`);
           res.cookie(sessionCookieName,'');
-          return accessDeniedCallback(req, res);
+          return accessDeniedRedirect(req, res);
         }
         return next(err);
       }
