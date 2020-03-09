@@ -2,25 +2,17 @@ import { expect } from 'chai';
 import { StringUtils } from 'common/utils/stringUtils';
 
 describe('StringUtils', () => {
-  describe('trimToUndefined', () => {
-    it('should return undefined if value is undefined', () => {
-      expect(StringUtils.trimToUndefined(undefined)).to.be.undefined;
+  describe('isBlank', () => {
+    it('should return true when value is null', () => {
+      expect(StringUtils.isBlank('')).to.be.true;
     });
 
-    it('should return undefined for blank string', () => {
-      expect(StringUtils.trimToUndefined('')).to.be.undefined;
+    it('should return true when value is undefined', () => {
+      expect(StringUtils.isBlank(undefined)).to.be.true;
     });
 
-    it('should return undefined for empty string', () => {
-      expect(StringUtils.trimToUndefined('   ')).to.be.undefined;
-    });
-
-    it('should return trim string if on both ends', () => {
-      expect(StringUtils.trimToUndefined('  abc  ')).to.be.equal('abc');
-    });
-
-    it('should return unchanged string if there is nothing to trim', () => {
-      expect(StringUtils.trimToUndefined('abc')).to.be.equal('abc');
+    it('should return false when value is a space', () => {
+      expect(StringUtils.isBlank(' ')).to.be.false;
     });
   });
 });
