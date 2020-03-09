@@ -6,7 +6,7 @@ import config from 'config';
 import { Paths } from '../app/paths';
 import { IdamClient } from 'idam/idamClient';
 import { RoutablePath } from 'common/router/routablePath';
-import { hasTokenExpired } from 'idam/authorizationMiddleware';
+import { hasValidToken } from 'idam/authorizationMiddleware';
 import { OAuthHelper } from 'idam/oAuthHelper';
 import { Logger } from '@hmcts/nodejs-logging';
 import { buildURL } from 'common/utils/buildURL';
@@ -27,7 +27,7 @@ function loginErrorHandler (
   err: Error,
   landing: RoutablePath = Paths.landing,
 ) {
-  if (hasTokenExpired(err)) {
+  if (hasValidToken(err)) {
     cookies.set(sessionCookie);
     logger.debug(`Protected path - expired auth token - access to ${req.path} rejected`);
     return res.redirect(OAuthHelper.forLogin(req, res, landing));

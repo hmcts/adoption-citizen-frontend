@@ -3,7 +3,7 @@ import * as chai from 'chai';
 import * as idamServiceMocks from 'test/http-mocks/idam/idam';
 import * as sinon from 'sinon';
 
-import { AuthorizationMiddleware, hasTokenExpired } from 'idam/authorizationMiddleware';
+import { AuthorizationMiddleware, hasValidToken } from 'idam/authorizationMiddleware';
 import { mockReq, mockRes } from 'sinon-express-mock';
 
 const spies = require('sinon-chai');
@@ -20,8 +20,8 @@ describe('AuthorizationMiddleware', () => {
         statusCode: HttpStatus.BAD_REQUEST,
       };
 
-      expect(hasTokenExpired(err1)).to.be.true;
-      expect(hasTokenExpired(err2)).to.be.false;
+      expect(hasValidToken(err1)).to.be.true;
+      expect(hasValidToken(err2)).to.be.false;
     });
   });
 

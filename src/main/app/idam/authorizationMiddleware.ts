@@ -11,7 +11,7 @@ import config from 'config';
 const sessionCookieName = config.get<string>('session.cookieName');
 const logger = Logger.getLogger('middleware/authorization');
 
-export function hasTokenExpired (err): boolean {
+export function hasValidToken (err): boolean {
   return (err.statusCode === HttpStatus.FORBIDDEN || err.statusCode === HttpStatus.UNAUTHORIZED);
 }
 
@@ -46,8 +46,8 @@ export class AuthorizationMiddleware {
           return next();
         }
       } catch (err) {
-        if (hasTokenExpired(err)) {
-          logger.debug(`Protected path - invalid JWT - access to ${req.path} rejected`);
+        if (hasValidToken(err)) {
+          logger.error(`Protected path - invalid JWT - access to ${req.path} rejected`);
           res.cookie(sessionCookieName,'');
           return accessDeniedCallback(req, res);
         }
