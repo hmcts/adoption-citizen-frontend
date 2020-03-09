@@ -14,8 +14,8 @@ export class IdamClient {
       headers: { Authorization: `Bearer ${jwt}` },
     });
 
-    const data = JSON.parse(await request
-      .get(requestOptions));
+    const response = await request.get(requestOptions);
+    const data = JSON.parse(response);
 
     return new User(
       data.id,
@@ -68,7 +68,9 @@ export class IdamClient {
       },
     });
 
-    const data = JSON.parse(await request.post(requestOptions));
+    const response = await request.post(requestOptions);
+    const data = JSON.parse(response);
+
     return new AuthToken(
       data.access_token,
       data.token_type,
@@ -84,6 +86,6 @@ export class IdamClient {
       },
     };
 
-    await request.delete(options);
+    request.delete(options);
   }
 }
