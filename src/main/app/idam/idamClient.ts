@@ -8,24 +8,25 @@ const idamApiUrl = config.get<string>('idam.api.url');
 
 export class IdamClient {
 
-  static async getUserFromJwt (jwt: string): Promise<User> {
+  static getUserFromJwt (jwt: string): Promise<User> {
     const requestOptions = Object.assign({
       url: `${idamApiUrl}/details`,
       headers: { Authorization: `Bearer ${jwt}` },
     });
 
-    const response = await request.get(requestOptions);
-    const data = JSON.parse(response);
-
-    return new User(
-      data.id,
-      data.email,
-      data.forename,
-      data.surname,
-      data.roles,
-      data.group,
-      jwt,
-    );
+    return request.get(requestOptions)
+      .then((response) => {
+        const user = JSON.parse(response);
+        return new User(
+          user.id,
+          user.email,
+          user.forename,
+          user.surname,
+          user.roles,
+          user.group,
+          jwt,
+        );
+      });
   }
 
   //We will need below in future but not for now
@@ -46,7 +47,7 @@ export class IdamClient {
   }
   */
 
-  static async getAuthToken (code: string, redirectUri: string): Promise<AuthToken> {
+  static getAuthToken (code: string, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId');
     const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret');
     const url = `${config.get('idam.api.url')}/oauth2/token`;
@@ -68,17 +69,18 @@ export class IdamClient {
       },
     });
 
-    const response = await request.post(requestOptions);
-    const data = JSON.parse(response);
-
-    return new AuthToken(
-      data.access_token,
-      data.token_type,
-      data.expires_in,
-    );
+    return request.post(requestOptions)
+      .then((response) => {
+        const authToken = JSON.parse(response);
+        return new AuthToken(
+          authToken.access_token,
+          authToken.token_type,
+          authToken.expires_in,
+        );
+      });
   }
 
-  static async invalidateSession (jwt: string): Promise<void> {
+  static invalidateSession (jwt: string): void {
     const options = {
       uri: `${config.get('idam.api.url')}/session/${jwt}`,
       headers: {
