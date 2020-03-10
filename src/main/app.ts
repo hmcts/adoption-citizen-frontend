@@ -39,10 +39,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// if (env !== 'mocha') {
-//   new CsrfProtection().enableFor(app)
-// }
-
 new AdoptionApplication().enableFor(app);
 
 app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')));

@@ -29,24 +29,6 @@ export class IdamClient {
       });
   }
 
-  //We will need below in future but not for now
-  /*
-  static async getServiceToken (): Promise<ServiceAuthToken> {
-    const oneTimePassword = otp({ secret: totpSecret }).totp()
-    const options = {
-      uri: `${s2sUrl}/lease`,
-      body: new ServiceAuthRequest(microserviceName, oneTimePassword)
-    }
-
-    try {
-      const data = await request.post(options)
-      return new ServiceAuthToken(JSON.parse(data))
-    } catch (err) {
-      throw new Error(`Unable to get service token - ${err}`)
-    }
-  }
-  */
-
   static getAuthToken (code: string, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId');
     const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret');
