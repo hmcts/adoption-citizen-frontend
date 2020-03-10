@@ -8,6 +8,7 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import config from 'config';
 
+import { Logger } from '@hmcts/nodejs-logging';
 import { Helmet } from 'main/modules/helmet';
 import { RouterFinder } from 'router/routerFinder';
 import { HTTPError } from 'main/HttpError';
@@ -17,8 +18,6 @@ import { AdoptionApplication } from 'case/index';
 
 secrets.setup(config);
 appinsight.setup(config);
-
-const { Logger } = require('@hmcts/nodejs-logging');
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
