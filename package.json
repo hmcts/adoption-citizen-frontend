@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/ts-node -r tsconfig-paths/register src/main/server.ts",
-    "cichecks": "yarn && yarn build && yarn lint && yarn test && yarn test:routes && yarn test:a11y",
+    "cichecks": "yarn && yarn build:prod && yarn lint && yarn test && yarn test:routes && yarn test:a11y",
     "lint": "sass-lint -v -q && eslint . --ext .js,.jsx,.ts,.tsx ",
     "build:dev": "concurrently \"yarn webpack-dev-server\" \"yarn run start\"",
     "build:prod": "yarn webpack --mode production --config webpack.config.ts",
