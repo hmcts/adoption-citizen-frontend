@@ -39,5 +39,11 @@ describe('RoutablePath', () => {
         expect(new RoutablePath('/claim/:type/:subtype/list', false).associatedView).to.be.equal('claim/list');
       });
     });
+
+    describe('constructor', () => {
+      it('should throw error when uri is missing', () => {
+        expect(() => new RoutablePath('',false)).to.throw('uri is missing');
+      });
+    });
   });
 });
