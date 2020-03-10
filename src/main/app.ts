@@ -1,9 +1,12 @@
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
+import * as secrets from './modules/secrets';
+import * as appinsight from './modules/appinisght';
 
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import favicon from 'serve-favicon';
+import config from 'config';
 
 import { Helmet } from 'main/modules/helmet';
 import { RouterFinder } from 'router/routerFinder';
@@ -12,7 +15,9 @@ import { Nunjucks } from 'main/modules/nunjucks';
 import { I18Next } from 'main/modules/i18n';
 import { AdoptionApplication } from 'case/index';
 
-const config = require('config');
+secrets.setup(config);
+appinsight.setup(config);
+
 const { Logger } = require('@hmcts/nodejs-logging');
 
 const env = process.env.NODE_ENV || 'development';
