@@ -47,11 +47,13 @@ export class AuthorizationMiddleware {
         } else {
           res.locals.isLoggedIn = true;
           res.locals.user = user;
+          logger.error('testing try block');
           return next();
         }
       } catch (err) {
+        logger.error('testing catch block');
         if (hasValidToken(err)) {
-          logger.debug(`Protected path - invalid JWT - access to ${req.path} rejected`);
+          logger.error(`Protected path - invalid JWT - access to ${req.path} rejected - ${err})`);
           res.cookie(sessionCookieName,'');
           return accessDeniedRedirect();
         }
