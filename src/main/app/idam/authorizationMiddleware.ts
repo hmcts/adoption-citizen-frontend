@@ -62,7 +62,6 @@ export class AuthorizationMiddleware {
 
   static handleUnprotectedPaths (unprotectedPaths: string[], req: express.Request, next: express.NextFunction): void {
     if (unprotectedPaths && unprotectedPaths.length !== 0 && unprotectedPaths.includes(req.path)) {
-      logger.debug(`Unprotected path - access to ${req.path} granted`);
       return next();
     }
   }
