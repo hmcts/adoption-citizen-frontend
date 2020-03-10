@@ -4,4 +4,9 @@ nodejs:
   memoryRequests: 512Mi
   memoryLimits: 1024Mi
   cpuLimits: 1
+  aadIdentityName: adoption
   environment:
+  keyVaults:
+    adoption:
+      secrets:
+        - os-postcode-lookup-api-key
