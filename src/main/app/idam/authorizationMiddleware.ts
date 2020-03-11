@@ -31,6 +31,8 @@ export class AuthorizationMiddleware {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
 
+    console.log('req----->',req.cookies)
+    // req.cookies = ''
     const jwt: string = JwtExtractor.extract(req);
 
     if (!jwt) {
