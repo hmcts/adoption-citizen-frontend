@@ -5,7 +5,6 @@ import * as appinsight from './modules/appinisght';
 
 import cookieParser from 'cookie-parser';
 import express from 'express';
-import favicon from 'serve-favicon';
 import config from 'config';
 
 import { Logger } from '@hmcts/nodejs-logging';
@@ -18,8 +17,6 @@ import { AdoptionApplication } from 'case/index';
 
 secrets.setup(config);
 appinsight.setup(config);
-
-const { Logger } = require('@hmcts/nodejs-logging');
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
@@ -35,11 +32,6 @@ new Nunjucks(developmentMode, i18next)
 // secure the application by adding various HTTP headers to its responses
 new Helmet(config.get('security')).enableFor(app);
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, '/public/img/favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

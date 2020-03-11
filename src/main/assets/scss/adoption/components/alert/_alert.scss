@@ -1,0 +1,13 @@
+.alert {
+  border-left-style: solid;
+  border-left-width: 10px;
+  box-sizing: border-box;
+  clear: both;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+
+  &--default {
+    background-color: #eaf8ff;
+    border-color: #2b8cc4;
+  }
+}

@@ -1,0 +1,20 @@
+{% from "../alert/alert.njk" import alert %}
+{% from "./sub-task-list.njk" import subTaskList %}
+
+{% macro taskList(tasks=[]) %}
+  <ol class="task-list">
+    {% for task in tasks %}
+      <li>
+        <h2 class="task-list__section">
+          <span class="task-list__section-number">{{ loop.index }}. </span> {{ task.heading }}
+        </h2>
+        {% if task.infoAlert %}
+          {{ alert( task.infoAlert.content, task.infoAlert.heading, task.infoAlert.type ) }}
+        {% endif %}
+      </li>
+      {% if task.subTasks %}
+        {{ subTaskList( task.subTasks, task.sectionId )}}
+      {% endif %}
+    {% endfor %}
+  </ol>
+{% endmacro %}

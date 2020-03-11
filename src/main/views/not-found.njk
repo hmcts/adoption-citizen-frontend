@@ -1,8 +1,5 @@
-<html>
-  <head>
-  </head>
-  <body>
-    <h1>Not found</h1>
-    <p>TODO: replace with a proper template in your application</p>
-  </body>
-</html>
+{% extends "./layouts/default.layout.njk" %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ t('common:pageNotFound.heading') }}</h1>
+{% endblock %}
