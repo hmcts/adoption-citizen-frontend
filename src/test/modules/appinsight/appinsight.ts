@@ -4,7 +4,7 @@ import * as appInsights from 'applicationinsights';
 import * as chai from 'chai';
 import * as appInsightConfig from '../../../main/modules/appinisght';
 import sinonChai from 'sinon-chai';
-import {remove, set} from 'lodash';
+import { remove, set } from 'lodash';
 
 const APP_INSIGHT_IKEY_CONFIG_PATH = 'applicationInsights.instrumentationKey';
 const APP_INSIGHT_IKEY = '1';

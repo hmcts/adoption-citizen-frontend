@@ -16,7 +16,8 @@ module.exports = {
     "eol-last": ["error"],
     "no-trailing-spaces": ["error"],
     "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0}],
-    "no-console": ["error"]
+    "no-console": ["error"],
+    "object-curly-spacing": ["error", "always"]
   },
   "overrides": [
     {
