@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-const { Logger } = require('@hmcts/nodejs-logging');
+
+import {app} from './app';
 import * as fs from 'fs';
 import * as https from 'https';
 import * as path from 'path';
-import { app } from './app';
+import {Logger} from '@hmcts/nodejs-logging';
 
 const logger = Logger.getLogger('server');
 
