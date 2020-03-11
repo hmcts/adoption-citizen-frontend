@@ -1,8 +1,6 @@
 import * as appInsights from 'applicationinsights';
 import {IConfig} from 'config';
 
-import {Logger} from '@hmcts/nodejs-logging';
-
 export function setup(config: IConfig): void {
 
   if (config.has('applicationInsights.instrumentationKey')) {
@@ -11,7 +9,5 @@ export function setup(config: IConfig): void {
       .setDistributedTracingMode(appInsights.DistributedTracingModes.AI_AND_W3C)
       .setSendLiveMetrics(true)
       .start();
-    Logger.getLogger('server')
-      .info('Application insight configured with ' + config.get('applicationInsights.instrumentationKey'));
   }
 }

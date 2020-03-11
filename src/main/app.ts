@@ -1,3 +1,5 @@
+import * as secrets from './modules/secrets';
+import * as appinsight from './modules/appinisght';
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
 
@@ -10,8 +12,6 @@ import {RouterFinder} from 'router/routerFinder';
 import {HTTPError} from 'main/HttpError';
 import {Nunjucks} from 'main/modules/nunjucks';
 import {I18Next} from 'main/modules/i18n';
-import * as secrets from './modules/secrets';
-import * as appinsight from './modules/appinisght';
 
 import config from 'config';
 
