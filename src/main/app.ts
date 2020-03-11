@@ -4,11 +4,11 @@ import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
-import {Helmet} from 'main/modules/helmet';
-import {RouterFinder} from 'router/routerFinder';
-import {HTTPError} from 'main/HttpError';
-import {Nunjucks} from 'main/modules/nunjucks';
-import {I18Next} from 'main/modules/i18n';
+import { Helmet } from 'main/modules/helmet';
+import { RouterFinder } from 'router/routerFinder';
+import { HTTPError } from 'main/HttpError';
+import { Nunjucks } from 'main/modules/nunjucks';
+import { I18Next } from 'main/modules/i18n';
 import * as secrets from './modules/secrets';
 import * as appinsight from './modules/appinisght';
 
@@ -17,7 +17,7 @@ import config from 'config';
 secrets.setup(config);
 appinsight.setup(config);
 
-const {Logger} = require('@hmcts/nodejs-logging');
+const { Logger } = require('@hmcts/nodejs-logging');
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
@@ -34,7 +34,7 @@ new Nunjucks(developmentMode, i18next)
 new Helmet(config.get('security')).enableFor(app);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
