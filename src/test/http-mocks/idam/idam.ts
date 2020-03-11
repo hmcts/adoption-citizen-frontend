@@ -47,21 +47,3 @@ export function rejectRetrieveUserFor (reason: string): mock.Scope {
     .get('/details')
     .reply(HttpStatus.FORBIDDEN, reason);
 }
-
-export function rejectRetrieveUserWith500For (): mock.Scope {
-  return mock(apiServiceBaseURL)
-    .get('/details')
-    .reply(HttpStatus.INTERNAL_SERVER_ERROR);
-}
-
-export function resolveRetrieveServiceToken (token: string = defaultAccessToken): mock.Scope {
-  return mock(s2sAuthServiceBaseURL)
-    .post('/lease')
-    .reply(HttpStatus.OK, token);
-}
-
-export function rejectRetrieveServiceToken (): mock.Scope {
-  return mock(s2sAuthServiceBaseURL)
-    .post('/lease')
-    .reply(HttpStatus.BAD_REQUEST);
-}
