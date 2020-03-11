@@ -1,0 +1,20 @@
+{
+  "serviceName": "Apply to adopt a child",
+  "phaseBanner": {
+    "phase": "Alpha",
+    "content": "This is a new service - your <a href='#'> feedback </a> will help us to improve it."
+  },
+  "links": {
+    "profile": "Profile",
+    "signOut": "Sign out"
+  },
+  "home": {
+    "heading": "Hello world!"
+  },
+  "error": {
+    "heading": "Something went wrong"
+  },
+  "pageNotFound": {
+    "heading": "Page not found"
+  }
+}

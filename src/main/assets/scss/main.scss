@@ -1,0 +1,5 @@
+$govuk-global-styles: true;
+
+@import '~govuk-frontend';
+@import 'adoption/components';
+@import 'adoption/util/';

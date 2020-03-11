@@ -1,10 +1,5 @@
-<html lang="en">
-  <head>
-    <title>Adoption Frontend Application</title>
-  </head>
-  <body>
-    <h1>{{ t('home.title') }}</h1>
-    <h1>
-      bbb{{ t('single') }}</h1>
-  </body>
-</html>
+{% extends "./layouts/default.layout.njk" %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">{{ t('common:home.heading') }}</h1>
+{% endblock %}

@@ -16,6 +16,7 @@ export class I18Next {
       .use(postProcessor)
       .use(middleware.LanguageDetector)
       .init({
+        ns: ['common', 'taskList'],
         backend: {
           loadPath: __dirname + '/../../locales/{{lng}}/{{ns}}.json',
           addPath: __dirname + '/../../locales/{{lng}}/{{ns}}.missing.json',
