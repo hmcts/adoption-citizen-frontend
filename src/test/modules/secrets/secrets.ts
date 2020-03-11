@@ -1,7 +1,7 @@
 import config from 'config';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import * as secrets from '../../../main/modules/secrets';
-import { set, remove, cloneDeep} from 'lodash';
+import { set, remove, cloneDeep } from 'lodash';
 
 const APP_INSIGHT_IKEY_CONFIG_PATH = 'secrets.adoption.AppInsightsInstrumentationKey';
 const APP_INSIGHT_IKEY = '1';
