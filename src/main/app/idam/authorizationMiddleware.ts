@@ -18,12 +18,9 @@ export function hasValidToken (err): boolean {
 
 export class AuthorizationMiddleware {
 
-  static requestHandler (
-    requiredRoles: string[],
-    unprotectedPaths?: string[]): express.RequestHandler {
+  static requestHandler (requiredRoles: string[]): express.RequestHandler {
 
     return async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-      this.handleUnprotectedPaths(unprotectedPaths, req, next);
       this.handleProtectedPaths(req, res, next, requiredRoles);
     };
   }
@@ -57,12 +54,6 @@ export class AuthorizationMiddleware {
         }
         return next(err);
       }
-    }
-  }
-
-  static handleUnprotectedPaths (unprotectedPaths: string[], req: express.Request, next: express.NextFunction): void {
-    if (unprotectedPaths && unprotectedPaths.length !== 0 && unprotectedPaths.includes(req.path)) {
-      return next();
     }
   }
 }

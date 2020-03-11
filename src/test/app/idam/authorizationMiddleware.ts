@@ -25,31 +25,6 @@ describe('AuthorizationMiddleware', () => {
     });
   });
 
-  context('handleUnprotectedPaths', () => {
-    let nextFunction;
-    beforeEach(() => {
-      nextFunction = sinon.spy(nextFunction);
-    });
-
-    it('should return express next function for unprotected paths', () => {
-      const req = mockReq({
-        path: '/unprotected',
-      });
-
-      AuthorizationMiddleware.handleUnprotectedPaths(['/unprotected'],req, nextFunction);
-      expect(nextFunction).to.have.been.called;
-    });
-
-    it('should not return next function when path is protected', () => {
-      const req = mockReq({
-        path: '/unprotected',
-      });
-
-      AuthorizationMiddleware.handleUnprotectedPaths([''],req, nextFunction);
-      expect(nextFunction).to.have.not.been.called;
-    });
-  });
-
   context('handleProtectedPaths', () => {
 
     let nextFunction;

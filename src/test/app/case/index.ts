@@ -14,7 +14,7 @@ describe('AdoptionApplication', () => {
       new AdoptionApplication().requestHandler();
 
       assert(spyRequestHandler.calledOnce);
-      assert(spyRequestHandler.withArgs([], []));
+      assert(spyRequestHandler.withArgs([]));
     });
   });
 });
