@@ -1,7 +1,7 @@
 import * as appInsights from 'applicationinsights';
-import {IConfig} from 'config';
+import { IConfig } from 'config';
 
-import {Logger} from '@hmcts/nodejs-logging';
+import { Logger } from '@hmcts/nodejs-logging';
 
 export function setup(config: IConfig): void {
 
