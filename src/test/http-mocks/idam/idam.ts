@@ -5,7 +5,7 @@ import mock from 'nock';
 
 const apiServiceBaseURL: string = config.get<string>('idam.api.url');
 
-export const defaultAccessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJpZGFtIiwiaWF0IjoxNDgzMjI4ODAwLCJleHAiOjQxMDI0NDQ4MDAsImF1ZCI6ImFkb3B0aW9uIiwic3ViIjoiYWRvcHRpb24ifQ.0EKZpjflxgaOryKryWVgXpsfJT1zTZAHM0Qfyn2-X1Q';
+export const defaultAccessToken = '123DummyAccessToken456';
 
 export function resolveRetrieveUserFor (id: string, ...roles: string[]): mock.Scope {
   return mock(apiServiceBaseURL)
