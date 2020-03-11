@@ -66,7 +66,6 @@ function testAccessibility (url: string): void {
 }
 
 describe('Accessibility', () => {
-  testAccessibility('/');
   testAccessibility('/task-list');
 });
 
