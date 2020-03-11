@@ -37,7 +37,7 @@ describe('AuthorizationMiddleware', () => {
       idamServiceMocks.resolveRetrieveUserFor('123','citizen');
 
       const req = mockReq({
-        cookies: { SESSION_ID: '123'},
+        cookies: { SESSION_ID: '123' },
       });
       const res = mockRes({
         locals: {
@@ -53,12 +53,12 @@ describe('AuthorizationMiddleware', () => {
 
     it('should redirect to login page when jwt is invalid', async () => {
       const req = mockReq({
-        headers: { host: 'localhost'},
-        cookies: { SESSION_ID: undefined},
+        headers: { host: 'localhost' },
+        cookies: { SESSION_ID: undefined },
       });
       const res = mockRes({
         redirect: sinon.stub(),
-        cookies: { SESSION_ID: '123'},
+        cookies: { SESSION_ID: '123' },
       });
 
       await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen']);
@@ -69,12 +69,12 @@ describe('AuthorizationMiddleware', () => {
       idamServiceMocks.resolveRetrieveUserFor('123','citizen');
 
       const req = mockReq({
-        headers: { host: 'localhost'},
-        cookies: { SESSION_ID: '123'},
+        headers: { host: 'localhost' },
+        cookies: { SESSION_ID: '123' },
       });
       const res = mockRes({
         redirect: sinon.stub(),
-        cookies: { SESSION_ID: '123'},
+        cookies: { SESSION_ID: '123' },
       });
       await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['Invalid role']);
       expect(res.redirect).to.have.calledOnce;
@@ -84,12 +84,12 @@ describe('AuthorizationMiddleware', () => {
       idamServiceMocks.rejectRetrieveUserFor('Forbidden');
 
       const req = mockReq({
-        headers: { host: 'localhost'},
-        cookies: { SESSION_ID: '123'},
+        headers: { host: 'localhost' },
+        cookies: { SESSION_ID: '123' },
       });
       const res = mockRes({
         redirect: sinon.stub(),
-        cookies: { SESSION_ID: '123'},
+        cookies: { SESSION_ID: '123' },
       });
       await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen']);
       expect(res.redirect).to.have.calledOnce;

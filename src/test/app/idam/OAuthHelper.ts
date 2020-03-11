@@ -6,10 +6,10 @@ describe('OAuthHelper', () => {
   context('forLogin', () => {
     it('should return idam login redirect uri', () => {
       const req = mockReq({
-        headers: { host: 'localhost'},
+        headers: { host: 'localhost' },
       });
       const res = mockRes({
-        cookies: { SESSION_ID: '123'},
+        cookies: { SESSION_ID: '123' },
       });
 
       const redirectUri = OAuthHelper.forLogin(req, res);
