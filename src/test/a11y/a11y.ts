@@ -1,11 +1,9 @@
 import { fail } from 'assert';
-import { app } from 'main/app';
-import { Paths } from 'case/paths';
-import { RoutablePath } from 'common/router/routablePath';
-
-import * as supertest from 'supertest';
 
 const pa11y = require('pa11y');
+import * as supertest from 'supertest';
+import { app } from '../../main/app';
+
 const agent = supertest.agent(app);
 
 class Pa11yResult {
@@ -51,28 +49,24 @@ function runPally(url: string): Pa11yResult {
   });
 }
 
-function testAccessibility (paths: Paths): void {
+function testAccessibility (url: string): void {
 
-  Object.values(paths).forEach((path: RoutablePath) => {
-    const url = path.uri;
-    describe(`Page ${url}`, () => {
+  describe(`Page ${url}`, () => {
 
-      it('should have no accessibility errors', (done) => {
-        ensurePageCallWillSucceed(url)
-          .then(() => runPally(agent.get(url).url))
-          .then((result: Pa11yResult) => {
-            expectNoErrors(result.issues);
-            done();
-          })
-          .catch((err) => done(err));
-      });
+    it('should have no accessibility errors', (done) => {
+      ensurePageCallWillSucceed(url)
+        .then(() => runPally(agent.get(url).url))
+        .then((result: Pa11yResult) => {
+          expectNoErrors(result.issues);
+          done();
+        })
+        .catch((err) => done(err));
     });
   });
 }
 
 describe('Accessibility', () => {
-
-  testAccessibility(Paths);
-
+  testAccessibility('/');
+  testAccessibility('/task-list');
 });
 
