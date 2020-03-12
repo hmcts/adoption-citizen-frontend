@@ -33,6 +33,9 @@
       ],
       "routes/*": [
         "main/routes/*"
+      ],
+      "modules/*": [
+        "main/modules/*"
       ]
     },
     "typeRoots": [
