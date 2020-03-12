@@ -4,7 +4,6 @@ import Cookies from 'cookies';
 import config from 'config';
 
 import { Paths } from '../app/paths';
-import { Paths as CasePaths } from 'case/paths';
 import { IdamClient } from 'idam/idamClient';
 import { RoutablePath } from 'common/router/routablePath';
 import { hasValidToken } from 'idam/authorizationMiddleware';
@@ -17,6 +16,7 @@ import { ErrorHandling } from 'common/utils/errorHandling';
 
 const logger = Logger.getLogger('router/landing');
 const sessionCookie = config.get<string>('session.cookieName');
+const STATE_COOKIE_NAME = 'state';
 
 function loginErrorHandler (
   req: express.Request,
@@ -31,11 +31,13 @@ function loginErrorHandler (
     logger.debug(`Protected path - expired auth token - access to ${req.path} rejected`);
     return res.redirect(OAuthHelper.forLogin(req, res, landing));
   }
+  cookies.set(STATE_COOKIE_NAME, '');
   return next(err);
 }
 
 function setAuthCookie (cookies: Cookies, accessToken: string): void {
   cookies.set(sessionCookie, accessToken);
+  cookies.set(STATE_COOKIE_NAME, '');
 }
 
 async function getAuthenticationToken (
@@ -77,7 +79,7 @@ export default express.Router()
     }
 
     if (res.locals.isLoggedIn) {
-      return res.redirect(CasePaths.taskListPage.uri);
+      // redirect to task list page
     } else {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
