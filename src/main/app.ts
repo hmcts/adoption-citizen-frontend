@@ -4,11 +4,11 @@ import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
-import { Helmet } from 'main/modules/helmet';
-import { RouterFinder } from 'router/routerFinder';
+import { Helmet } from './modules/helmet';
+import { RouterFinder } from './router/routerFinder';
 import { HTTPError } from 'main/HttpError';
-import { Nunjucks } from 'main/modules/nunjucks';
-import { I18Next } from 'main/modules/i18n';
+import { Nunjucks } from './modules/nunjucks';
+import { I18Next } from './modules/i18n';
 import * as secrets from './modules/secrets';
 import * as appinsight from './modules/appinisght';
 
