@@ -2,5 +2,29 @@
   "useCSRFProtection": true,
   "security": {
     "referrerPolicy": "origin"
+  },
+  "secrets": {
+    "adoption": {
+      "adoption-s2s-secret": "secret",
+      "citizen-oauth-client-secret": "adoption"
+    }
+  },
+  "idam": {
+    "authentication-web": {
+      "url": "http://localhost:9002"
+    },
+    "api": {
+      "url": "http://localhost:5000"
+    },
+    "service-2-service-auth": {
+      "url": "http://localhost:4552",
+      "microservice": "adoption"
+    }
+  },
+  "oauth": {
+    "clientId": "adoption"
+  },
+  "session": {
+    "cookieName": "SESSION_ID"
   }
 }
