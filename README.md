@@ -31,7 +31,6 @@ Run:
 
 ```bash
 $ yarn run build:dev
-
 ```
 
 The applications's home page will be available at https://localhost:3000
