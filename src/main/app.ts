@@ -1,23 +1,22 @@
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
+import * as secrets from './modules/secrets';
+import * as appinsight from './modules/appinisght';
 
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import config from 'config';
 
+import { Logger } from '@hmcts/nodejs-logging';
 import { Helmet } from './modules/helmet';
 import { RouterFinder } from './router/routerFinder';
 import { HTTPError } from 'main/HttpError';
 import { Nunjucks } from './modules/nunjucks';
 import { I18Next } from './modules/i18n';
-import * as secrets from './modules/secrets';
-import * as appinsight from './modules/appinisght';
-
-import config from 'config';
+import { AdoptionApplication } from './app/case/index';
 
 secrets.setup(config);
 appinsight.setup(config);
-
-const { Logger } = require('@hmcts/nodejs-logging');
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
@@ -37,6 +36,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+new AdoptionApplication().enableFor(app);
 
 app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')));
 

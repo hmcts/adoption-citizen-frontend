@@ -1,10 +1,7 @@
 import * as express from 'express';
+import { Paths } from '../app/paths';
 
-const router = express.Router();
-
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.render('home');
-});
-
-module.exports = router;
+export default express.Router()
+  .get(Paths.homePage.uri, (req, res) =>{
+    res.redirect(Paths.landing.uri);
+  });
