@@ -4,6 +4,7 @@ import Cookies from 'cookies';
 import config from 'config';
 
 import { Paths } from '../app/paths';
+import { Paths as CasePaths } from 'case/paths';
 import { IdamClient } from 'idam/idamClient';
 import { RoutablePath } from 'common/router/routablePath';
 import { hasValidToken } from 'idam/authorizationMiddleware';
@@ -79,7 +80,7 @@ export default express.Router()
     }
 
     if (res.locals.isLoggedIn) {
-      // redirect to task list page
+      res.redirect(CasePaths.taskListPage.uri);
     } else {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
