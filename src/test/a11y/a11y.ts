@@ -54,6 +54,9 @@ function expectNoErrors (messages: PallyIssue[]): void {
 // GOV UK template has semantic issues in two branding imagery. Disabling for now.
 function runPally(url: string): Pa11yResult {
   return pa11y(url, {
+    headers: {
+      Cookie: `${cookieName}=token`,
+    },
     hideElements: '.govuk-footer__licence-logo, .govuk-header__logotype-crown',
   });
 }
