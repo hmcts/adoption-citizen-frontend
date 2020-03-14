@@ -8,6 +8,8 @@ import config from 'config';
 import * as supertest from 'supertest';
 import 'test/a11y/mocks';
 
+app.locals.csrf = 'dummy-token'
+
 const pa11y = require('pa11y');
 const agent = supertest.agent(app);
 const cookieName: string = config.get<string>('session.cookieName');
