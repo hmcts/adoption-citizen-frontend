@@ -32,6 +32,8 @@ describe('AuthorizationMiddleware', () => {
       nextFunction = sinon.spy(nextFunction);
     });
 
+    afterEach(() => sinon.restore());
+
     it('should return next function when user has correct role', async () => {
 
       idamServiceMocks.resolveRetrieveUserFor('123','citizen');
@@ -57,7 +59,7 @@ describe('AuthorizationMiddleware', () => {
         cookies: { SESSION_ID: undefined },
       });
       const res = mockRes({
-        redirect: sinon.stub(),
+        redirect: sinon.spy(),
         cookies: { SESSION_ID: '123' },
       });
 
@@ -73,10 +75,25 @@ describe('AuthorizationMiddleware', () => {
         cookies: { SESSION_ID: '123' },
       });
       const res = mockRes({
-        redirect: sinon.stub(),
+        redirect: sinon.spy(),
         cookies: { SESSION_ID: '123' },
       });
       await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['Invalid role']);
+      expect(res.redirect).to.have.calledOnce;
+    });
+
+    it('should redirect to login page when token is invalid', async () => {
+      idamServiceMocks.rejectRetrieveUserFor('Forbidden');
+
+      const req = mockReq({
+        headers: { host: 'localhost' },
+        cookies: { SESSION_ID: '123' },
+      });
+      const res = mockRes({
+        redirect: sinon.spy(),
+        cookies: { SESSION_ID: '123' },
+      });
+      await AuthorizationMiddleware.handleProtectedPaths(req, res, nextFunction, ['citizen']);
       expect(res.redirect).to.have.calledOnce;
     });
   });
