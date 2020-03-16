@@ -23,6 +23,7 @@ export class Nunjucks {
 
     const nunjucksEnv = nunjucks.configure([
       path.join(__dirname,'..','..','views'),
+      path.join(__dirname,'..','..','app','case'),
       govUkFrontendPath,
     ], {
       autoescape: true,
