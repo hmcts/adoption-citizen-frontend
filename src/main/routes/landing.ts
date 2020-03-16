@@ -4,15 +4,15 @@ import Cookies from 'cookies';
 import config from 'config';
 
 import { Paths } from '../app/paths';
-import { IdamClient } from '../app/idam/idamClient';
-import { RoutablePath } from '../app/common/router/routablePath';
-import { hasValidToken } from '../app/idam/authorizationMiddleware';
-import { OAuthHelper } from '../app/idam/oAuthHelper';
+import { IdamClient } from 'idam/idamClient';
+import { RoutablePath } from 'common/router/routablePath';
+import { hasValidToken } from 'idam/authorizationMiddleware';
+import { OAuthHelper } from 'idam/oAuthHelper';
 import { Logger } from '@hmcts/nodejs-logging';
-import { buildURL } from '../app/common/utils/buildURL';
-import { JwtExtractor } from '../app/idam/jwtExtractor';
-import { AuthToken } from '../app/idam/AuthToken';
-import { ErrorHandling } from '../app/common/utils/errorHandling';
+import { buildURL } from 'common/utils/buildURL';
+import { JwtExtractor } from 'idam/jwtExtractor';
+import { AuthToken } from 'idam/AuthToken';
+import { ErrorHandling } from 'common/utils/errorHandling';
 
 const logger = Logger.getLogger('router/landing');
 const sessionCookie = config.get<string>('session.cookieName');

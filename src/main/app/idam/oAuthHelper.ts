@@ -2,9 +2,9 @@ import * as express from 'express';
 import uuid from 'uuid';
 import config from 'config';
 
-import { RoutablePath } from '../common/router/routablePath';
+import { RoutablePath } from 'common/router/routablePath';
 import { Paths } from '../paths';
-import { buildURL } from '../common/utils/buildURL';
+import { buildURL } from 'common/utils/buildURL';
 
 const clientId = config.get<string>('oauth.clientId');
 const loginPath = `${config.get('idam.authentication-web.url')}/login`;

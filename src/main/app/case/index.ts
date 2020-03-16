@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-import { AuthorizationMiddleware } from '../idam/authorizationMiddleware';
+import { AuthorizationMiddleware } from 'idam/authorizationMiddleware';
 
 export class AdoptionApplication {
   enableFor (app: express.Express): void {

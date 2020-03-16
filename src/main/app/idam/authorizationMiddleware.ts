@@ -1,11 +1,11 @@
 import * as express from 'express';
 import * as HttpStatus from 'http-status-codes';
 
-import { JwtExtractor } from '../idam/jwtExtractor';
-import { IdamClient } from '../idam/idamClient';
-import { User } from '../idam/user';
+import { JwtExtractor } from 'idam/jwtExtractor';
+import { IdamClient } from 'idam/idamClient';
+import { User } from 'idam/user';
 import { Logger } from '@hmcts/nodejs-logging';
-import { OAuthHelper } from '../idam/oAuthHelper';
+import { OAuthHelper } from 'idam/oAuthHelper';
 
 import config from 'config';
 
