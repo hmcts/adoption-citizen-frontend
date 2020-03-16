@@ -21,6 +21,7 @@
       "microservice": "adoption"
     }
   },
+  "roles": ["citizen"],
   "oauth": {
     "clientId": "adoption"
   },
