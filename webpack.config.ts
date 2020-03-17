@@ -21,4 +21,5 @@ export default {
     path: path.resolve(__dirname, 'src/main/public/'),
     filename: 'main.js',
   },
+  devtool: 'cheap-module-source-map',
 };
