@@ -4,7 +4,7 @@ import Cookies from 'cookies';
 import config from 'config';
 
 import { Paths } from 'main/app/paths';
-import { Paths as CasePaths } from 'case/paths';
+// import { Paths as CasePaths } from 'case/paths';
 import { IdamClient } from 'idam/idamClient';
 import { RoutablePath } from 'common/router/routablePath';
 import { hasValidToken } from 'idam/authorizationMiddleware';
@@ -80,9 +80,9 @@ export default express.Router()
     }
 
     if (res.locals.isLoggedIn) {
-      const state = OAuthHelper.fromBase64(req.query.state)
+      const state = JSON.parse(OAuthHelper.fromBase64(req.query.state))
       console.log('state--->',state);
-      res.redirect(CasePaths.taskListPage.uri);
+      res.redirect(state.redirect);
     } else {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
