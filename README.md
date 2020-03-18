@@ -93,6 +93,33 @@ $ yarn test:a11y
 
 Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
 
+### Debugging the application
+Node inspector is enabled, Whilst running the application in development mode using `yarn build:dev`.
+
+See below how to attach a debugger in the IDE.
+
+#### Debug in Visual Studio Code
+To set up the debug configuration in vscode, create the following file in project root folder:-
+
+.vscode/launch.json
+```
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Node: Nodemon",
+      "port": 9229,
+      "restart": true,
+      "protocol": "inspector",
+      "address": "localhost"
+    }
+  ]
+}
+```
+
+
 ### Security
 
 #### CSRF prevention
