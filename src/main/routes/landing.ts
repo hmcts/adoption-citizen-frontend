@@ -80,6 +80,8 @@ export default express.Router()
     }
 
     if (res.locals.isLoggedIn) {
+      const state = OAuthHelper.fromBase64(req.query.state)
+      console.log('state--->',state);
       res.redirect(CasePaths.taskListPage.uri);
     } else {
       res.redirect(OAuthHelper.forLogin(req, res));
