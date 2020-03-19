@@ -1,14 +1,14 @@
 import * as idamServiceMock from 'test/http-mocks/idam/idam';
+import * as mock from 'nock';
 
 import request from 'supertest';
 import config from 'config';
 import cookie from 'cookie';
+import supertest from 'supertest';
 
 import { expect } from 'chai';
 import { app } from 'main/app';
 import { Paths } from 'main/app/paths';
-import * as mock from 'nock';
-import supertest from 'supertest';
 
 const cookieName: string = config.get<string>('session.cookieName');
 
@@ -47,8 +47,8 @@ describe('Logout', () => {
     });
 
     it('should remove session cookie even when session invalidation is failed ', async () => {
-      idamServiceMock.resolveRetrieveUserFor('1', 'citizen')
-      idamServiceMock.rejectInvalidateSession(idamServiceMock.defaultAccessToken, 'bearerToken')
+      idamServiceMock.resolveRetrieveUserFor('1', 'citizen');
+      idamServiceMock.rejectInvalidateSession(idamServiceMock.defaultAccessToken, 'bearerToken');
 
       await request(app)
         .get(Paths.logout.uri)
