@@ -46,7 +46,7 @@ describe('Logout', () => {
         .expect(res => expect(res.header.location).include('/'));
     });
 
-    it('should remove session cookie even when session invalidation is failed ', async () => {
+    it('should remove session cookie even when session invalidation has failed ', async () => {
       idamServiceMock.resolveRetrieveUserFor('1', 'citizen');
       idamServiceMock.rejectInvalidateSession(idamServiceMock.defaultAccessToken, 'bearerToken');
 

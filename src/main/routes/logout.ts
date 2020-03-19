@@ -6,7 +6,6 @@ import { User } from 'idam/user';
 import { IdamClient } from 'idam/idamClient';
 import { Logger } from '@hmcts/nodejs-logging';
 
-import Cookies from 'cookies';
 import config from 'config';
 
 const sessionCookie = config.get<string>('session.cookieName');
@@ -26,8 +25,6 @@ export default express.Router()
         }
       }
 
-      const cookies = new Cookies(req, res);
-      cookies.set(sessionCookie, '');
-
+      res.clearCookie(sessionCookie);
       res.redirect(Paths.homePage.uri);
     });
