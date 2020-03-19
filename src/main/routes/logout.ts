@@ -20,7 +20,7 @@ export default express.Router()
 
       if(jwt) {
         try {
-          await IdamClient.invalidateSession(jwt);
+          IdamClient.invalidateSession(jwt);
         } catch (err) {
           logger.error(`Failed invalidating JWT for user  ${user}`);
         }
