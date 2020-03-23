@@ -1,10 +1,10 @@
 import * as express from 'express';
 
+import { Logger } from '@hmcts/nodejs-logging';
 import { Paths } from 'main/app/paths';
 import { JwtExtractor } from 'idam/jwtExtractor';
 import { User } from 'idam/user';
 import { IdamClient } from 'idam/idamClient';
-import { Logger } from '@hmcts/nodejs-logging';
 
 import config from 'config';
 
@@ -26,5 +26,5 @@ export default express.Router()
       }
 
       res.clearCookie(sessionCookie);
-      res.redirect(Paths.homePage.uri);
+      res.redirect(Paths.landing.uri);
     });

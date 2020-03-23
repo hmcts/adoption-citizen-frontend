@@ -36,14 +36,14 @@ describe('Logout', () => {
         .expect(res => expect(getCookieValue(res, `${cookieName}`)).to.be.empty);
     });
 
-    it('should redirect to home page when session cookie is removed', async () => {
+    it('should redirect to landing page when session cookie is removed', async () => {
       idamServiceMock.resolveRetrieveUserFor('1', 'citizen');
       idamServiceMock.resolveInvalidateSession('token');
 
       await request(app)
         .get(Paths.logout.uri)
         .set('Cookie', `${cookieName}=token`)
-        .expect(res => expect(res.header.location).include('/'));
+        .expect(res => expect(res.header.location).include('/landing'));
     });
 
     it('should remove session cookie even when session invalidation has failed ', async () => {
