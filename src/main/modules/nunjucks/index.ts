@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as express from 'express';
 import * as nunjucks from 'nunjucks';
 import { i18n } from 'i18next';
+import { Paths as AppPaths } from 'main/app/paths';
 
 export class Nunjucks {
   constructor(public developmentMode: boolean, public i18next: i18n) {
@@ -33,6 +34,7 @@ export class Nunjucks {
 
     // Enables i18next translate method globally in nujucks
     nunjucksEnv.addGlobal('t', (key: string): string => this.i18next.t(key));
+    nunjucksEnv.addGlobal('AppPaths', AppPaths);
 
     app.use((req, res, next) => {
       res.locals.pagePath = req.path;

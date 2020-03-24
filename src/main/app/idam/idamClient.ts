@@ -70,6 +70,8 @@ export class IdamClient {
       },
     };
 
-    request.delete(options);
+    request.delete(options)
+      .then((res) => res.statusCode)
+      .catch((err) => err.statusCode);
   }
 }
