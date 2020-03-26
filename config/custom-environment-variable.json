@@ -6,5 +6,16 @@
     "api": {
       "url": "IDAM_API_URL"
     }
+  },
+  "oauth": {
+    "clientId": "OAUTH_CLIENT_ID"
+  },
+  "session": {
+    "cookieName": "JWT_COOKIE_NAME"
+  },
+  "secrets": {
+    "adoption": {
+      "adoption-oauth-client-secret": "OAUTH_CLIENT_SECRET"
+    }
   }
 }
