@@ -120,7 +120,7 @@ variable "packages_name" {
 }
 
 variable "packages_project" {
-  default = "divorce"
+  default = "adoption"
 }
 
 variable "packages_environment" {
@@ -137,10 +137,6 @@ variable "public_protocol" {
 
 variable "http_proxy" {
   default = "http://proxyout.reform.hmcts.net:8080/"
-}
-
-variable "no_proxy" {
-  default = "localhost,127.0.0.0/8,127.0.0.1,127.0.0.1*,local.home,reform.hmcts.net,*.reform.hmcts.net,betaDevBdivorceAppLB.reform.hmcts.net,betaDevBccidamAppLB.reform.hmcts.net,*.internal,*.platform.hmcts.net"
 }
 
 variable "health_endpoint" {

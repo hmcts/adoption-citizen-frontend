@@ -13,8 +13,14 @@ locals {
   asp_rg = "${var.env == "prod" ? "adoption-prod" : "${var.raw_product}-${var.env}"}"
 }
 
+data "azurerm_key_vault" "adoption_key_vault" {
+  name                = "${local.vault_name}"
+  resource_group_name = "${local.vault_name}"
+}
+
 data "azurerm_key_vault_secret" "oauth_client_secret" {
-  name = "adoption-oauth-client-secret"
+  name = "oauth-client-secret"
+  key_vault_id        = "${data.azurerm_key_vault.adoption_key_vault.id}"
 }
 
 resource "azurerm_resource_group" "rg" {
