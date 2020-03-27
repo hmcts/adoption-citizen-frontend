@@ -1,9 +1,23 @@
 nodejs:
   image: hmctspublic.azurecr.io/ado/adoption-frontend:latest
+  imagePullPolicy: IfNotPresent
   applicationPort: 3000
+  replicas: 1
+  useInterpodAntiAffinity: false
+  registerAdditionalDns:
+    enabled: false
   memoryRequests: 512Mi
   memoryLimits: 1024Mi
   cpuLimits: 1
+  readinessPath: /health
+  readinessDelay: 5
+  readinessTimeout: 3
+  readinessPeriod: 15
+  livenessPath: /health/liveness
+  livenessDelay: 5
+  livenessTimeout: 3
+  livenessPeriod: 15
+  livenessFailureThreshold: 3
   aadIdentityName: adoption
   environment:
     REFORM_TEAM: adoption
