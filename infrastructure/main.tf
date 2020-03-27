@@ -3,6 +3,10 @@ provider "azurerm" {}
 locals {
   public_hostname = "${var.product}-${var.component}-${var.env}.service.${local.aseName}.internal"
   vault_name    = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview") ? "${var.raw_product}-aat" : "${var.raw_product}-saat" : "${var.raw_product}-${var.env}"}"
+
+  // IDAM
+  IDAM_API_URL = "${var.idam_api_url}"
+  IDAM_AUTHENTICATION_WEB_URL = "${var.authentication_web_url}"
 }
 
 resource "azurerm_resource_group" "rg" {
