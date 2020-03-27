@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import config from 'config';
 import * as appInsights from 'applicationinsights';
 import * as chai from 'chai';
-import * as appInsightConfig from '../../../main/modules/appinisght';
+import * as appInsightConfig from 'main/modules/appinsights';
 import sinonChai from 'sinon-chai';
 import { remove, set } from 'lodash';
 
