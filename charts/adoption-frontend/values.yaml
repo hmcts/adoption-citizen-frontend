@@ -1,6 +1,5 @@
 nodejs:
   image: hmctspublic.azurecr.io/ado/adoption-frontend:latest
-  imagePullPolicy: IfNotPresent
   applicationPort: 3000
   memoryRequests: 512Mi
   memoryLimits: 1024Mi
