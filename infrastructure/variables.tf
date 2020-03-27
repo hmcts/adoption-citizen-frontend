@@ -27,6 +27,7 @@ variable "raw_product" {
 
 variable "component" {
   type = "string"
+  default = "frontend"
 }
 
 variable "location" {

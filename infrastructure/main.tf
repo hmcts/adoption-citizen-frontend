@@ -1,26 +1,8 @@
-provider "azurerm" {
-  version = "=1.41.0"
-}
+provider "azurerm" {}
+
 locals {
-  aseName = "core-compute-${var.env}"
   public_hostname = "${var.product}-${var.component}-${var.env}.service.${local.aseName}.internal"
-  instance_size = "${var.env == "prod" || var.env == "sprod" || var.env == "aat" ? "I2" : "I1"}"
-  capacity      = "${var.env == "prod" || var.env == "sprod" || var.env == "aat" ? 2 : 1}"
-  local_env     = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview") ? "aat" : "saat" : var.env}"
   vault_name    = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview") ? "${var.raw_product}-aat" : "${var.raw_product}-saat" : "${var.raw_product}-${var.env}"}"
-
-  asp_name = "${var.env == "prod" ? "adoption-prod" : "${var.raw_product}-${var.env}"}"
-  asp_rg = "${var.env == "prod" ? "adoption-prod" : "${var.raw_product}-${var.env}"}"
-}
-
-data "azurerm_key_vault" "adoption_key_vault" {
-  name                = "${local.vault_name}"
-  resource_group_name = "${local.vault_name}"
-}
-
-data "azurerm_key_vault_secret" "oauth_client_secret" {
-  name = "oauth-client-secret"
-  key_vault_id        = "${data.azurerm_key_vault.adoption_key_vault.id}"
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -47,11 +29,21 @@ module "key-vault" {
   tenant_id                  = "${var.tenant_id}"
   object_id                  = "${var.jenkins_AAD_objectId}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
-  product_group_object_id    = "78fd709b-45c7-42f1-8411-130434575920"
+  product_group_object_id    = ""
   common_tags                = "${var.common_tags}"
 
   #aks migration
   managed_identity_object_id = "${var.managed_identity_object_id}"
+}
+
+data "azurerm_key_vault" "adoption_key_vault" {
+  name                = "${local.vault_name}"
+  resource_group_name = "${local.vault_name}"
+}
+
+data "azurerm_key_vault_secret" "oauth_client_secret" {
+  name = "oauth-client-secret"
+  key_vault_id        = "${data.azurerm_key_vault.adoption_key_vault.id}"
 }
 
 module "adoption-frontend" {
@@ -66,8 +58,6 @@ module "adoption-frontend" {
   https_only                      = "false"
   capacity                        = "${var.capacity}"
   common_tags                     = "${var.common_tags}"
-  asp_name                        = "${local.asp_name}"
-  asp_rg                          = "${local.asp_rg}"
   instance_size                   = "I3"
   appinsights_instrumentation_key = "${var.appinsights_instrumentation_key}"
   enable_ase                      = "${var.enable_ase}"
