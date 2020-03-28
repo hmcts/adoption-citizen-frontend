@@ -3,6 +3,7 @@
     "outDir": "./dist/",
     "alwaysStrict": true,
     "module": "commonjs",
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2019",
