@@ -8,5 +8,5 @@ nodejs:
 idam-pr:
   enabled: true
   redirect_uris:
-    Adoption:
+    adoption:
       - https://www-${SERVICE_FQDN}/landing
