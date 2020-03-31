@@ -31,7 +31,7 @@ export class IdamClient {
 
   static getAuthToken (code: string, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId');
-    const clientSecret = config.get<string>('idam.clientSecret');
+    const clientSecret = config.get<string>('secrets.adoption.adoption-idam-client-secret');
     const url = `${config.get('idam.api.url')}/oauth2/token`;
 
     console.log('clientSecret---->',clientSecret)

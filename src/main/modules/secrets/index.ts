@@ -13,7 +13,6 @@ export function setup(config: IConfig): void {
   console.log("Config", config);
   if (has(config,'secrets.adoption')) {
     setSecret(config, 'secrets.adoption.AppInsightsInstrumentationKey', 'applicationInsights.instrumentationKey');
-    setSecret(config, 'secrets.adoption.adoption-idam-client-secret', 'idam.clientSecret');
   }
   console.log("After setting secrets", config);
 }
