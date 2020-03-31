@@ -15,3 +15,4 @@ nodejs:
     adoption:
       secrets:
         - AppInsightsInstrumentationKey
+        - adoption-idam-client-secret

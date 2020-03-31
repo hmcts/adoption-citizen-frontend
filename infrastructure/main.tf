@@ -45,7 +45,7 @@ data "azurerm_key_vault" "adoption_key_vault" {
   resource_group_name = "${local.vault_name}"
 }
 
-data "azurerm_key_vault_secret" "oauth_client_secret" {
-  name = "oauth-client-secret"
+data "azurerm_key_vault_secret" "adoption_idam_client_secret" {
+  name = "adoption_idam_client_secret"
   key_vault_id        = "${data.azurerm_key_vault.adoption_key_vault.id}"
 }

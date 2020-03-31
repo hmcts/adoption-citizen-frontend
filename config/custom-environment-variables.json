@@ -15,7 +15,7 @@
   },
   "secrets": {
     "adoption": {
-      "adoption-oauth-client-secret": "OAUTH_CLIENT_SECRET"
+      "adoption-idam-client-secret": "OAUTH_CLIENT_SECRET"
     }
   }
 }
