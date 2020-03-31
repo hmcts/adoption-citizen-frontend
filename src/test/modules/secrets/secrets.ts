@@ -17,15 +17,15 @@ describe('application insight setup', () => {
 
     set(configuration, APP_INSIGHT_IKEY_CONFIG_PATH, APP_INSIGHT_IKEY);
 
-    secrets.setup();
+    secrets.setup(configuration);
 
-    //expect(configuration.applicationInsights.instrumentationKey).to.equal(APP_INSIGHT_IKEY);
+    expect(configuration.applicationInsights.instrumentationKey).to.equal(APP_INSIGHT_IKEY);
   });
 
   it('should not add application insight secrets to config if secrets is absent', () => {
     remove(configuration, APP_INSIGHT_IKEY_CONFIG_PATH);
 
-    secrets.setup();
+    secrets.setup(configuration);
 
     expect(configuration.applicationInsights).to.be.undefined;
   });

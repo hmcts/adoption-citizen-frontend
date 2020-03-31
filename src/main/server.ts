@@ -4,7 +4,7 @@ import * as propertiesVolume from '@hmcts/properties-volume';
 propertiesVolume.addTo(config);
 
 import * as secrets from 'modules/secrets';
-secrets.setup();
+secrets.setup(config);
 const { Logger } = require('@hmcts/nodejs-logging');
 import * as fs from 'fs';
 import * as https from 'https';
