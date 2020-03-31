@@ -48,6 +48,7 @@ async function getAuthenticationToken (
 ): Promise<AuthToken> {
 
   let authenticationToken;
+  console.log('req.query.code---->',req.query.code)
   if (req.query.code) {
     authenticationToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, landing.uri));
   } else if (checkCookie) {
