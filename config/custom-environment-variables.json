@@ -12,10 +12,5 @@
   },
   "session": {
     "cookieName": "JWT_COOKIE_NAME"
-  },
-  "secrets": {
-    "adoption": {
-      "adoption-idam-client-secret": "OAUTH_CLIENT_SECRET"
-    }
   }
 }

@@ -11,19 +11,3 @@ withPipeline(type, product, component) {
   disableLegacyDeployment()
   enableSlackNotifications('#fpla_adoption_tech')
 }
-
-def secrets = [
-  'adoption-${env}':
-    [
-      secret('adoption-idam-client-secret', 'OAUTH_CLIENT_SECRET')
-    ]
-]
-
-static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
-  [ $class: 'AzureKeyVaultSecret',
-    secretType: 'Secret',
-    name: secretName,
-    version: '',
-    envVariable: envVar
-  ]
-}
