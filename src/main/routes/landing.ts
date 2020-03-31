@@ -67,10 +67,13 @@ export default express.Router()
 
     try {
       const authenticationToken = await getAuthenticationToken(req);
+      console.log('authenticationToken--->',authenticationToken)
 
       if (authenticationToken) {
         const accessToken: string = authenticationToken.accessToken;
         user = await IdamClient.getUserFromJwt(accessToken);
+        console.log('user--->',user)
+
         res.locals.isLoggedIn = true;
         res.locals.user = user;
         setAuthCookie(cookies, accessToken);
