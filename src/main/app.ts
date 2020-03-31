@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
-import * as secrets from 'modules/secrets';
 import * as appinsights from 'modules/appinsights';
 
 import cookieParser from 'cookie-parser';
