@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 import * as config from 'config';
-import * as propertiesVolume from '@hmcts/properties-volume';
-propertiesVolume.addTo(config);
 
 import * as secrets from 'modules/secrets';
 secrets.setup(config);
