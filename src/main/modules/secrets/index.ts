@@ -1,15 +1,16 @@
 import { get, has, set } from 'lodash';
-import { IConfig } from 'config';
+import * as config from 'config';
 
-const setSecret = (config: IConfig, secretPath: string, configPath: string): void => {
+const setSecret = (secretPath: string, configPath: string): void => {
   if (has(config, secretPath)) {
     set(config, configPath, get(config, secretPath));
   }
 };
 
-export function setup(config: IConfig): void {
-  if (config.has('secrets.adoption')) {
-    setSecret(config, 'secrets.adoption.AppInsightsInstrumentationKey', 'applicationInsights.instrumentationKey');
-    setSecret(config, 'secrets.adoption.adoption-idam-client-secret', 'idam.clientSecret');
+export function setup(): void {
+  console.log("Config", config);
+  if (has(config, 'secrets.adoption')) {
+    setSecret('secrets.adoption.AppInsightsInstrumentationKey', 'applicationInsights.instrumentationKey');
+    setSecret('secrets.adoption.adoption-idam-client-secret', 'idam.clientSecret');
   }
 }

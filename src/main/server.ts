@@ -8,7 +8,8 @@ import * as config from 'config'
 import * as propertiesVolume from '@hmcts/properties-volume'
 import * as secrets from 'modules/secrets';
 propertiesVolume.addTo(config)
-secrets.setup(config);
+
+secrets.setup();
 
 const logger = Logger.getLogger('server');
 
