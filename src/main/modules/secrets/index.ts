@@ -13,4 +13,5 @@ export function setup(): void {
     setSecret('secrets.adoption.AppInsightsInstrumentationKey', 'applicationInsights.instrumentationKey');
     setSecret('secrets.adoption.adoption-idam-client-secret', 'idam.clientSecret');
   }
+  console.log("After setting secrets", config);
 }
