@@ -4,6 +4,11 @@ import * as fs from 'fs';
 import * as https from 'https';
 import * as path from 'path';
 import { app } from './app';
+import * as config from 'config'
+import * as propertiesVolume from '@hmcts/properties-volume'
+import * as secrets from 'modules/secrets';
+propertiesVolume.addTo(config)
+secrets.setup(config);
 
 const logger = Logger.getLogger('server');
 
