@@ -12,7 +12,7 @@ nodejs:
     IDAM_API_URL: https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net
     IDAM_AUTHENTICATION_WEB_URL: https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net
   keyVaults:
-    secrets:
-      adoption:
+    adoption:
+      secrets:
         - AppInsightsInstrumentationKey
         - adoption-idam-client-secret

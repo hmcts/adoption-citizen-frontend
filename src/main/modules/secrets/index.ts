@@ -12,5 +12,6 @@ export function setup(config: IConfig): void {
   propertiesVolume.addTo(config);
   if (config.has('secrets.adoption')) {
     setSecret(config, 'secrets.adoption.AppInsightsInstrumentationKey', 'applicationInsights.instrumentationKey');
+    setSecret(config, 'secrets.adoption.adoption-idam-client-secret', 'adoption-idam-client-secret');
   }
 }
