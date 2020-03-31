@@ -3,12 +3,6 @@
   "security": {
     "referrerPolicy": "origin"
   },
-  "secrets": {
-    "adoption": {
-      "adoption-s2s-secret": "secret",
-      "adoption-idam-client-secret": "adoption"
-    }
-  },
   "idam": {
     "authentication-web": {
       "url": "http://localhost:9002"
@@ -19,7 +13,8 @@
     "service-2-service-auth": {
       "url": "http://localhost:4552",
       "microservice": "adoption"
-    }
+    },
+    "clientSecret": "adoption",
   },
   "roles": ["citizen"],
   "oauth": {
