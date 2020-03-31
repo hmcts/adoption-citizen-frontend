@@ -34,6 +34,9 @@ export class IdamClient {
     const clientSecret = config.get<string>('secrets.adoption.adoption-idam-client-secret');
     const url = `${config.get('idam.api.url')}/oauth2/token`;
 
+    console.log('clientSecret---->',clientSecret)
+    console.log('url---->',url)
+
     const formData = Object.assign({}, {
       'grant_type': 'authorization_code',
       'code': code,
@@ -42,6 +45,7 @@ export class IdamClient {
       'client_secret': clientSecret,
     });
 
+    console.log('formData---->',formData)
     const requestOptions = Object.assign({
       url: url,
       form: formData,
@@ -54,6 +58,7 @@ export class IdamClient {
     return request.post(requestOptions)
       .then((response) => {
         const authToken = JSON.parse(response);
+        console.log('authToken---->',authToken)
         return new AuthToken(
           authToken.access_token,
           authToken.token_type,
