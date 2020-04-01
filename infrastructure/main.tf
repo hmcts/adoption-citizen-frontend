@@ -1,14 +1,5 @@
 provider "azurerm" {}
 
-locals {
-  public_hostname = "${var.product}-${var.component}-${var.env}.service.${local.aseName}.internal"
-  vault_name    = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview") ? "${var.raw_product}-aat" : "${var.raw_product}-saat" : "${var.raw_product}-${var.env}"}"
-
-  // IDAM
-  IDAM_API_URL = "${var.idam_api_url}"
-  IDAM_AUTHENTICATION_WEB_URL = "${var.authentication_web_url}"
-}
-
 resource "azurerm_resource_group" "rg" {
   name     = "${var.product}-${var.component}-${var.env}"
   location = "${var.location}"
@@ -38,14 +29,4 @@ module "key-vault" {
 
   #aks migration
   managed_identity_object_id = "${var.managed_identity_object_id}"
-}
-
-data "azurerm_key_vault" "adoption_key_vault" {
-  name                = "${local.vault_name}"
-  resource_group_name = "${local.vault_name}"
-}
-
-data "azurerm_key_vault_secret" "adoption_idam_client_secret" {
-  name = "adoption_idam_client_secret"
-  key_vault_id        = "${data.azurerm_key_vault.adoption_key_vault.id}"
 }
