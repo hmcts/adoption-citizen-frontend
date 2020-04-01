@@ -1,0 +1,16 @@
+{
+  "idam": {
+    "authentication-web": {
+      "url": "IDAM_AUTHENTICATION_WEB_URL"
+    },
+    "api": {
+      "url": "IDAM_API_URL"
+    }
+  },
+  "oauth": {
+    "clientId": "OAUTH_CLIENT_ID"
+  },
+  "session": {
+    "cookieName": "JWT_COOKIE_NAME"
+  }
+}

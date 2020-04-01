@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+import * as config from 'config';
+
+import * as secrets from 'modules/secrets';
+secrets.setup(config);
 const { Logger } = require('@hmcts/nodejs-logging');
 import * as fs from 'fs';
 import * as https from 'https';

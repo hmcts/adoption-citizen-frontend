@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
-import * as secrets from 'modules/secrets';
 import * as appinsights from 'modules/appinsights';
 
 import cookieParser from 'cookie-parser';
@@ -15,7 +14,6 @@ import { Nunjucks } from 'modules/nunjucks';
 import { I18Next } from 'modules/i18n';
 import { AdoptionApplication } from 'case/index';
 
-secrets.setup(config);
 appinsights.setup(config);
 
 const env = process.env.NODE_ENV || 'development';

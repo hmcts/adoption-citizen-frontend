@@ -26,13 +26,11 @@ export class AuthorizationMiddleware {
   }
 
   static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[]) {
-
     function accessDeniedRedirect (): void {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
 
     const jwt: string = JwtExtractor.extract(req);
-
     if (!jwt) {
       return accessDeniedRedirect();
     } else {

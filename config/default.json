@@ -6,7 +6,7 @@
   "secrets": {
     "adoption": {
       "adoption-s2s-secret": "secret",
-      "citizen-oauth-client-secret": "adoption"
+      "adoption-idam-client-secret": "adoption"
     }
   },
   "idam": {

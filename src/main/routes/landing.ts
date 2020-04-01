@@ -71,9 +71,12 @@ export default express.Router()
       if (authenticationToken) {
         const accessToken: string = authenticationToken.accessToken;
         user = await IdamClient.getUserFromJwt(accessToken);
+
         res.locals.isLoggedIn = true;
         res.locals.user = user;
+
         setAuthCookie(cookies, accessToken);
+
       }
     } catch (err) {
       return loginErrorHandler(req, res, cookies, next, err);
