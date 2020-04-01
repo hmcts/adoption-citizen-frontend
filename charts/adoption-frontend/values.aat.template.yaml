@@ -4,11 +4,3 @@ nodejs:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
-
-tags:
-  idam-pr: true
-
-idam-pr:
-  redirect_uris:
-    adoption:
-      - https://www-${SERVICE_FQDN}/landing

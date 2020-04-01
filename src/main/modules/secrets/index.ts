@@ -10,9 +10,7 @@ const setSecret = (config: IConfig, secretPath: string, configPath: string): voi
 
 export function setup(config: IConfig): void {
   propertiesVolume.addTo(config);
-  console.log("Config", config);
   if (has(config,'secrets.adoption')) {
     setSecret(config, 'secrets.adoption.AppInsightsInstrumentationKey', 'applicationInsights.instrumentationKey');
   }
-  console.log("After setting secrets", config);
 }

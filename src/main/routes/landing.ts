@@ -48,7 +48,6 @@ async function getAuthenticationToken (
 ): Promise<AuthToken> {
 
   let authenticationToken;
-  console.log('req.query.code---->',req.query.code)
   if (req.query.code) {
     authenticationToken = await IdamClient.getAuthToken(req.query.code, buildURL(req, landing.uri));
   } else if (checkCookie) {
@@ -68,26 +67,21 @@ export default express.Router()
 
     try {
       const authenticationToken = await getAuthenticationToken(req);
-      console.log('authenticationToken--->',authenticationToken)
 
       if (authenticationToken) {
         const accessToken: string = authenticationToken.accessToken;
         user = await IdamClient.getUserFromJwt(accessToken);
-        console.log('user--->',user)
 
         res.locals.isLoggedIn = true;
         res.locals.user = user;
 
-        console.log('user--->',user);
         setAuthCookie(cookies, accessToken);
 
-        console.log('Auth cookie set -->',cookies);
       }
     } catch (err) {
       return loginErrorHandler(req, res, cookies, next, err);
     }
 
-    console.log('Before redirect -->',res.locals.isLoggedIn);
     if (res.locals.isLoggedIn) {
       res.redirect(CasePaths.taskListPage.uri);
     } else {
