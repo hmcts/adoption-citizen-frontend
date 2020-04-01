@@ -10,6 +10,7 @@ const requiredRoles = config.get<string[]>('roles');
 
 export class AdoptionApplication {
   enableFor (app: express.Express): void {
+    console.log('Enabled for /case/ -->');
     app.all('/case/*', this.requestHandler());
     app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')));
   }

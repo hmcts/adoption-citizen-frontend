@@ -27,23 +27,28 @@ export class AuthorizationMiddleware {
 
   static async handleProtectedPaths (req: express.Request, res: express.Response, next: express.NextFunction, requiredRoles: string[]) {
 
+    console.log('handleProtectedPaths -->',req);
     function accessDeniedRedirect (): void {
       res.redirect(OAuthHelper.forLogin(req, res));
     }
 
     const jwt: string = JwtExtractor.extract(req);
 
+    console.log('JwtExtractor -->',jwt);
     if (!jwt) {
       return accessDeniedRedirect();
     } else {
       try {
         const user: User = await IdamClient.getUserFromJwt(jwt);
 
+        console.log('JwtExtractor, user -->',user);
         if (!user.isInRoles(...requiredRoles)) {
+          console.log('JwtExtractor, user  not in roles-->',user);
           return accessDeniedRedirect();
         } else {
           res.locals.isLoggedIn = true;
           res.locals.user = user;
+          console.log('Going next->');
           return next();
         }
       } catch (err) {
