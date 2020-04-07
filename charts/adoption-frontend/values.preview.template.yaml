@@ -5,10 +5,8 @@ nodejs:
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
 
-tags:
-  idam-pr: true
-
 idam-pr:
+  enabled: true
   redirect_uris:
     adoption:
       - https://${SERVICE_FQDN}/landing
