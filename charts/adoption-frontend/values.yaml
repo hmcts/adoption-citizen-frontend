@@ -16,3 +16,5 @@ nodejs:
       secrets:
         - AppInsightsInstrumentationKey
         - adoption-idam-client-secret
+idam-pr:
+  enabled: false
