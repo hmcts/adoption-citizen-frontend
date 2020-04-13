@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-
-import { Alert, SubTask, TaskList, Task, TaskStatus } from '../../../../../main/app/case/types';
+import { Alert, SubTask, TaskList, Task, TaskStatus } from 'case/models';
+import * as taskListLocales from 'main/locales/en/taskList.json';
 
 const alert = new Alert('alert heading');
 
@@ -53,7 +53,7 @@ describe('Task list component', () => {
     });
 
     it('Should get status', () => {
-      expect(subTasks[0].status).to.be.equal(TaskStatus.Complete);
+      expect(subTasks[0].status).to.be.equal(taskListLocales.taskStatus.complete);
     });
   });
 });

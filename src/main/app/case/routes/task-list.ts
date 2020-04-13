@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { SubTaskListBuilder } from 'case/util/subTaskListBuilder';
+import { SubTaskListBuilder } from 'case/helpers/subTaskListBuilder';
 import { Paths } from 'case/paths';
 
 const router = express.Router();
