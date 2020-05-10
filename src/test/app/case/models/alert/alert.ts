@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Alert } from 'case/models';
+import { Alert } from 'case/models/alert/alert';
 
 describe('Alert', () => {
   it('should get content prop', () => {

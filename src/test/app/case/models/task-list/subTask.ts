@@ -1,6 +1,7 @@
 import { expect } from 'chai';
-import { SubTask, TaskStatus } from 'case/models';
 import * as taskList from 'main/locales/en/taskList.json';
+import { TaskStatus } from 'case/models/task-list/taskStatus';
+import { SubTask } from 'case/models/task-list/subTask';
 
 describe('SubTask', () => {
   context('convertTaskStatusToString', () => {

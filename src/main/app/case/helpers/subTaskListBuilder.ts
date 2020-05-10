@@ -1,5 +1,6 @@
-import { SubTask, TaskStatus } from 'case/models';
 import * as taskList from 'main/locales/en/taskList.json';
+import { SubTask } from 'case/models/task-list/subTask';
+import { TaskStatus } from 'case/models/task-list/taskStatus';
 
 export class SubTaskListBuilder {
 

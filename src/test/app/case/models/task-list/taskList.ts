@@ -1,6 +1,10 @@
 import { expect } from 'chai';
-import { Alert, SubTask, TaskList, Task, TaskStatus } from 'case/models';
 import * as taskListLocales from 'main/locales/en/taskList.json';
+import { SubTask } from 'case/models/task-list/subTask';
+import { TaskStatus } from 'case/models/task-list/taskStatus';
+import { Alert } from 'case/models/alert/alert';
+import { Task } from 'case/models/task-list/task';
+import { TaskList } from 'case/models/task-list/taskList';
 
 const alert = new Alert('alert heading');
 
