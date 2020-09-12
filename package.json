@@ -75,7 +75,7 @@
     "js-base64": "^2.5.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "nunjucks": "^3.2.0",
     "nyc": "^15.0.0",
     "otp": "^0.1.3",
